@@ -31,6 +31,7 @@ return tiny.sortedProcessingSystem {
 		-- TODO definetely a separate system
 		graphics.camera:draw(function(l, t, w, h)
 			love.graphics.print("gold: %s" % player.gold, 0, 0)
+			love.graphics.print("mode: %s" % ui.mode, 0, 15)
 		end)
 	end
 }

@@ -22,5 +22,12 @@ module.palette = types.palette("sprites/palette.png", {
 	"casual_gold",
 })
 
+module.ui_modes = types.enumeration {
+	"normal",
+	"investing",
+}
+
+module.maximal_garrison = 10
+
 
 return module

@@ -2,6 +2,16 @@ local module = {}
 
 
 -- definitions --
+local enumeration_member = function(n, name)
+	return setmetatable({value = n, name = name}, {
+		__tostring = function(self)
+			return self.name
+		end,
+		__lt = function(self, other) return self.value < other.value end,
+		__le = function(self, other) return self.value <= other.value end,
+	})
+end
+
 module.enumeration = function(members)
 	return fun.iter(members)
 		:enumerate()

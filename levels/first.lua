@@ -14,6 +14,7 @@ return {load = function(world)
 		anchor_position = vector {233, 35},
 		fertility = .03,
 		owner = player,
+		maximal_garrison = 8,
 	})
 
 	kit.add_province("sprites/zandara", "annar", {

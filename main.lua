@@ -33,5 +33,9 @@ love.load = function(args)
 		gold = 0,
 	}
 
+	ui = {
+		mode = standard.ui_modes.normal,
+	}
+
 	require("levels.first").load(world)
 end
