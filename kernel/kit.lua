@@ -12,16 +12,16 @@ module.load_sprite = function(path)
 	}
 end
 
-module.add_island = function(planet, name, island)
-	island.sprite = module.load_sprite("%s/islands/%s.png" % {planet, name})
-	island.layer = standard.layers.island
-	island.highlight = world:addEntity {
+module.add_province = function(planet, name, province)
+	province.sprite = module.load_sprite("%s/provinces/%s.png" % {planet, name})
+	province.layer = standard.layers.province
+	province.highlight = world:addEntity {
 		name = "highlight: %s" % name,
 		sprite = module.load_sprite("%s/highlights/%s.png" % {planet, name}),
 		layer = standard.layers.highlight
 	}
 
-	return world:addEntity(island)
+	return world:addEntity(province)
 end
 
 module.is_mouse_over = function(entity)

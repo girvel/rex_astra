@@ -5,17 +5,17 @@ return {load = function(world)
 		layer = standard.layers.planet,
 	}
 
-	kit.add_island("sprites/zandara", "sod", {
+	kit.add_province("sprites/zandara", "sod", {
 		garrison = 3,
 		anchor_position = vector {233, 35},
 	})
 
-	kit.add_island("sprites/zandara", "annar", {
+	kit.add_province("sprites/zandara", "annar", {
 		garrison = 2,
 		anchor_position = vector {220, 66},
 	})
 
-	kit.add_island("sprites/zandara", "dowur", {
+	kit.add_province("sprites/zandara", "dowur", {
 		garrison = 2,
 		anchor_position = vector {248, 56},
 	})
