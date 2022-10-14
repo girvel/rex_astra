@@ -3,6 +3,19 @@ local module = {}
 
 
 -- functions --
+module.parse_launch_parameters = function(args)
+	args[-2] = nil
+	args[-1] = nil
+
+	local parser = argparse()
+		:name "rex_astra"
+		:description "A simple game"
+
+	parser:flag "-m --trace-mouse"
+
+	return parser:parse(args)
+end
+
 module.load_systems = function(world)
 	for _, system in ipairs(love.filesystem.getDirectoryItems("systems")) do
 		world:addSystem(require("systems." .. system:sub(1, -5)))

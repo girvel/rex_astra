@@ -1,3 +1,6 @@
+local standard = require "kernel.standard"
+
+
 local module = {}
 
 
@@ -9,20 +12,16 @@ module.load_sprite = function(path)
 	}
 end
 
-module.enumeration = function(members)
-	return fun.iter(members)
-		:enumerate()
-		:map(function(i, m) return m, i end)
-		:tomap()
-end
+module.add_island = function(planet, name, island)
+	island.sprite = module.load_sprite("%s/islands/%s.png" % {planet, name})
+	island.layer = standard.layers.island
+	island.highlight = world:addEntity {
+		name = "highlight: %s" % name,
+		sprite = module.load_sprite("%s/highlights/%s.png" % {planet, name}),
+		layer = standard.layers.highlight
+	}
 
-module.get_palette = function(palette_path, colors)
-	local palette_data = love.image.newImageData(palette_path)
-
-	return fun.iter(colors)
-		:enumerate()
-		:map(function(i, c) return c, {palette_data:getPixel(i - 1, 0)} end)
-		:tomap()
+	return world:addEntity(island)
 end
 
 module.is_mouse_over = function(entity)

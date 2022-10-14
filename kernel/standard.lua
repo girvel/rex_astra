@@ -1,17 +1,17 @@
-local kit = require "kernel.kit"
+local types = require "kernel.types"
 
 
 local module = {}
 
 
 -- definitions --
-module.layers = kit.enumeration {
+module.layers = types.enumeration {
 	"planet",
 	"island",
 	"highlight",
 }
 
-module.palette = kit.get_palette("sprites/palette.png", {
+module.palette = types.palette("sprites/palette.png", {
 	"transparent",
 	"sea_blue",
 	"tropic_green",
