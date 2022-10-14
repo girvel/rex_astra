@@ -1,6 +1,9 @@
--- GLOBAL IMPORTS --
+-- The only place a global can be defined in is here
+
+-- this is for between-libraries dependencies
 package.path = package.path .. ";lib/?.lua"
 
+-- libraries --
 require "strong"
 tiny = require "tiny"
 gamera = require "gamera"
@@ -8,112 +11,18 @@ log = require "log"
 inspect = require "inspect"
 fun = require "fun"
 
+-- kernel --
+kit = require "kernel.kit"
 vector = require "kernel.vector"
+engine = require "kernel.engine"
+standard = require "kernel.standard"
+graphics = require "kernel.graphics"
 
-local load_sprite = function(path)
-	return {
-		image = love.graphics.newImage(path),
-		data = love.image.newImageData(path),
-	}
-end
 
-local enumeration = function(members)
-	return fun.iter(members)
-		:enumerate()
-		:map(function(i, m) return m, i end)
-		:tomap()
-end
+-- engine initialization --
+world = tiny.world()
 
-local get_palette = function(palette_path, colors)
-	local palette_data = love.image.newImageData(palette_path)
+engine.load_systems(world)
+engine.override_game_cycle(world)
 
-	return fun.iter(colors)
-		:enumerate()
-		:map(function(i, c) return c, {palette_data:getPixel(i - 1, 0)} end)
-		:tomap()
-end
-
-layers = enumeration {
-	"planet",
-	"island",
-	"highlight",
-}
-
-palette = get_palette("sprites/palette.png", {
-	"transparent",
-	"sea_blue",
-	"tropic_green",
-	"cold_gray",
-	"white",
-	"black",
-})
-
-is_mouse_over = function(entity)
-	local mouse_position = vector {camera:toWorld(love.mouse.getPosition())}
-	mouse_position = mouse_position - (entity.position or {0, 0})
-
-	if (mouse_position[1] <= 0 or 
-		mouse_position[2] <= 0 or 
-		mouse_position[1] > entity.sprite.data:getWidth() or
-		mouse_position[2] > entity.sprite.data:getHeight()
-	) then
-		return false
-	end
-
-	local r, g, b, a = entity.sprite.data:getPixel(unpack(mouse_position))
-	return a > 0
-end
-
-centered_print = function(position, text)
-	local font = love.graphics.getFont()
-	local w = font:getWidth(text)
-	local h = font:getHeight()
-
-	love.graphics.print(text, position[1], position[2], 0, 1, 1, w / 2, h / 2)
-end
-
-function love.load()
-	log.info("Loading the game")
-	world = tiny.world()
-
-	for _, system in ipairs(love.filesystem.getDirectoryItems("systems")) do
-		tiny.addSystem(world, require("systems." .. system:sub(1, -5)))
-	end
-
-	window_size = vector {960, 540}
-	world_size = window_size / 2
-
-	love.window.setMode(unpack(window_size))
-	love.graphics.setDefaultFilter("nearest", "nearest")
-
-	camera = gamera.new(0, 0, unpack(world_size))
-	camera:setScale(2.0)
-
-	world:addEntity {
-		name = "The Planet",
-		sprite = load_sprite("sprites/planet.png"),
-		layer = layers.planet,
-	}
-
-	world:addEntity {
-		name = "Island of Sod",
-		sprite = load_sprite("sprites/islands/sod.png"),
-		layer = layers.island,
-		garrison = 3,
-		anchor_position = vector {233, 35},
-		highlight = world:addEntity {
-			name = "[Island of Sod] Highlight",
-			sprite = load_sprite("sprites/highlights/sod.png"),
-			layer = layers.highlight
-		}
-	}
-end
-
-for _, callback in ipairs {'update', 'keypressed', 'mousepressed', 'draw'} do
-	love[callback] = function(...)
-		world:update(
-			select('#', ...) == 1 and select(1, ...) or {...},
-			function(_, x) return x.system_type == callback end
-		)
-	end
-end
+require("levels.first").load(world)

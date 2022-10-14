@@ -12,7 +12,7 @@ return tiny.sortedProcessingSystem {
 	process = function(_, entity)
 		if entity.visible == false then return end
 
-		camera:draw(function(l, t, w, h)
+		graphics.camera:draw(function(l, t, w, h)
 			love.graphics.draw(
 				entity.sprite.image,
 				unpack(entity.position or {0, 0})
@@ -20,9 +20,9 @@ return tiny.sortedProcessingSystem {
 
 			-- TODO a separate system maybe???
 			if entity.garrison and entity.anchor_position then
-				love.graphics.setColor(palette.black)
-				centered_print(entity.anchor_position, tostring(entity.garrison))
-				love.graphics.setColor(palette.white)
+				love.graphics.setColor(standard.palette.black)
+				kit.centered_print(entity.anchor_position, tostring(entity.garrison))
+				love.graphics.setColor(standard.palette.white)
 			end
 		end)
 	end,
