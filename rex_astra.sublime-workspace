@@ -1,0 +1,224 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"termin",
+				"Terminus: Open Default Shell in Tab (View)"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"theme",
+				"UI: Select Theme"
+			],
+			[
+				"ahk",
+				"Set Syntax: AutoHotkey"
+			],
+			[
+				"markd",
+				"Set Syntax: Markdown"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/workshop/rex_astra"
+	],
+	"file_history":
+	[
+		"/C/Users/widau/OneDrive/Документы/StarCraft II/Accounts/415905157/Hotkeys/123.SC2Hotkeys",
+		"/C/Users/widau/OneDrive/Документы/My Games/Skyrim Special Edition/SkyrimPrefs.ini",
+		"/D/Documents/Stafford gambit mate 2 -- script.md",
+		"/D/Documents/Stafford gambit mate 1 -- script.md",
+		"/C/Users/widau/AppData/Roaming/.minecraft/crash-reports/crash-2022-09-20_14.45.15-client.txt",
+		"/D/Documents/Tree of life.md",
+		"/D/workshop/cli/.git/COMMIT_EDITMSG",
+		"/D/Documents/public opinion is bullshit/Script.md",
+		"/D/Documents/Caro-Kann Fantasy gone wrong -- script.md",
+		"/D/Documents/Magical win vs higher rated opponent -- script.md",
+		"/D/Documents/London defence -- script.md",
+		"/C/Users/widau/Documents/AutoHotkey.ahk",
+		"/D/Documents/Beautiful maneuver -- script.md",
+		"/D/Documents/Attacking game, blunder and recovery -- script.md",
+		"/D/Documents/Vienna gambit forced line -- script.md",
+		"/D/Documents/Vienna gambit mate -- script.md",
+		"/C/Users/widau/AppData/Roaming/Mozilla/Firefox/Profiles/0bhtges3.default-release/chrome/userChrome.css",
+		"/D/Documents/tstest.py",
+		"/C/Users/widau/AppData/Roaming/butler/butler.yaml",
+		"/D/Documents/Reddit post.md",
+		"/D/Documents/London defence -- notes.md",
+		"/D/Documents/London defence -- script 3.md",
+		"/D/Documents/Hyppo -- script.md",
+		"/D/Documents/London defence -- script 2.md",
+		"/D/Documents/butler/.git/COMMIT_EDITMSG",
+		"/D/Documents/tiny_storage/.git/COMMIT_EDITMSG",
+		"/C/Users/widau/OneDrive/Документы/London defence -- script.md",
+		"/C/Users/widau/OneDrive/Документы/London defence -- notes.md",
+		"/C/Users/widau/OneDrive/Документы/London defence -- script 2.md",
+		"/C/Users/widau/PycharmProjects/metaworld/.git/COMMIT_EDITMSG"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 116.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "rex_astra.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

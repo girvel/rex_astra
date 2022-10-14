@@ -7,6 +7,8 @@
 -- under the terms of the MIT license. See LICENSE for details.
 --
 
+local inspect = require 'inspect'
+
 local log = { _version = "0.1.0" }
 
 log.usecolor = true
@@ -47,7 +49,7 @@ local tostring = function(...)
       x = round(x, .01)
     end
     if type(x) == "table" then
-      x = require("lib.inspect")(x)
+      x = inspect(x)
     end
     t[#t + 1] = _tostring(x)
   end

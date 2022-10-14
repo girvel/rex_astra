@@ -1,30 +1,20 @@
 -- GLOBAL IMPORTS --
-tiny = require "lib.tiny"
-require "lib.strong"
-gamera = require "lib.gamera"
-log = require "lib.log"
-inspect = require "lib.inspect"
-fun = require "lib.fun"
+package.path = package.path .. ";lib/?.lua"
+
+require "strong"
+tiny = require "tiny"
+gamera = require "gamera"
+log = require "log"
+inspect = require "inspect"
+fun = require "fun"
+
+vector = require "kernel.vector"
 
 local load_sprite = function(path)
 	return {
 		image = love.graphics.newImage(path),
 		data = love.image.newImageData(path),
 	}
-end
-
-local vector_div = function(vector, coefficient)
-	return fun.iter(vector):map(function(v) return v / coefficient end):totable()
-end
-
-local vector_sub = function(a, b)
-	return fun.zip(a, b):map(function(u, v) return u - v end):totable()
-end
-
-local vector_in = function(a, b)
-	return fun.zip(a, b)
-		:map(fun.operator.le)
-		:reduce(fun.operator.land, true)
 end
 
 local enumeration = function(members)
@@ -41,8 +31,8 @@ local layers = enumeration {
 }
 
 hover = function(entity)
-	local mouse_position = {camera:toWorld(love.mouse.getPosition())}
-	mouse_position = vector_sub(mouse_position, entity.position)
+	local mouse_position = vector {camera:toWorld(love.mouse.getPosition())}
+	mouse_position = mouse_position - (entity.position or {0, 0})
 
 	if (mouse_position[1] <= 0 or 
 		mouse_position[2] <= 0 or 
@@ -64,8 +54,8 @@ function love.load()
 		tiny.addSystem(world, require("systems." .. system:sub(1, -5)))
 	end
 
-	window_size = {960, 540}
-	world_size = vector_div(window_size, 2)
+	window_size = vector {960, 540}
+	world_size = window_size / 2
 
 	love.window.setMode(unpack(window_size))
 	love.graphics.setDefaultFilter("nearest", "nearest")
