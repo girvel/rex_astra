@@ -10,7 +10,7 @@ return tiny.sortedProcessingSystem {
 	end,
 
 	process = function(_, entity)
-		if not entity.sprite or entity.visible == false then return end
+		if entity.visible == false then return end
 
 		camera:draw(function(l, t, w, h)
 			love.graphics.draw(

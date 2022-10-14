@@ -30,7 +30,7 @@ local layers = enumeration {
 	"highlight",
 }
 
-hover = function(entity)
+is_mouse_over = function(entity)
 	local mouse_position = vector {camera:toWorld(love.mouse.getPosition())}
 	mouse_position = mouse_position - (entity.position or {0, 0})
 
@@ -63,18 +63,22 @@ function love.load()
 	camera = gamera.new(0, 0, unpack(world_size))
 	camera:setScale(2.0)
 
-	-- TODO try world:addEntity
-	tiny.addEntity(world, {
+	world:addEntity {
 		name = "The Planet",
 		sprite = load_sprite("sprites/planet.png"),
 		layer = layers.planet,
-	})
+	}
 
-	tiny.addEntity(world, {
+	world:addEntity {
 		name = "Island of Sod",
 		sprite = load_sprite("sprites/islands/sod.png"),
 		layer = layers.island,
-	})
+		highlight = world:addEntity {
+			name = "[Island of Sod] Highlight",
+			sprite = load_sprite("sprites/highlights/sod.png"),
+			layer = layers.highlight
+		}
+	}
 end
 
 for _, callback in ipairs {'update', 'keypressed', 'mousepressed', 'draw'} do
