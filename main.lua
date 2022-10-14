@@ -24,11 +24,29 @@ local enumeration = function(members)
 		:tomap()
 end
 
-local layers = enumeration {
+local get_palette = function(palette_path, colors)
+	local palette_data = love.image.newImageData(palette_path)
+
+	return fun.iter(colors)
+		:enumerate()
+		:map(function(i, c) return c, {palette_data:getPixel(i - 1, 0)} end)
+		:tomap()
+end
+
+layers = enumeration {
 	"planet",
 	"island",
 	"highlight",
 }
+
+palette = get_palette("sprites/palette.png", {
+	"transparent",
+	"sea_blue",
+	"tropic_green",
+	"cold_gray",
+	"white",
+	"black",
+})
 
 is_mouse_over = function(entity)
 	local mouse_position = vector {camera:toWorld(love.mouse.getPosition())}
@@ -44,6 +62,14 @@ is_mouse_over = function(entity)
 
 	local r, g, b, a = entity.sprite.data:getPixel(unpack(mouse_position))
 	return a > 0
+end
+
+centered_print = function(position, text)
+	local font = love.graphics.getFont()
+	local w = font:getWidth(text)
+	local h = font:getHeight()
+
+	love.graphics.print(text, position[1], position[2], 0, 1, 1, w / 2, h / 2)
 end
 
 function love.load()
@@ -73,6 +99,8 @@ function love.load()
 		name = "Island of Sod",
 		sprite = load_sprite("sprites/islands/sod.png"),
 		layer = layers.island,
+		garrison = 3,
+		anchor_position = vector {233, 35},
 		highlight = world:addEntity {
 			name = "[Island of Sod] Highlight",
 			sprite = load_sprite("sprites/highlights/sod.png"),

@@ -8,6 +8,7 @@ module_metatable.__call = function(_, array)
 	return setmetatable({unpack(array)}, vector_metatable)
 end
 
+
 -- operators --
 vector_metatable.__sub = function(a, b)
 	return fun.zip(a, b):map(function(u, v) return u - v end):totable()

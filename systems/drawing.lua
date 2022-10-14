@@ -17,6 +17,13 @@ return tiny.sortedProcessingSystem {
 				entity.sprite.image,
 				unpack(entity.position or {0, 0})
 			)
+
+			-- TODO a separate system maybe???
+			if entity.garrison and entity.anchor_position then
+				love.graphics.setColor(palette.black)
+				centered_print(entity.anchor_position, tostring(entity.garrison))
+				love.graphics.setColor(palette.white)
+			end
 		end)
 	end,
 }
