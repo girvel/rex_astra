@@ -29,6 +29,8 @@ return tiny.sortedProcessingSystem {
 
 	postProcess = function()
 		-- TODO definetely a separate system
-		love.graphics.print("gold: %s" % player.gold, 0, 0)
+		graphics.camera:draw(function(l, t, w, h)
+			love.graphics.print("gold: %s" % player.gold, 0, 0)
+		end)
 	end
 }
