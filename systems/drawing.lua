@@ -1,7 +1,7 @@
 return tiny.sortedProcessingSystem {
 	name = "systems.drawing",
 	system_type = "draw",
-	filter = tiny.requireAll("sprite", "position", "layer"),
+	filter = tiny.requireAll("sprite", "layer"),
 
 	compare = function(_, e1, e2) return e1.layer < e2.layer end,
 
@@ -15,7 +15,7 @@ return tiny.sortedProcessingSystem {
 		camera:draw(function(l, t, w, h)
 			love.graphics.draw(
 				entity.sprite.image,
-				entity.position[1], entity.position[2]
+				unpack(entity.position or {0, 0})
 			)
 		end)
 	end,

@@ -46,6 +46,9 @@ local tostring = function(...)
     if type(x) == "number" then
       x = round(x, .01)
     end
+    if type(x) == "table" then
+      x = require("lib.inspect")(x)
+    end
     t[#t + 1] = _tostring(x)
   end
   return table.concat(t, " ")

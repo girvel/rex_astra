@@ -17,6 +17,45 @@ local vector_div = function(vector, coefficient)
 	return fun.iter(vector):map(function(v) return v / coefficient end):totable()
 end
 
+local vector_sub = function(a, b)
+	return fun.zip(a, b):map(function(u, v) return u - v end):totable()
+end
+
+local vector_in = function(a, b)
+	return fun.zip(a, b)
+		:map(fun.operator.le)
+		:reduce(fun.operator.land, true)
+end
+
+local enumeration = function(members)
+	return fun.iter(members)
+		:enumerate()
+		:map(function(i, m) return m, i end)
+		:tomap()
+end
+
+local layers = enumeration {
+	"planet",
+	"island",
+	"highlight",
+}
+
+hover = function(entity)
+	local mouse_position = {camera:toWorld(love.mouse.getPosition())}
+	mouse_position = vector_sub(mouse_position, entity.position)
+
+	if (mouse_position[1] <= 0 or 
+		mouse_position[2] <= 0 or 
+		mouse_position[1] > entity.sprite.data:getWidth() or
+		mouse_position[2] > entity.sprite.data:getHeight()
+	) then
+		return false
+	end
+
+	local r, g, b, a = entity.sprite.data:getPixel(unpack(mouse_position))
+	return a > 0
+end
+
 function love.load()
 	log.info("Loading the game")
 	world = tiny.world()
@@ -26,27 +65,25 @@ function love.load()
 	end
 
 	window_size = {960, 540}
-	field_size = vector_div(window_size, 2)
+	world_size = vector_div(window_size, 2)
 
 	love.window.setMode(unpack(window_size))
 	love.graphics.setDefaultFilter("nearest", "nearest")
 
-	camera = gamera.new(0, 0, 960, 540)
+	camera = gamera.new(0, 0, unpack(world_size))
 	camera:setScale(2.0)
 
 	-- TODO try world:addEntity
 	tiny.addEntity(world, {
 		name = "The Planet",
 		sprite = load_sprite("sprites/planet.png"),
-		position = vector_div(field_size, 2),
-		layer = -2,
+		layer = layers.planet,
 	})
 
 	tiny.addEntity(world, {
 		name = "Island of Sod",
 		sprite = load_sprite("sprites/islands/sod.png"),
-		position = {100, 100},
-		layer = 0,
+		layer = layers.island,
 	})
 end
 
