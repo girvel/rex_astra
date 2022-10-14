@@ -29,5 +29,9 @@ love.load = function(args)
 	engine.load_systems(world)
 	engine.override_game_cycle(world)
 
+	player = {
+		gold = 0,
+	}
+
 	require("levels.first").load(world)
 end

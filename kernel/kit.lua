@@ -24,6 +24,21 @@ module.add_province = function(planet, name, province)
 	return world:addEntity(province)
 end
 
+module.add_coin = function(province)
+	local sprite = module.load_sprite("sprites/golden_coin.png")
+	return world:addEntity {
+		name = "coin",
+		sprite = sprite,
+		layer = standard.layers.coin,
+		position = province.anchor_position - vector {
+			sprite.data:getWidth() / 2, 
+			sprite.data:getHeight(),
+		},
+		coin_flag = true,
+		parent_province = province,
+	}
+end
+
 module.is_mouse_over = function(entity)
 	local mouse_position = vector {graphics.camera:toWorld(love.mouse.getPosition())}
 	mouse_position = mouse_position - (entity.position or {0, 0})
@@ -46,6 +61,10 @@ module.centered_print = function(position, text)
 	local h = font:getHeight()
 
 	love.graphics.print(text, position[1], position[2], 0, 1, 1, w / 2, h / 2)
+end
+
+module.chance = function(chance)
+	return math.random() < chance
 end
 
 

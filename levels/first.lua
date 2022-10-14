@@ -8,6 +8,7 @@ return {load = function(world)
 	kit.add_province("sprites/zandara", "sod", {
 		garrison = 3,
 		anchor_position = vector {233, 35},
+		fertility = 60,
 	})
 
 	kit.add_province("sprites/zandara", "annar", {

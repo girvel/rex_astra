@@ -9,6 +9,7 @@ module.layers = types.enumeration {
 	"planet",
 	"province",
 	"highlight",
+	"coin",
 }
 
 module.palette = types.palette("sprites/palette.png", {
@@ -18,6 +19,7 @@ module.palette = types.palette("sprites/palette.png", {
 	"cold_gray",
 	"white",
 	"black",
+	"casual_gold",
 })
 
 
