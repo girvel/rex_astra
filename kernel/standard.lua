@@ -20,11 +20,15 @@ module.palette = types.palette("sprites/palette.png", {
 	"white",
 	"black",
 	"casual_gold",
+	"selection",
+	"ai1",
+	"player",
 })
 
 module.ui_modes = types.enumeration {
 	"normal",
 	"investing",
+	"aggression",
 }
 
 module.maximal_garrison = 10

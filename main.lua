@@ -30,11 +30,14 @@ love.load = function(args)
 	engine.override_game_cycle(world)
 
 	player = {
+		name = "Rex Astra",
+		color = standard.palette.player,
 		gold = 0,
 	}
 
 	ui = {
 		mode = standard.ui_modes.normal,
+		sources = {},
 	}
 
 	require("levels.first").load(world)

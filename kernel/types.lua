@@ -13,10 +13,16 @@ local enumeration_member = function(n, name)
 end
 
 module.enumeration = function(members)
-	return fun.iter(members)
+	local result = fun.iter(members)
 		:enumerate()
 		:map(function(i, m) return m, i end)
 		:tomap()
+
+	return setmetatable(result, {
+		__index = function(self, index)
+			error("No enumeration member %s" % index)
+		end
+	})
 end
 
 module.palette = function(palette_path, colors)

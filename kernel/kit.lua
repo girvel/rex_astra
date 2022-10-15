@@ -13,12 +13,15 @@ module.load_sprite = function(path)
 end
 
 module.add_province = function(planet, name, province)
+	province.neighbours = province.neighbours or {}
 	province.sprite = module.load_sprite("%s/provinces/%s.png" % {planet, name})
 	province.layer = standard.layers.province
 	province.highlight = world:addEntity {
 		name = "highlight: %s" % name,
 		sprite = module.load_sprite("%s/highlights/%s.png" % {planet, name}),
-		layer = standard.layers.highlight
+		layer = standard.layers.highlight,
+		is_team_colored = true,
+		parent = province,
 	}
 
 	return world:addEntity(province)
@@ -67,5 +70,53 @@ module.chance = function(chance)
 	return math.random() < chance
 end
 
+module.invest = function(entity)
+	if  entity.garrison < (entity.maximal_garrison or standard.maximal_garrison) and
+		entity.garrison <= entity.owner.gold
+	then
+		entity.owner.gold = entity.owner.gold - entity.garrison
+		entity.garrison = entity.garrison + 1
+		return true
+	end
+
+	return false
+end
+
+module.attack = function(army, target)
+	army = fun.iter(army)
+		:filter(function(a) 
+			return a.garrison > 0 and fun.iter(target.neighbours):index(a) 
+		end)
+		:totable()
+
+	log.info("%s attack %s" % {
+		inspect(fun.iter(army)
+			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
+			:totable()),
+		"%s (%s)" % {target.name, target.owner.name},
+	})
+
+	local attacking_force = fun.iter(army)
+		:reduce(function(acc, a) return acc + a.garrison end, 0)
+
+	if attacking_force <= 0 then
+		return false
+	end
+
+	if kit.chance(attacking_force / (attacking_force + 1.5 * target.garrison)) then
+		target.garrison = target.garrison - 1
+
+		if target.garrison < 0 then
+			target.owner = army[1].owner
+			target.garrison = 0
+		end
+
+		return true
+	else
+		army[1].garrison = army[1].garrison - 1
+
+		return false
+	end
+end
 
 return module

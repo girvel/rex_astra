@@ -6,8 +6,9 @@ return tiny.system {
 		local key, _, _ = unpack(event)
 
 		ui.mode = ({
-			g = standard.ui_modes.investing,
 			escape = standard.ui_modes.normal,
+			g = standard.ui_modes.investing,
+			a = standard.ui_modes.aggression,
 		})[key]
 	end,
 }
