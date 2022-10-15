@@ -82,16 +82,17 @@ module.planet = function(world, name, path)
 			}
 		end,
 
-		add_province = function(self, name, province)
+		add_province = function(self, province)
 			province.neighbours = province.neighbours or {}
+			province.garrison = province.garrison or 0
 
 			province.hitbox = module.fill_province_hitbox(
 				self.borders, province.anchor_position
 			)
-			province.layer = -1  -- TODO remove this hack
+			province.layer = 1  -- TODO remove this hack
 
 			province.highlight = self.world:addEntity {
-				name = "highlight: %s" % name,
+				name = "highlight: %s" % province.name,
 				sprite = module.generate_highlight(province.hitbox),
 				layer = standard.layers.highlight,
 				is_team_colored = true,
@@ -171,6 +172,11 @@ module.attack = function(army, target)
 
 	if attacking_force <= 0 then
 		return false
+	end
+
+	if target.owner == nil then
+		target.owner = army[1].owner
+		return true
 	end
 
 	log.info("%s attack %s" % {

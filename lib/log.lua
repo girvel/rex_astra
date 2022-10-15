@@ -49,7 +49,7 @@ local tostring = function(...)
       x = round(x, .01)
     end
     if type(x) == "table" then
-      x = inspect(x)
+      x = inspect(x, {depth = 2})
     end
     t[#t + 1] = _tostring(x)
   end

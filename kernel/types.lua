@@ -18,6 +18,8 @@ module.enumeration = function(members)
 		:map(function(i, m) return m, i end)
 		:tomap()
 
+	result.members_ = members_
+
 	return setmetatable(result, {
 		__index = function(self, index)
 			error("No enumeration member %s" % index)

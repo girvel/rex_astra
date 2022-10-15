@@ -19,7 +19,7 @@ return tiny.sortedProcessingSystem {
 			-- draw the sprite --
 			-- TODO remove if
 			if entity.sprite then
-				if entity.is_team_colored then
+				if entity.is_team_colored and entity.parent.owner then
 					love.graphics.setColor(entity.parent.owner.color or standard.palette.white)
 				end
 
@@ -53,8 +53,23 @@ return tiny.sortedProcessingSystem {
 			love.graphics.setColor(standard.palette.white)
 
 			-- print ui values --
-			love.graphics.print("gold: %s" % player.gold, 0, 0)
-			love.graphics.print("mode: %s" % ui.mode, 0, 15)
+			local lines = {
+				{standard.ui_modes.investing, "[G]old: %s" % player.gold},
+				{standard.ui_modes.aggression, "[A]rmy: ?"},
+				{standard.ui_modes.normal, "[Ecs] selection"},
+			}
+
+			for i, line_pair in ipairs(lines) do
+				local mode, line = unpack(line_pair)
+
+				if mode == ui.mode then
+					love.graphics.setColor(standard.palette.selection)
+				end
+
+				love.graphics.print(line, 0, 15 * (i - 1))
+				
+				love.graphics.setColor(standard.palette.white)
+			end
 
 			if ui.console.active then
 				love.graphics.print("> %s" % ui.console.command, 0, 30)
