@@ -10,3 +10,6 @@ Prototype:
 Long features:
   ☐ animations
  
+
+Optimization remarks:
+  ☐ Regenerate province hitboxes & highlights only when developing

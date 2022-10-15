@@ -5,11 +5,66 @@ local module = {}
 
 
 -- definitions --
-module.load_sprite = function(path)
-	return {
-		image = love.graphics.newImage(path),
-		data = love.image.newImageData(path),
+module.pixels_near = function(x, y, w, h)
+	return fun.iter {
+		{x + 1, y},
+		{x - 1, y},
+		{x, y + 1},
+		{x, y - 1},
 	}
+		:filter(function(pos) return 
+			pos[1] >= 0 and
+			pos[2] >= 0 and
+			pos[1] < w and
+			pos[2] < h
+		end)
+end
+
+module.generate_highlight = function(province_data)
+	data = love.image.newImageData(
+		province_data:getWidth(),
+		province_data:getHeight()
+	)
+
+	local w = province_data:getWidth()
+	local h = province_data:getHeight()
+
+	for _, x in fun.range(0, w - 1) do
+		for _, y in fun.range(0, h - 1) do
+			if ({province_data:getPixel(x, y)})[4] == 0 and
+				module.pixels_near(x, y, w, h)
+					:reduce(function(acc, pos) return 
+						acc or ({province_data:getPixel(unpack(pos))})[4] == 1
+					end, false)
+			then
+				data:setPixel(x, y, unpack(standard.palette.white))
+			end
+		end
+	end
+
+	return love.graphics.newImage(data)
+end
+
+module.fill_province_hitbox = function(borders, position, hitbox)
+	hitbox = hitbox or love.image.newImageData(
+		borders:getWidth(), borders:getHeight()
+	)
+
+	if  ({borders:getPixel(unpack(position))})[4] > 0 or 
+		({hitbox:getPixel(unpack(position))})[4] > 0 
+	then
+		return hitbox
+	end
+
+	hitbox:setPixel(position[1], position[2], unpack(standard.palette.white))
+
+	for _, p in module.pixels_near(
+		position[1], position[2], borders:getWidth(), borders:getHeight()
+	) do
+		module.fill_province_hitbox(borders, p, hitbox)
+	end
+
+	return hitbox
 end
 
 module.planet = function(world, name, path)
@@ -17,22 +72,27 @@ module.planet = function(world, name, path)
 		world = world,
 		name = name,
 		path = path,
+		borders = love.image.newImageData("%s/borders.png" % path),
 
 		add_planet = function(self)
 			self.world:addEntity {
 				name = self.name,
-				sprite = kit.load_sprite("%s/planet.png" % self.path),
+				sprite = love.graphics.newImage("%s/planet.png" % self.path),
 				layer = standard.layers.planet,
 			}
 		end,
 
 		add_province = function(self, name, province)
 			province.neighbours = province.neighbours or {}
-			province.sprite = module.load_sprite("%s/provinces/%s.png" % {self.path, name})
-			province.layer = standard.layers.province
+
+			province.hitbox = module.fill_province_hitbox(
+				self.borders, province.anchor_position
+			)
+			province.layer = -1  -- TODO remove this hack
+
 			province.highlight = self.world:addEntity {
 				name = "highlight: %s" % name,
-				sprite = module.load_sprite("%s/highlights/%s.png" % {self.path, name}),
+				sprite = module.generate_highlight(province.hitbox),
 				layer = standard.layers.highlight,
 				is_team_colored = true,
 				parent = province,
@@ -43,30 +103,16 @@ module.planet = function(world, name, path)
 	}
 end
 
-module.add_province = function(planet, name, province)
-	province.neighbours = province.neighbours or {}
-	province.sprite = module.load_sprite("%s/provinces/%s.png" % {planet, name})
-	province.layer = standard.layers.province
-	province.highlight = world:addEntity {
-		name = "highlight: %s" % name,
-		sprite = module.load_sprite("%s/highlights/%s.png" % {planet, name}),
-		layer = standard.layers.highlight,
-		is_team_colored = true,
-		parent = province,
-	}
-
-	return world:addEntity(province)
-end
-
 module.add_coin = function(province)
-	local sprite = module.load_sprite("sprites/golden_coin.png")
+	local hitbox = love.image.newImageData("sprites/golden_coin.png")
 	return world:addEntity {
 		name = "coin",
-		sprite = sprite,
+		sprite = love.graphics.newImage("sprites/golden_coin.png"),
+		hitbox = hitbox,
 		layer = standard.layers.coin,
 		position = province.anchor_position - vector {
-			sprite.data:getWidth() / 2, 
-			sprite.data:getHeight(),
+			hitbox:getWidth() / 2, 
+			hitbox:getHeight(),
 		},
 		coin_flag = true,
 		parent_province = province,
@@ -77,15 +123,15 @@ module.is_mouse_over = function(entity)
 	local mouse_position = vector {graphics.camera:toWorld(love.mouse.getPosition())}
 	mouse_position = mouse_position - (entity.position or {0, 0})
 
-	if (mouse_position[1] <= 0 or 
-		mouse_position[2] <= 0 or 
-		mouse_position[1] > entity.sprite.data:getWidth() or
-		mouse_position[2] > entity.sprite.data:getHeight()
+	if (mouse_position[1] < 0 or 
+		mouse_position[2] < 0 or 
+		mouse_position[1] >= entity.hitbox:getWidth() or
+		mouse_position[2] >= entity.hitbox:getHeight()
 	) then
 		return false
 	end
 
-	local r, g, b, a = entity.sprite.data:getPixel(unpack(mouse_position))
+	local r, g, b, a = entity.hitbox:getPixel(unpack(mouse_position))
 	return a > 0
 end
 

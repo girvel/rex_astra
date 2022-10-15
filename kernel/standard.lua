@@ -7,7 +7,6 @@ local module = {}
 -- definitions --
 module.layers = types.enumeration {
 	"planet",
-	"province",
 	"highlight",
 	"coin",
 }
