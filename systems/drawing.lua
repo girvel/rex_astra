@@ -50,6 +50,10 @@ return tiny.sortedProcessingSystem {
 			-- print ui values --
 			love.graphics.print("gold: %s" % player.gold, 0, 0)
 			love.graphics.print("mode: %s" % ui.mode, 0, 15)
+
+			if ui.console.active then
+				love.graphics.print("> %s" % ui.console.command, 0, 30)
+			end
 		end)
 	end
 }

@@ -90,9 +90,9 @@ module.attack = function(army, target)
 		:totable()
 
 	log.info("%s attack %s" % {
-		inspect(fun.iter(army)
+		table.concat(fun.iter(army)
 			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
-			:totable()),
+			:totable(), ", "),
 		"%s (%s)" % {target.name, target.owner.name},
 	})
 

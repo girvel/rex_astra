@@ -9,9 +9,11 @@ module.parse_launch_parameters = function(args)
 
 	local parser = argparse()
 		:name "rex_astra"
-		:description "A simple game"
+		:description "Run the Rex Astra game"
 
 	parser:flag "-m --trace-mouse"
+
+	parser:flag "-d --debug"
 
 	return parser:parse(args)
 end

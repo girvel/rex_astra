@@ -38,6 +38,10 @@ love.load = function(args)
 	ui = {
 		mode = standard.ui_modes.normal,
 		sources = {},
+		console = {
+			command = "",
+			active = false,
+		}
 	}
 
 	require("levels.first").load(world)
