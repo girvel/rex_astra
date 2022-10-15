@@ -5,7 +5,7 @@ return tiny.system {
 	update = function(self, event)
 		if not launch.debug then return end
 
-		local key, _, _ = unpack(event)
+		local key = unpack(event)
 
 		if key == "`" then
 			ui.console.active = not ui.console.active

@@ -5,13 +5,11 @@ return {load = function(world)
 		gold = 0,
 	}
 
-	world:addEntity {
-		name = "The Planet",
-		sprite = kit.load_sprite("sprites/zandara/planet.png"),
-		layer = standard.layers.planet,
-	}
+	local zandara = kit.planet(world, "Zandara", "sprites/zandara")
 
-	local sod = kit.add_province("sprites/zandara", "sod", {
+	zandara:add_planet()
+
+	local sod = zandara:add_province("sod", {
 		name = "Coast of Sod",
 		garrison = 3,
 		anchor_position = vector {233, 35},
@@ -20,7 +18,7 @@ return {load = function(world)
 		maximal_garrison = 8,
 	})
 
-	local annar = kit.add_province("sprites/zandara", "annar", {
+	local annar = zandara:add_province("annar", {
 		name = "Taiga of Annar",
 		garrison = 2,
 		anchor_position = vector {220, 66},
@@ -28,7 +26,7 @@ return {load = function(world)
 		owner = ai1,
 	})
 
-	local dowur = kit.add_province("sprites/zandara", "dowur", {
+	local dowur = zandara:add_province("dowur", {
 		name = "Dowur lowlands",
 		garrison = 2,
 		anchor_position = vector {248, 56},
@@ -36,7 +34,25 @@ return {load = function(world)
 		owner = player,
 	})
 
+	local venedai = zandara:add_province("venedai", {
+		name = "Venedai reach",
+		garrison = 2,
+		anchor_position = vector {189, 77},
+		fertility = .11,
+		owner = ai1,
+	})
+
+	local zanartha = zandara:add_province("zanartha", {
+		name = "Zanartha highland",
+		garrison = 2,
+		anchor_position = vector {236, 92},
+		fertility = .06,
+		owner = ai1,
+	})
+
 	sod.neighbours = {annar, dowur}
-	annar.neighbours = {sod, dowur}
+	annar.neighbours = {sod, dowur, venedai, zanartha}
 	dowur.neighbours = {sod, annar}
+	venedai.neighbours = {annar}
+	zanartha.neighbours = {annar}
 end}

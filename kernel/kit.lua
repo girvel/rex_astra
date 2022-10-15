@@ -12,6 +12,37 @@ module.load_sprite = function(path)
 	}
 end
 
+module.planet = function(world, name, path)
+	return {
+		world = world,
+		name = name,
+		path = path,
+
+		add_planet = function(self)
+			self.world:addEntity {
+				name = self.name,
+				sprite = kit.load_sprite("%s/planet.png" % self.path),
+				layer = standard.layers.planet,
+			}
+		end,
+
+		add_province = function(self, name, province)
+			province.neighbours = province.neighbours or {}
+			province.sprite = module.load_sprite("%s/provinces/%s.png" % {self.path, name})
+			province.layer = standard.layers.province
+			province.highlight = self.world:addEntity {
+				name = "highlight: %s" % name,
+				sprite = module.load_sprite("%s/highlights/%s.png" % {self.path, name}),
+				layer = standard.layers.highlight,
+				is_team_colored = true,
+				parent = province,
+			}
+
+			return self.world:addEntity(province)
+		end,
+	}
+end
+
 module.add_province = function(planet, name, province)
 	province.neighbours = province.neighbours or {}
 	province.sprite = module.load_sprite("%s/provinces/%s.png" % {planet, name})
@@ -89,19 +120,19 @@ module.attack = function(army, target)
 		end)
 		:totable()
 
-	log.info("%s attack %s" % {
-		table.concat(fun.iter(army)
-			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
-			:totable(), ", "),
-		"%s (%s)" % {target.name, target.owner.name},
-	})
-
 	local attacking_force = fun.iter(army)
 		:reduce(function(acc, a) return acc + a.garrison end, 0)
 
 	if attacking_force <= 0 then
 		return false
 	end
+
+	log.info("%s attack %s" % {
+		table.concat(fun.iter(army)
+			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
+			:totable(), ", "),
+		"%s (%s)" % {target.name, target.owner.name},
+	})
 
 	if kit.chance(attacking_force / (attacking_force + 1.5 * target.garrison)) then
 		target.garrison = target.garrison - 1
