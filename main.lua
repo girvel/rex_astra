@@ -81,8 +81,33 @@ love.load = function(args)
 		console = {
 			command = "",
 			active = false,
-		}
+		},
+		chat = {
+			{standard.palette.white, "Hello!"},
+
+			w = graphics.world_size[1] / 4,
+			font = standard.fonts.small,
+			put = function(self, message, color)
+				color = color or standard.palette.white
+
+				local i = math.min(#message, math.floor(self.w / self.font:getWidth('w')))
+
+				while #message > 0 do
+					if  i < #message and 
+						self.font:getWidth(message:sub(1, i + 1)) < self.w 
+					then
+						i = i + 1
+					else 
+						table.insert(self, {color, message:sub(1, i)})
+						message = message:sub(i + 1, #message)
+						i = math.min(#message, math.floor(self.w / self.font:getWidth('w')))
+					end
+				end
+			end,
+		},
 	}
+
+	ui.chat:put("Lorem ipsum dolor sit amet")
 
 	log.info("Loading the level")
 	level = require("levels.first").load(world)

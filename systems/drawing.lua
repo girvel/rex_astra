@@ -69,6 +69,20 @@ return tiny.sortedProcessingSystem {
 			if ui.console.active then
 				love.graphics.print("> %s" % ui.console.command, 0, 45)
 			end
+
+			love.graphics.setFont(ui.chat.font)
+
+			local line_h = ui.chat.font:getHeight()
+			local lines_n = math.min(#ui.chat, graphics.world_size[2] / line_h)
+
+			for y in fun.range(0, lines_n - 1) do
+				love.graphics.print(
+					ui.chat[#ui.chat - lines_n + y + 1],
+					graphics.world_size[1] - ui.chat.w, y * line_h
+				)
+			end
+
+			love.graphics.setFont(standard.fonts.normal)
 		end)
 	end
 }

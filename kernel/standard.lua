@@ -32,5 +32,14 @@ module.ui_modes = types.enumeration {
 
 module.maximal_garrison = 10
 
+module.fonts = {
+	small = love.graphics.newFont(8),
+	normal = love.graphics.newFont(12),
+}
+
+for _, f in pairs(module.fonts) do
+	f:setFilter("nearest", "nearest")
+end
+
 
 return module
