@@ -82,6 +82,7 @@ return {
 			local a, b = message:find("%a[%a%d]+{")
 
 			if a == nil then
+				log.debug {graphics.palette.white, message}
 				return fun.iter {graphics.palette.white, message}
 			end
 
@@ -94,6 +95,7 @@ return {
 
 			local second_message = message:sub(b + 1, c - 1)
 
+			log.debug {first_color, first_message, second_color, second_message}
 			return fun.chain(
 				fun.iter {first_color, first_message, second_color, second_message},
 				self:_message(message:sub(d + 1))

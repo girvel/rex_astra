@@ -17,7 +17,7 @@ return tiny.sortedProcessingSystem {
 		graphics.camera:draw(function(l, t, w, h)
 
 			-- draw the sprite --
-			-- TODO remove if
+			-- TODO remove if?
 			if entity.sprite then
 				if entity.is_team_colored and entity.parent.owner then
 					love.graphics.setColor(entity.parent.owner.color or graphics.palette.white)
@@ -36,9 +36,9 @@ return tiny.sortedProcessingSystem {
 				love.graphics.setColor(graphics.palette.white)
 			end
 
-			-- display province info --
-			if entity.garrison and entity.anchor_position then
-				love.graphics.setColor(graphics.palette.black)
+			-- province info --
+			if entity.garrison and entity.owner and entity.anchor_position then
+				love.graphics.setColor(entity.owner.color)
 				kit.centered_print(entity.anchor_position, tostring(entity.garrison))
 				love.graphics.setColor(graphics.palette.white)
 			end
@@ -48,7 +48,9 @@ return tiny.sortedProcessingSystem {
 	postProcess = function()
 		graphics.camera:draw(function(l, t, w, h)
 
-			-- print ui values --
+			-- ui modes --
+			love.graphics.setFont(standard.fonts.normal)
+
 			local lines = {
 				{standard.ui_modes.investing, "[G]old: %s" % player.gold},
 				{standard.ui_modes.aggression, "[A]rmy"},
@@ -66,10 +68,12 @@ return tiny.sortedProcessingSystem {
 				love.graphics.setColor(graphics.palette.white)
 			end
 
+			-- console --
 			if ui.console.active then
 				love.graphics.print("> %s" % ui.console.command, 0, 45)
 			end
 
+			-- chat --
 			love.graphics.setFont(ui.chat.font)
 
 			local line_h = ui.chat.font:getHeight()
@@ -81,8 +85,6 @@ return tiny.sortedProcessingSystem {
 					graphics.world_size[1] - ui.chat.w - 5, y * line_h
 				)
 			end
-
-			love.graphics.setFont(standard.fonts.normal)
 		end)
 	end
 }
