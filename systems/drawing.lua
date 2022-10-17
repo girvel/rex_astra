@@ -23,6 +23,11 @@ return tiny.sortedProcessingSystem {
 					love.graphics.setColor(entity.parent.owner.color or standard.palette.white)
 				end
 
+				if entity.opacity then
+					local r, g, b = love.graphics.getColor()
+					love.graphics.setColor(r, g, b, entity.opacity)
+				end
+
 				love.graphics.draw(
 					entity.sprite,
 					unpack(entity.position or {0, 0})
@@ -43,20 +48,10 @@ return tiny.sortedProcessingSystem {
 	postProcess = function()
 		graphics.camera:draw(function(l, t, w, h)
 
-			-- display selection --
-			love.graphics.setColor(standard.palette.selection)
-
-			for entity, _ in pairs(ui.sources) do
-				love.graphics.draw(entity.highlight.sprite, 0, 0)
-			end
-
-			love.graphics.setColor(standard.palette.white)
-
 			-- print ui values --
 			local lines = {
 				{standard.ui_modes.investing, "[G]old: %s" % player.gold},
 				{standard.ui_modes.aggression, "[A]rmy"},
-				{standard.ui_modes.normal, "[Ecs] selection"},
 			}
 
 			for i, line_pair in ipairs(lines) do
@@ -72,7 +67,7 @@ return tiny.sortedProcessingSystem {
 			end
 
 			if ui.console.active then
-				love.graphics.print("> %s" % ui.console.command, 0, 60)
+				love.graphics.print("> %s" % ui.console.command, 0, 45)
 			end
 		end)
 	end
