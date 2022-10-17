@@ -2,7 +2,7 @@ return {load = function(world)
 	local r = {}
 
 	r.ai1 = world:addEntity {
-		name = "AI_1",
+		name = "Jadian nomads",
 		color = graphics.palette.ai1,
 		gold = 0,
 	}

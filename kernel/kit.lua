@@ -183,8 +183,12 @@ module.attack = function(army, target)
 	end
 
 	if not target.owner then
+		ui.chat:message(
+			"#1{%s} colonizes %s" % {army[1].owner.name, target.name}, 
+			army[1].owner.color
+		)
+
 		target.owner = army[1].owner
-		log.trace("%s colonizes %s" % {army[1].owner.name, target.name})
 		return true
 	end
 
@@ -201,6 +205,12 @@ module.attack = function(army, target)
 		return true
 	end
 
+	ui.chat:message(
+		"#1{%s} attack %s, #2{%s}" % 
+		{army[1].owner.name, target.name, target.owner.name}, 
+		army[1].owner.color, target.owner.color
+	)
+
 	local success = kit.chance(
 		attacking_force / (attacking_force + 1.5 * target.garrison)
 	)
@@ -211,19 +221,15 @@ module.attack = function(army, target)
 		if target.garrison < 0 then
 			target.owner = army[1].owner
 			target.garrison = 0
-			log.trace("%s takes %s" % {army[1].owner.name, target.name})
+
+			ui.chat:message(
+				"#1{%s} takes %s" % {army[1].owner.name, target.name}, 
+				army[1].owner.color
+			)
 		end
 	else
 		army[1].garrison = army[1].garrison - 1
 	end
-
-	log.trace("%s attack %s, %s" % {
-		table.concat(fun.iter(army)
-			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
-			:totable(), ", "),
-		"%s (%s)" % {target.name, target.owner.name},
-		success and "victory" or "defeat",
-	})
 
 	return success
 end

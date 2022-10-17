@@ -13,6 +13,17 @@ return {
 		w = graphics.world_size[1] / 4,
 		font = standard.fonts.small,
 
+		put = function(self, message)
+			log.info(
+				"Chat:", 
+				fun.iter(message)
+					:filter(function(x) return type(x) == "string" end)
+					:reduce(fun.operator.concat, "")
+			)
+
+			return self:_put(message)
+		end,
+
 		_put = function(self, message)
 			local line = {}
 			local w = self.w
@@ -54,22 +65,28 @@ return {
 			):totable())
 		end,
 
-		message = function(self, message, color)
-			log.info("Chat:", message)
-			return self:_put(self:_message(message, color):totable())
+		message = function(self, message, ...)
+			for i, color in ipairs {...} do
+				message = message:gsub("#%i" % i, 
+					fun.iter(graphics.palette)
+						:filter(function(key, value) return value == color end)
+						:map(function(key) return key end)
+						:head()
+				)
+			end
+
+			return self:put(self:_message(message):totable())
 		end,
 
 		_message = function(self, message, color)
-			color = color or graphics.palette.white
-
 			local a, b = message:find("%a[%a%d]+{")
 
 			if a == nil then
-				return fun.iter {color, message}
+				return fun.iter {graphics.palette.white, message}
 			end
 
 			local first_message = message:sub(1, a - 1)
-			local first_color = color
+			local first_color = graphics.palette.white
 
 			local second_color = graphics.palette[message:sub(a, b - 1)]
 
@@ -79,7 +96,7 @@ return {
 
 			return fun.chain(
 				fun.iter {first_color, first_message, second_color, second_message},
-				self:_message(message:sub(d + 1), color)
+				self:_message(message:sub(d + 1))
 			)
 		end,
 	},
