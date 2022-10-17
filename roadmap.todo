@@ -1,5 +1,5 @@
 MVP:
-  ☐ movable armies
+  ✔ movable armies @done (22-10-17 13:00)
   ☐ win/lose
   ☐ enemy AI
 
@@ -25,3 +25,6 @@ Optimization remarks:
 Minor improvments:
   ☐ Round borders on the sea
   ☐ Ocean details
+  ☐ Icon
+  ☐ Cursor
+  ☐ Flags of player colors

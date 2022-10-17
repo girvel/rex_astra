@@ -184,30 +184,48 @@ module.attack = function(army, target)
 
 	if not target.owner then
 		target.owner = army[1].owner
+		log.trace("%s colonizes %s" % {army[1].owner.name, target.name})
 		return true
 	end
 
-	log.info("%s attack %s" % {
-		table.concat(fun.iter(army)
-			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
-			:totable(), ", "),
-		"%s (%s)" % {target.name, target.owner.name},
-	})
+	if target.owner == army[1].owner then
+		for _, entity in ipairs(army) do
+			local movement = math.min(
+				math.floor(entity.garrison * 2 / 3 + .5), 
+				target.maximal_garrison - target.garrison
+			)
 
-	if kit.chance(attacking_force / (attacking_force + 1.5 * target.garrison)) then
+			entity.garrison = entity.garrison - movement
+			target.garrison = target.garrison + movement
+		end
+		return true
+	end
+
+	local success = kit.chance(
+		attacking_force / (attacking_force + 1.5 * target.garrison)
+	)
+
+	if success then
 		target.garrison = target.garrison - 1
 
 		if target.garrison < 0 then
 			target.owner = army[1].owner
 			target.garrison = 0
+			log.trace("%s takes %s" % {army[1].owner.name, target.name})
 		end
-
-		return true
 	else
 		army[1].garrison = army[1].garrison - 1
-
-		return false
 	end
+
+	log.trace("%s attack %s, %s" % {
+		table.concat(fun.iter(army)
+			:map(function(e) return "%s (%s)" % {e.name, e.owner.name} end)
+			:totable(), ", "),
+		"%s (%s)" % {target.name, target.owner.name},
+		success and "victory" or "defeat",
+	})
+
+	return success
 end
 
 local query_system = require "systems.query"

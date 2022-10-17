@@ -30,9 +30,7 @@ return tiny.processingSystem {
 		end,
 
 		[standard.ui_modes.aggression] = function(_, entity)
-			if entity.owner ~= player then
-				kit.attack(ui.sources, entity)
-			end
+			kit.attack(ui.sources, entity)
 		end,
 	},
 }
