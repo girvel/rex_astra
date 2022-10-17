@@ -11,6 +11,7 @@ Prototype:
   ☐ events log
   ☐ beautiful UI mode indicator
   ☐ lore research
+  ☐ RU translation?
 
 
 Long features:
@@ -19,3 +20,8 @@ Long features:
 
 Optimization remarks:
   ☐ Regenerate province hitboxes & highlights only when developing
+
+
+Minor improvments:
+  ☐ Round borders on the sea
+  ☐ Ocean details
