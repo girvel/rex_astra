@@ -18,7 +18,7 @@ module.enumeration = function(members)
 		:map(function(i, m) return m, i end)
 		:tomap()
 
-	result.members_ = members_
+	result.members_ = members
 
 	return setmetatable(result, {
 		__index = function(self, index)
