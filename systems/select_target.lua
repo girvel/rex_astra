@@ -1,13 +1,16 @@
-return tiny.processingSystem {
-	name = "systems.hotkeys_target",
+return tiny.processingSystem {  -- TODO selection system?
+	name = "systems.select_target",
 	system_type = "mousepressed",
 	filter = tiny.requireAll("garrison", "hitbox"),
 
-	process = function(self, entity, key)
-		if not kit.is_mouse_over(entity) then return end
+	process = function(self, entity, event)
+		local x, y, button = unpack(event)
+
+		if mouse.mutex.pressed[button] or not kit.is_mouse_over(entity) then return end
+		mouse.mutex.pressed[button] = true
 
 		if self.behaviours[ui.mode] then
-			self.behaviours[ui.mode](self, entity, key)
+			self.behaviours[ui.mode](self, entity, button)
 		end
 		
 		ui.mode = standard.ui_modes.normal

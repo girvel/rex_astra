@@ -1,10 +1,20 @@
-return tiny.processingSystem {
+return tiny.sortedProcessingSystem {
 	name = "systems.highlighting",
 	system_type = "update",
-	filter = tiny.requireAll("hitbox", "highlight"),
+	filter = tiny.requireAll("hitbox"),
+
+	compare = function(_, e1, e2) return e1.layer > e2.layer end,
 
 	process = function(_, entity)
-		entity.highlight.opacity = kit.is_mouse_over(entity) and .7 or 0
+		local is_over = not mouse.mutex.over and kit.is_mouse_over(entity)
+
+		if entity.highlight then
+			entity.highlight.opacity = is_over and .7 or 0
+		end
+
+		if is_over then
+			mouse.mutex.over = true
+		end
 	end,
 
 	postProcess = function()

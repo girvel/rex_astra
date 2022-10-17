@@ -41,7 +41,7 @@ love.load = function(args)
 
 	world = tiny.world()
 	engine.load_systems(world, {
-		"keyboard_mutex",
+		"mutex",
 
 		"collecting",
 		"console_special_keys",
@@ -50,7 +50,7 @@ love.load = function(args)
 		"drawing",
 		"highlighting",
 		"hotkeys",
-		"hotkeys_target",
+		"select_target",
 		"income",
 		"modifiers_pressed",
 		"modifiers_released",
@@ -68,10 +68,19 @@ love.load = function(args)
 		modifiers = {
 			shift = false,
 		},
-		mutex_lock = {},
+		mutex = {
+			pressed = {},
+		},
 		modifier_by_scancode = {
 			rshift = "shift",
 			lshift = "shift",
+		},
+	}
+
+	mouse = {
+		mutex = {
+			pressed = {},
+			over = false,
 		},
 	}
 
@@ -107,7 +116,7 @@ love.load = function(args)
 		},
 	}
 
-	ui.chat:put("Lorem ipsum dolor sit amet")
+	ui.chat:put("Lorem ipsum dolor sit amet", standard.palette.player)
 
 	log.info("Loading the level")
 	level = require("levels.first").load(world)

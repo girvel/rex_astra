@@ -5,7 +5,7 @@ return tiny.system {
 	update = function(self, text)
 		if not launch.debug or not ui.console.active then return end
 
-		for key, _ in pairs(keyboard.mutex_lock) do
+		for key, _ in pairs(keyboard.mutex.pressed) do
 			if #key == 1 then
 				text = text:gsub(key, "")
 			end
@@ -15,7 +15,7 @@ return tiny.system {
 
 		text = text:capitalize():swapcase()
 		for i in fun.range(#text) do
-			keyboard.mutex_lock[text(i)] = true
+			keyboard.mutex.pressed[text(i)] = true
 		end
 	end,
 }
