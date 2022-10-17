@@ -92,31 +92,55 @@ love.load = function(args)
 			active = false,
 		},
 		chat = {
-			{standard.palette.white, "Hello!"},
-
 			w = graphics.world_size[1] / 4,
 			font = standard.fonts.small,
-			put = function(self, message, color)
-				color = color or standard.palette.white
+			put = function(self, message)
+				local line = {}
+				local w = self.w
+				local i = 0
 
-				local i = math.min(#message, math.floor(self.w / self.font:getWidth('w')))
-
-				while #message > 0 do
-					if  i < #message and 
-						self.font:getWidth(message:sub(1, i + 1)) < self.w 
-					then
-						i = i + 1
-					else 
-						table.insert(self, {color, message:sub(1, i)})
-						message = message:sub(i + 1, #message)
-						i = math.min(#message, math.floor(self.w / self.font:getWidth('w')))
+				local color, text
+				while true do
+					if i == #message then
+						table.insert(self, line)
+						return
 					end
+
+					color = message[i + 1]
+					text = log.debug(message[i + 2])
+					local dw = log.debug(self.font:getWidth(text), w)
+
+					if dw > w then break end
+
+					table.insert(line, color)
+					table.insert(line, text)
+
+					w = w - dw
+					i = i + 2
 				end
+
+				local j = math.floor(w / self.font:getWidth('w'))
+				repeat
+					j = j + 1
+				until self.font:getWidth(text:sub(1, j + 1)) >= w
+
+				table.insert(line, color)
+				table.insert(line, text:sub(1, j))
+
+				table.insert(self, line)
+
+				self:put(fun.chain(
+					fun.iter {color, text:sub(j + 1, #text)},
+					fun.iter(message):drop_n(i + 2)
+				):totable())
 			end,
 		},
 	}
 
-	ui.chat:put("Lorem ipsum dolor sit amet", standard.palette.player)
+	ui.chat:put({
+		standard.palette.white, "A voice: ", standard.palette.player, 
+		"Rex Astra", standard.palette.white, " hit that little girl!"
+	})
 
 	log.info("Loading the level")
 	level = require("levels.first").load(world)
