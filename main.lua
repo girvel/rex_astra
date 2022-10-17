@@ -35,6 +35,16 @@ love.load = function(args)
 		gold = 0,
 	}
 
+	keyboard = {
+		modifiers = {
+			shift = false,
+		},
+		modifier_by_scancode = {
+			rshift = "shift",
+			lshift = "shift",
+		},
+	}
+
 	ui = {
 		mode = standard.ui_modes.normal,
 		sources = {},
@@ -44,5 +54,5 @@ love.load = function(args)
 		}
 	}
 
-	require("levels.first").load(world)
+	level = require("levels.first").load(world)
 end

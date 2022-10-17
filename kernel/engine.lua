@@ -25,7 +25,7 @@ module.load_systems = function(world)
 end
 
 module.override_game_cycle = function(world)
-	for _, callback in ipairs {'update', 'keypressed', 'mousepressed', 'draw'} do
+	for _, callback in ipairs {'update', 'keypressed', 'keyreleased', 'mousepressed', 'draw'} do
 		love[callback] = function(...)
 			world:update(
 				select('#', ...) == 1 and select(1, ...) or {...},

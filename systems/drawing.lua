@@ -46,7 +46,7 @@ return tiny.sortedProcessingSystem {
 			-- display selection --
 			love.graphics.setColor(standard.palette.selection)
 
-			for _, entity in ipairs(ui.sources) do
+			for entity, _ in pairs(ui.sources) do
 				love.graphics.draw(entity.highlight.sprite, 0, 0)
 			end
 
@@ -55,7 +55,7 @@ return tiny.sortedProcessingSystem {
 			-- print ui values --
 			local lines = {
 				{standard.ui_modes.investing, "[G]old: %s" % player.gold},
-				{standard.ui_modes.aggression, "[A]rmy: ?"},
+				{standard.ui_modes.aggression, "[A]rmy"},
 				{standard.ui_modes.normal, "[Ecs] selection"},
 			}
 
