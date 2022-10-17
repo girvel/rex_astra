@@ -7,7 +7,5 @@ return tiny.system {
 		if keyboard.modifier_by_scancode[scancode] then
 			keyboard.modifiers[keyboard.modifier_by_scancode[scancode]] = false
 		end
-	
-		log.trace(keyboard.modifier_by_scancode[scancode], "released")
 	end,
 }

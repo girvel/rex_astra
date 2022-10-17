@@ -18,14 +18,48 @@ module.parse_launch_parameters = function(args)
 	return parser:parse(args)
 end
 
-module.load_systems = function(world)
-	for _, system in ipairs(love.filesystem.getDirectoryItems("systems")) do
-		world:addSystem(require("systems." .. system:sub(1, -5)))
+module.load_systems = function(world, order)
+	order = fun.iter(order)
+		:enumerate()
+		:map(function(i, s) return s, i end)
+		:tomap()
+
+	systems = {}
+
+	for _, system_file in ipairs(love.filesystem.getDirectoryItems("systems")) do
+		system_name = system_file:sub(1, -5)
+
+		if order[system_name] then
+			local system = require("systems." .. system_name)
+			systems[order[system_name]] = system
+
+			if not fun.iter(module.events):index(system.system_type) then
+				log.warn(
+					"System `%s` has unrecognized type `%s`" %
+					{system.name, system.system_type}
+				)
+			end
+		else
+			log.warn("Detected unlisted system `%s`" % system_name)
+		end
+	end
+
+	for _, s in ipairs(systems) do
+		world:addSystem(s)
 	end
 end
 
+module.events = {
+	'update', 
+	'textinput',
+	'keypressed', 
+	'keyreleased', 
+	'mousepressed', 
+	'draw',
+}
+
 module.override_game_cycle = function(world)
-	for _, callback in ipairs {'update', 'keypressed', 'keyreleased', 'mousepressed', 'draw'} do
+	for _, callback in ipairs(module.events) do
 		love[callback] = function(...)
 			world:update(
 				select('#', ...) == 1 and select(1, ...) or {...},

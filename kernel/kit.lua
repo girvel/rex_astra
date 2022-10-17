@@ -213,12 +213,12 @@ end
 local query_system = require "systems.query"
 module.query = function(request_source)
 	local _, predicate = load("return function(e) return %s end" % request_source)
-	local result = fun.iter(query_system.entities):filter():totable()
+	local result = fun.iter(query_system.entities):filter(predicate):totable()
 	
 	if #result > 1 then
 		log.warn(
-			"Query `%s` returned more than one value; \n\n%s" % 
-			{request_source, inspect(result)}
+			"Query `%s` returned more %s values; \n\n%s" % 
+			{request_source, #result, inspect(result)}
 		)
 	end
 

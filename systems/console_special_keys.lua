@@ -1,20 +1,23 @@
 return tiny.system {
-	name = "systems.console",
+	name = "systems.console_special_keys",
 	system_type = "keypressed",
 
 	update = function(self, event)
-		if not launch.debug then return end
+		local _, scancode = unpack(event)
 
-		local key = unpack(event)
+		if not launch.debug or keyboard.mutex_lock[scancode] then return end
 
-		if key == "`" then
+		-- mutex = nil if function reaches the end
+		keyboard.mutex_lock[scancode] = true
+
+		if scancode == "`" then
 			ui.console.active = not ui.console.active
 			return
 		end
 
 		if not ui.console.active then return end
 
-		if key == "return" then
+		if scancode == "return" then
 			local success, message = pcall(load("return " .. ui.console.command))
 			log.info(">", ui.console.command, ">>", message)
 
@@ -23,14 +26,14 @@ return tiny.system {
 			end
 
 			ui.console.command = ""
-		elseif key == "backspace" then
+			return
+		elseif scancode == "backspace" then
 			if #ui.console.command > 0 then
 				ui.console.command = ui.console.command:sub(1, -2)
 			end
-		elseif key == "space" then 
-			ui.console.command = ui.console.command .. " "
-		elseif #key == 1 then
-			ui.console.command = ui.console.command .. tostring(key)
+			return
 		end
+
+		keyboard.mutex_lock[scancode] = nil
 	end,
 }

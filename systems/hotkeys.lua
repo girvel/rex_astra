@@ -4,6 +4,7 @@ return tiny.system {
 
 	update = function(self, event)
 		local key, scancode = unpack(event)
+		if not keyboard.mutex_lock[scancode] then return end
 
 		if self.behaviours[scancode] then
 			ui.mode = self.behaviours[scancode](self) or ui.mode

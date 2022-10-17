@@ -12,6 +12,8 @@ log = require "log"
 inspect = require "inspect"
 fun = require "fun"
 
+-- TODO warning on empty globals
+
 -- kernel --
 kit = require "kernel.kit"
 vector = require "kernel.vector"
@@ -26,7 +28,22 @@ love.load = function(args)
 	launch = engine.parse_launch_parameters(args)
 
 	world = tiny.world()
-	engine.load_systems(world)
+	engine.load_systems(world, {
+		"keyboard_mutex",
+
+		"collecting",
+		"console_special_keys",
+		"console_input",
+		"debugging",
+		"drawing",
+		"highlighting",
+		"hotkeys",
+		"hotkeys_target",
+		"income",
+		"modifiers_pressed",
+		"modifiers_released",
+		"query",
+	})
 	engine.override_game_cycle(world)
 
 	player = {
@@ -39,6 +56,7 @@ love.load = function(args)
 		modifiers = {
 			shift = false,
 		},
+		mutex_lock = {},
 		modifier_by_scancode = {
 			rshift = "shift",
 			lshift = "shift",
