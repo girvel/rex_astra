@@ -20,7 +20,7 @@ return tiny.sortedProcessingSystem {
 			-- TODO remove if
 			if entity.sprite then
 				if entity.is_team_colored and entity.parent.owner then
-					love.graphics.setColor(entity.parent.owner.color or standard.palette.white)
+					love.graphics.setColor(entity.parent.owner.color or graphics.palette.white)
 				end
 
 				if entity.opacity then
@@ -33,14 +33,14 @@ return tiny.sortedProcessingSystem {
 					unpack(entity.position or {0, 0})
 				)
 
-				love.graphics.setColor(standard.palette.white)
+				love.graphics.setColor(graphics.palette.white)
 			end
 
 			-- display province info --
 			if entity.garrison and entity.anchor_position then
-				love.graphics.setColor(standard.palette.black)
+				love.graphics.setColor(graphics.palette.black)
 				kit.centered_print(entity.anchor_position, tostring(entity.garrison))
-				love.graphics.setColor(standard.palette.white)
+				love.graphics.setColor(graphics.palette.white)
 			end
 		end)
 	end,
@@ -58,12 +58,12 @@ return tiny.sortedProcessingSystem {
 				local mode, line = unpack(line_pair)
 
 				if mode == ui.mode then
-					love.graphics.setColor(standard.palette.selection)
+					love.graphics.setColor(graphics.palette.selection)
 				end
 
 				love.graphics.print(line, 0, 15 * (i - 1))
 				
-				love.graphics.setColor(standard.palette.white)
+				love.graphics.setColor(graphics.palette.white)
 			end
 
 			if ui.console.active then
@@ -78,7 +78,7 @@ return tiny.sortedProcessingSystem {
 			for y in fun.range(0, lines_n - 1) do
 				love.graphics.print(
 					ui.chat[#ui.chat - lines_n + y + 1],
-					graphics.world_size[1] - ui.chat.w, y * line_h
+					graphics.world_size[1] - ui.chat.w - 5, y * line_h
 				)
 			end
 

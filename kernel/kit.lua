@@ -37,7 +37,7 @@ module.generate_highlight = function(province_data)
 						acc or ({province_data:getPixel(unpack(pos))})[4] == 1
 					end, false)
 			then
-				data:setPixel(x, y, unpack(standard.palette.white))
+				data:setPixel(x, y, unpack(graphics.palette.white))
 			end
 		end
 	end
@@ -56,7 +56,7 @@ module.fill_province_hitbox = function(borders, position, hitbox)
 		return hitbox
 	end
 
-	hitbox:setPixel(position[1], position[2], unpack(standard.palette.white))
+	hitbox:setPixel(position[1], position[2], unpack(graphics.palette.white))
 
 	for _, p in module.pixels_near(
 		position[1], position[2], borders:getWidth(), borders:getHeight()

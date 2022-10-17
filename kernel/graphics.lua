@@ -1,3 +1,6 @@
+local types = require "kernel.types"
+
+
 local module = {}
 
 
@@ -11,6 +14,19 @@ love.graphics.setDefaultFilter("nearest", "nearest")
 
 module.camera = gamera.new(0, 0, unpack(module.world_size))
 module.camera:setScale(module.scale)
+
+module.palette = types.palette("sprites/palette.png", {
+	"transparent",
+	"sea_blue",
+	"tropic_green",
+	"cold_gray",
+	"white",
+	"black",
+	"casual_gold",
+	"selection",
+	"ai1",
+	"player",
+})
 
 
 return module

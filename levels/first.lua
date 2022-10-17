@@ -3,7 +3,7 @@ return {load = function(world)
 
 	r.ai1 = world:addEntity {
 		name = "AI_1",
-		color = standard.palette.ai1,
+		color = graphics.palette.ai1,
 		gold = 0,
 	}
 
