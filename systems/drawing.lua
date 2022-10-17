@@ -72,7 +72,7 @@ return tiny.sortedProcessingSystem {
 			end
 
 			if ui.console.active then
-				love.graphics.print("> %s" % ui.console.command, 0, 30)
+				love.graphics.print("> %s" % ui.console.command, 0, 60)
 			end
 		end)
 	end
