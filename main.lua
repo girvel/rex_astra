@@ -32,6 +32,7 @@ engine = require "kernel.engine"
 standard = require "kernel.standard"
 graphics = require "kernel.graphics"
 ui = require "kernel.ui"
+prototypes = require "kernel.prototypes"
 
 
 -- engine initialization --
@@ -60,12 +61,6 @@ love.load = function(args)
 	})
 	engine.override_game_cycle(world)
 
-	player = kit.player {
-		name = "Rex Astra",
-		color = graphics.palette.player,
-		gold = 0,
-	}
-
 	keyboard = {
 		modifiers = {
 			shift = false,
@@ -86,7 +81,11 @@ love.load = function(args)
 		},
 	}
 
-	ui.chat:message "A voice: player{Rex Astra} hit that little girl!"
+	player = world:addEntity(prototypes.player {
+		name = "Rex Astra",
+		color = graphics.palette.player,
+		gold = 0,
+	})
 
 	log.info("Loading the level")
 	level = require("levels.first").load(world)

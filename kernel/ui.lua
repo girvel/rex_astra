@@ -60,12 +60,7 @@ return {
 
 			table.insert(self, line)
 
-			log.debug("chain(%s, %s)" % {
-				inspect {color, text:sub(j + 1, #text)},
-				inspect(fun.iter(message):drop_n(i + 2):totable())
-			})
-
-			self:_put(kit.concat(
+			self:_put(kit.table.concat(
 				{color, text:sub(j + 1, #text)},
 				fun.iter(message):drop_n(i + 2):totable()
 			))
@@ -89,7 +84,6 @@ return {
 			local a, b = message:find("%a[%a%d]+{")
 
 			if a == nil then
-				log.debug {graphics.palette.white, message}
 				table.insert(result, graphics.palette.white)
 				table.insert(result, message)
 				return result
@@ -103,8 +97,6 @@ return {
 			local c, d = message:find("}")
 
 			local second_message = message:sub(b + 1, c - 1)
-
-			log.debug {first_color, first_message, second_color, second_message}
 
 			table.insert(result, first_color)
 			table.insert(result, first_message)

@@ -39,7 +39,7 @@ return tiny.sortedProcessingSystem {
 			-- province info --
 			if entity.garrison and entity.owner and entity.anchor_position then
 				love.graphics.setColor(entity.owner.color)
-				kit.centered_print(entity.anchor_position, tostring(entity.garrison))
+				graphics.centered_print(entity.anchor_position, tostring(entity.garrison))
 				love.graphics.setColor(graphics.palette.white)
 			end
 		end)
@@ -79,11 +79,13 @@ return tiny.sortedProcessingSystem {
 			local line_h = ui.chat.font:getHeight() + ui.chat.line_spacing
 			local lines_n = math.min(#ui.chat, math.floor(graphics.world_size[2] / line_h))
 
-			for y in fun.range(0, lines_n - 1) do
-				love.graphics.print(
-					ui.chat[#ui.chat - lines_n + y + 1],
-					graphics.world_size[1] - ui.chat.w - 5, y * line_h
-				)
+			if lines_n > 0 then
+				for y in fun.range(0, lines_n - 1) do
+					love.graphics.print(
+						ui.chat[#ui.chat - lines_n + y + 1],
+						graphics.world_size[1] - ui.chat.w - 5, y * line_h
+					)
+				end
 			end
 		end)
 	end

@@ -6,7 +6,7 @@ return tiny.processingSystem {
 	process = function(self, entity, event)
 		local x, y, button = unpack(event)
 
-		if mouse.mutex.pressed[button] or not kit.is_mouse_over(entity) then return end
+		if mouse.mutex.pressed[button] or not graphics.is_mouse_over(entity) then return end
 		mouse.mutex.pressed[button] = true
 
 		player.gold = player.gold + 1

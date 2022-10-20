@@ -1,7 +1,7 @@
 return {load = function(world)
 	local r = {}
 
-	r.jadians = world:addEntity(kit.player {
+	r.jadians = world:addEntity(prototypes.player {
 		name = "Jadian nomads",
 		color = graphics.palette.ai1,
 		gold = 0,
@@ -14,7 +14,7 @@ return {load = function(world)
 
 			if self.gold > 0 then
 				for _, province in ipairs(self.property) do
-					if not kit.invest(
+					if not kit.orders.invest(
 						province, 
 						math.ceil(self.gold / #self.property)) 
 					then break end
@@ -23,13 +23,13 @@ return {load = function(world)
 
 			for _, province in ipairs(self.property) do
 				if kit.random.chance(self.activity_chance) then
-					kit.attack({province}, kit.random.choose(province.neighbours))
+					kit.orders.attack({province}, kit.random.choose(province.neighbours))
 				end
 			end
 		end,
 	})
 
-	local zandara = kit.planet(world, "Zandara", "sprites/zandara")
+	local zandara = prototypes.planet(world, "Zandara", "sprites/zandara")
 
 	zandara:add_planet()
 

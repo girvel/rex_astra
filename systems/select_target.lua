@@ -6,7 +6,7 @@ return tiny.processingSystem {  -- TODO selection system?
 	process = function(self, entity, event)
 		local x, y, button = unpack(event)
 
-		if mouse.mutex.pressed[button] or not kit.is_mouse_over(entity) then return end
+		if mouse.mutex.pressed[button] or not graphics.is_mouse_over(entity) then return end
 		mouse.mutex.pressed[button] = true
 
 		if self.behaviours[ui.mode] then
@@ -33,7 +33,7 @@ return tiny.processingSystem {  -- TODO selection system?
 		end,
 
 		[standard.ui_modes.aggression] = function(_, entity)
-			kit.attack(ui.sources, entity)
+			kit.orders.attack(ui.sources, entity)
 		end,
 	},
 }

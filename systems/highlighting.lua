@@ -6,7 +6,7 @@ return tiny.sortedProcessingSystem {
 	compare = function(_, e1, e2) return e1.layer > e2.layer end,
 
 	process = function(_, entity)
-		local is_over = not mouse.mutex.over and kit.is_mouse_over(entity)
+		local is_over = not mouse.mutex.over and graphics.is_mouse_over(entity)
 
 		if entity.highlight then
 			entity.highlight.opacity = is_over and .7 or 0

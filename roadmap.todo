@@ -19,6 +19,7 @@ Refactoring:
   ☐ kit submodules
   ☐ standard -> other kernel modules
   ☐ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc)
+  ☐ information system
 
 
 Long features:

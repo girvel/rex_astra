@@ -4,7 +4,7 @@ return tiny.processingSystem {
 	filter = tiny.requireAll("fertility", "owner"),
 
 	income_repeater = types.repeater(1),
-	global_fertility_rate = .5,
+	global_fertility_rate = .2,
 
 	process = function(self, entity, dt)
 		if not entity.owner then return end
@@ -18,7 +18,7 @@ return tiny.processingSystem {
 		then
 			if entity.owner == player then
 				if not entity.coin then 
-					entity.coin = kit.add_coin(entity)
+					entity.coin = world:addEntity(prototypes.coin(entity))
 				end
 			else
 				entity.owner.gold = entity.owner.gold + 1

@@ -25,7 +25,7 @@ return tiny.system {
 		g = function()
 			for entity, _ in pairs(ui.sources) do
 				if entity.owner == player then
-					kit.invest(entity, 1)
+					kit.orders.invest(entity, 1)
 				end
 			end
 		end,
