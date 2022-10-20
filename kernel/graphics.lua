@@ -28,6 +28,21 @@ module.palette = types.palette("sprites/palette.png", {
 	"player",
 })
 
+module.layers = types.enumeration {
+	"planet",
+	"highlight",
+	"coin",
+}
+
+module.fonts = {
+	small = love.graphics.newFont("fonts/aseprite-remix.ttf", 7),
+	normal = love.graphics.newFont("fonts/aseprite-remix.ttf", 14),
+}
+
+for _, f in pairs(module.fonts) do
+	f:setFilter("nearest", "nearest")
+end
+
 module.pixels_near = function(x, y, w, h)
 	return fun.iter {
 		{x + 1, y},
@@ -88,22 +103,6 @@ module.fill_province_hitbox = function(borders, position, hitbox)
 	end
 
 	return hitbox
-end
-
-module.is_mouse_over = function(entity)
-	local mouse_position = vector {graphics.camera:toWorld(love.mouse.getPosition())}
-	mouse_position = mouse_position - (entity.position or {0, 0})
-
-	if (mouse_position[1] < 0 or 
-		mouse_position[2] < 0 or 
-		mouse_position[1] >= entity.hitbox:getWidth() or
-		mouse_position[2] >= entity.hitbox:getHeight()
-	) then
-		return false
-	end
-
-	local r, g, b, a = entity.hitbox:getPixel(unpack(mouse_position))
-	return a > 0
 end
 
 module.centered_print = function(position, text)

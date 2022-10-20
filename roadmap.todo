@@ -6,7 +6,7 @@ MVP:
 
 
 Prototype:
-  ☐ mouse, keyboard mutex events
+  ✔ mouse, keyboard mutex events @done (22-10-20 10:32)
   ☐ systems manual order
   ☐ basic AI
   ☐ events log
@@ -16,10 +16,11 @@ Prototype:
 
 
 Refactoring:
-  ☐ kit submodules
-  ☐ standard -> other kernel modules
-  ☐ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc)
+  ✔ kit submodules @done (22-10-20 10:32)
+  ✔ standard -> other kernel modules @done (22-10-20 10:32)
+  ✔ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc) @done (22-10-20 10:32)
   ☐ information system
+  ☐ mouse, keyboard systems
 
 
 Long features:

@@ -1,9 +1,9 @@
-local standard = require "kernel.standard"
-local graphics = require "kernel.graphics"
-
-
-return {
-	mode = standard.ui_modes.normal,
+local module = {
+	modes = types.enumeration {
+		"normal",
+		"investing",
+		"aggression",
+	},
 	sources = {},
 	console = {
 		command = "",
@@ -11,7 +11,7 @@ return {
 	},
 	chat = {
 		w = graphics.world_size[1] / 4,
-		font = standard.fonts.small,
+		font = graphics.fonts.small,
 		line_spacing = 1,
 
 		put = function(self, message)
@@ -107,3 +107,7 @@ return {
 		end,
 	},
 }
+module.mode = module.modes.normal
+
+
+return module

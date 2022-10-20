@@ -64,7 +64,6 @@ return {load = function(world)
 
 	r.zanartha = zandara:add_province {
 		name = "Zanartha highland",
-		garrison = 2,
 		anchor_position = vector {236, 92},
 		fertility = .06,
 		owner = r.ai1,

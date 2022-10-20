@@ -10,7 +10,7 @@ return tiny.system {
 		    return text:gsub("([^%w])", "%%%1")
 		end
 
-		for key, _ in pairs(keyboard.mutex.pressed) do
+		for key, _ in pairs(devices.keyboard.mutex.pressed) do
 			if #key == 1 then
 				text = text:gsub(escape_pattern(key), "")
 			end
@@ -20,7 +20,7 @@ return tiny.system {
 
 		text = text:capitalize():swapcase()
 		for i in fun.range(#text) do
-			keyboard.mutex.pressed[text(i)] = true
+			devices.keyboard.mutex.pressed[text(i)] = true
 		end
 	end,
 }

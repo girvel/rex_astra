@@ -5,10 +5,12 @@ return tiny.system {
 	update = function(self, event)
 		local _, scancode = unpack(event)
 
-		if not launch.debug or keyboard.mutex.pressed[scancode] then return end
+		if  not launch.debug or 
+			devices.keyboard.mutex.pressed[scancode] 
+		then return end
 
 		-- mutex = nil if function reaches the end
-		keyboard.mutex.pressed[scancode] = true
+		devices.keyboard.mutex.pressed[scancode] = true
 
 		if scancode == "`" then
 			ui.console.active = not ui.console.active
@@ -34,6 +36,6 @@ return tiny.system {
 			return
 		end
 
-		keyboard.mutex.pressed[scancode] = nil
+		devices.keyboard.mutex.pressed[scancode] = nil
 	end,
 }

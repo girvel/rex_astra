@@ -49,11 +49,11 @@ return tiny.sortedProcessingSystem {
 		graphics.camera:draw(function(l, t, w, h)
 
 			-- ui modes --
-			love.graphics.setFont(standard.fonts.normal)
+			love.graphics.setFont(graphics.fonts.normal)
 
 			local lines = {
-				{standard.ui_modes.investing, "[G]old: %s" % player.gold},
-				{standard.ui_modes.aggression, "[A]rmy"},
+				{ui.modes.investing, "[G]old: %s" % player.gold},
+				{ui.modes.aggression, "[A]rmy"},
 			}
 
 			for i, line_pair in ipairs(lines) do

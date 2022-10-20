@@ -3,8 +3,8 @@ return tiny.system {
 	system_type = "update",
 
 	update = function()
-		keyboard.mutex.pressed = {}
-		mouse.mutex.pressed = {}
-		mouse.mutex.over = false
+		devices.keyboard.mutex.pressed = {}
+		devices.mouse.mutex.pressed = {}
+		devices.mouse.mutex.over = false
 	end,
 }

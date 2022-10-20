@@ -4,8 +4,10 @@ return tiny.system {
 	update = function(self, event)
 		local key, scancode = unpack(event)
 
-		if keyboard.modifier_by_scancode[scancode] then
-			keyboard.modifiers[keyboard.modifier_by_scancode[scancode]] = true
+		if devices.keyboard.modifier_by_scancode[scancode] then
+			devices.keyboard.modifiers[
+				devices.keyboard.modifier_by_scancode[scancode]
+			] = true
 		end
 	end,
 }

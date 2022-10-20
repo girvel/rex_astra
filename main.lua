@@ -29,10 +29,10 @@ types = require "kernel.types"
 kit = require "kernel.kit"
 vector = require "kernel.vector"
 engine = require "kernel.engine"
-standard = require "kernel.standard"
 graphics = require "kernel.graphics"
 ui = require "kernel.ui"
 prototypes = require "kernel.prototypes"
+devices = require "kernel.devices"
 
 
 -- engine initialization --
@@ -60,26 +60,6 @@ love.load = function(args)
 		"ai",
 	})
 	engine.override_game_cycle(world)
-
-	keyboard = {
-		modifiers = {
-			shift = false,
-		},
-		mutex = {
-			pressed = {},
-		},
-		modifier_by_scancode = {
-			rshift = "shift",
-			lshift = "shift",
-		},
-	}
-
-	mouse = {
-		mutex = {
-			pressed = {},
-			over = false,
-		},
-	}
 
 	player = world:addEntity(prototypes.player {
 		name = "Rex Astra",

@@ -13,14 +13,14 @@ module.planet = function(world, name, path)
 			self.world:addEntity {
 				name = self.name,
 				sprite = love.graphics.newImage("%s/planet.png" % self.path),
-				layer = standard.layers.planet,
+				layer = graphics.layers.planet,
 			}
 		end,
 
 		province_defaults = {
 			neighbours = {},
 			garrison = 0,
-			maximal_garrison = standard.maximal_garrison,
+			maximal_garrison = 10,
 			layer = 1,
 			owner = false,
 		},
@@ -35,7 +35,7 @@ module.planet = function(world, name, path)
 			province.highlight = self.world:addEntity {
 				name = "highlight: %s" % province.name,
 				sprite = graphics.generate_highlight(province.hitbox),
-				layer = standard.layers.highlight,
+				layer = graphics.layers.highlight,
 				is_team_colored = true,
 				parent = province,
 			}
@@ -63,7 +63,7 @@ module.coin = function(province)
 		name = "coin",
 		sprite = love.graphics.newImage("sprites/golden_coin.png"),
 		hitbox = hitbox,
-		layer = standard.layers.coin,
+		layer = graphics.layers.coin,
 		position = province.anchor_position - vector {
 			hitbox:getWidth() / 2, 
 			hitbox:getHeight(),

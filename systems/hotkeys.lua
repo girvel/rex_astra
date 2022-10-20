@@ -4,7 +4,7 @@ return tiny.system {
 
 	update = function(self, event)
 		local key, scancode = unpack(event)
-		if not keyboard.mutex.pressed[scancode] then return end
+		if not devices.keyboard.mutex.pressed[scancode] then return end
 
 		if self.behaviours[scancode] then
 			ui.mode = self.behaviours[scancode](self) or ui.mode
@@ -13,12 +13,12 @@ return tiny.system {
 
 	behaviours = {
 		escape = function()
-			return standard.ui_modes.normal
+			return ui.modes.normal
 		end,
 
 		a = function()
 			return fun.iter(ui.sources):length() > 0 
-				and standard.ui_modes.aggression 
+				and ui.modes.aggression 
 				or nil
 		end,
 
