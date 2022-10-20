@@ -76,8 +76,8 @@ return tiny.sortedProcessingSystem {
 			-- chat --
 			love.graphics.setFont(ui.chat.font)
 
-			local line_h = ui.chat.font:getHeight()
-			local lines_n = math.min(#ui.chat, graphics.world_size[2] / line_h)
+			local line_h = ui.chat.font:getHeight() + ui.chat.line_spacing
+			local lines_n = math.min(#ui.chat, math.floor(graphics.world_size[2] / line_h))
 
 			for y in fun.range(0, lines_n - 1) do
 				love.graphics.print(

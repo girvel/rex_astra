@@ -4,7 +4,55 @@ local standard = require "kernel.standard"
 local module = {}
 
 
+-- submodules --
+module.random = require "kernel.kit.random"
+
+
 -- definitions --
+module.merge = function(first, second)
+	for key, value in pairs(second) do
+		first[key] = first[key] or value
+	end
+
+	return first
+end
+
+module.player = function(entity)
+	return module.merge(entity, {
+		property = {},
+		own = function(self, ...)
+			for _, subject in ipairs {...} do
+				module.set_owner(subject, self)
+			end
+		end,
+	})
+end
+
+module.delete = function(t, item)
+	local index = fun.iter(t):index(item)
+	return index and table.remove(t, index)
+end
+
+module.concat = function(self, other)
+	for _, e in ipairs(other) do
+		table.insert(self, e)
+	end
+
+	return self
+end
+
+module.set_owner = function(entity, owner)
+	if entity.owner then
+		kit.delete(owner.property, entity)
+	end
+
+	entity.owner = owner
+
+	if entity.owner then
+		table.insert(owner.property, entity)
+	end
+end
+
 module.pixels_near = function(x, y, w, h)
 	return fun.iter {
 		{x + 1, y},
@@ -91,9 +139,7 @@ module.planet = function(world, name, path)
 		},
 
 		add_province = function(self, province)
-			for key, value in pairs(self.province_defaults) do
-				province[key] = province[key] or value
-			end
+			module.merge(province, self.province_defaults)
 
 			province.hitbox = module.fill_province_hitbox(
 				self.borders, province.anchor_position
@@ -152,16 +198,14 @@ module.centered_print = function(position, text)
 	love.graphics.print(text, position[1], position[2], 0, 1, 1, w / 2, h / 2)
 end
 
-module.chance = function(chance)
-	return math.random() < chance
-end
 
-module.invest = function(entity)
+
+module.invest = function(entity, amount)
 	if  entity.garrison < entity.maximal_garrison and
-		entity.owner.gold >= 1
+		entity.owner.gold >= amount
 	then
-		entity.owner.gold = entity.owner.gold - 1
-		entity.garrison = entity.garrison + 1
+		entity.owner.gold = entity.owner.gold - amount
+		entity.garrison = entity.garrison + amount
 		return true
 	end
 
@@ -188,7 +232,7 @@ module.attack = function(army, target)
 			army[1].owner.color
 		)
 
-		target.owner = army[1].owner
+		module.set_owner(target, army[1].owner)
 		return true
 	end
 
@@ -211,7 +255,7 @@ module.attack = function(army, target)
 		army[1].owner.color, target.owner.color
 	)
 
-	local success = kit.chance(
+	local success = kit.random.chance(
 		attacking_force / (attacking_force + 1.5 * target.garrison)
 	)
 
@@ -219,7 +263,7 @@ module.attack = function(army, target)
 		target.garrison = target.garrison - 1
 
 		if target.garrison < 0 then
-			target.owner = army[1].owner
+			kit.set_owner(target, army[1].owner)
 			target.garrison = 0
 
 			ui.chat:message(

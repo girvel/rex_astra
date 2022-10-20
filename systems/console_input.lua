@@ -5,9 +5,14 @@ return tiny.system {
 	update = function(self, text)
 		if not launch.debug or not ui.console.active then return end
 
+		-- TODO kit
+		local function escape_pattern(text)
+		    return text:gsub("([^%w])", "%%%1")
+		end
+
 		for key, _ in pairs(keyboard.mutex.pressed) do
 			if #key == 1 then
-				text = text:gsub(key, "")
+				text = text:gsub(escape_pattern(key), "")
 			end
 		end
 

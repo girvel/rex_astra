@@ -20,8 +20,8 @@ module.ui_modes = types.enumeration {
 module.maximal_garrison = 10
 
 module.fonts = {
-	small = love.graphics.newFont(8),
-	normal = love.graphics.newFont(12),
+	small = love.graphics.newFont("fonts/aseprite-remix.ttf", 7),
+	normal = love.graphics.newFont("fonts/aseprite-remix.ttf", 14),
 }
 
 for _, f in pairs(module.fonts) do

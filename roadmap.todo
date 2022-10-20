@@ -2,6 +2,7 @@ MVP:
   ✔ movable armies @done (22-10-17 13:00)
   ☐ win/lose
   ☐ enemy AI
+  ☐ help
 
 
 Prototype:
@@ -12,6 +13,12 @@ Prototype:
   ✔ beautiful UI mode indicator @done (22-10-17 11:37)
   ☐ lore research
   ☐ RU translation?
+
+
+Refactoring:
+  ☐ kit submodules
+  ☐ standard -> other kernel modules
+  ☐ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc)
 
 
 Long features:

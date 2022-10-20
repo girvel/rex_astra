@@ -56,10 +56,11 @@ love.load = function(args)
 		"modifiers_pressed",
 		"modifiers_released",
 		"query",
+		"ai",
 	})
 	engine.override_game_cycle(world)
 
-	player = {
+	player = kit.player {
 		name = "Rex Astra",
 		color = graphics.palette.player,
 		gold = 0,

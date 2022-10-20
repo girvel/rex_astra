@@ -12,6 +12,7 @@ return {
 	chat = {
 		w = graphics.world_size[1] / 4,
 		font = standard.fonts.small,
+		line_spacing = 1,
 
 		put = function(self, message)
 			log.info(
@@ -59,10 +60,15 @@ return {
 
 			table.insert(self, line)
 
-			self:_put(fun.chain(
-				fun.iter {color, text:sub(j + 1, #text)},
-				fun.iter(message):drop_n(i + 2)
-			):totable())
+			log.debug("chain(%s, %s)" % {
+				inspect {color, text:sub(j + 1, #text)},
+				inspect(fun.iter(message):drop_n(i + 2):totable())
+			})
+
+			self:_put(kit.concat(
+				{color, text:sub(j + 1, #text)},
+				fun.iter(message):drop_n(i + 2):totable()
+			))
 		end,
 
 		message = function(self, message, ...)
@@ -75,15 +81,18 @@ return {
 				)
 			end
 
-			return self:put(self:_message(message):totable())
+			return self:put(self:_message(message))
 		end,
 
-		_message = function(self, message, color)
+		_message = function(self, message, result)
+			local result = result or {}
 			local a, b = message:find("%a[%a%d]+{")
 
 			if a == nil then
 				log.debug {graphics.palette.white, message}
-				return fun.iter {graphics.palette.white, message}
+				table.insert(result, graphics.palette.white)
+				table.insert(result, message)
+				return result
 			end
 
 			local first_message = message:sub(1, a - 1)
@@ -96,10 +105,13 @@ return {
 			local second_message = message:sub(b + 1, c - 1)
 
 			log.debug {first_color, first_message, second_color, second_message}
-			return fun.chain(
-				fun.iter {first_color, first_message, second_color, second_message},
-				self:_message(message:sub(d + 1))
-			)
+
+			table.insert(result, first_color)
+			table.insert(result, first_message)
+			table.insert(result, second_color)
+			table.insert(result, second_message)
+
+			return self:_message(message:sub(d + 1), result)
 		end,
 	},
 }

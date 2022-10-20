@@ -36,23 +36,21 @@ module.palette = function(palette_path, colors)
 		:tomap()
 end
 
-module.repeater = function()
+module.repeater = function(period)
 	return {
 		value = 0,
+		period = period,
 
 		move = function(self, delta) 
 			self.value = self.value + delta 
-			return self
-		end,
-
-		each = function(self, period)
-			if self.value > period then
-				self.value = self.value - period
+			
+			if self.value > self.period then
+				self.value = self.value - self.period
 				return true
 			end
 
 			return false
-		end
+		end,
 	}
 end
 
