@@ -76,6 +76,8 @@ end
 module.player = function(entity)
 	return kit.table.merge(entity, {
 		property = {},
+		gold = 0,
+		
 		own = function(self, ...)
 			for _, subject in ipairs {...} do
 				subject:set_owner(self)

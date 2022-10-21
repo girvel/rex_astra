@@ -15,9 +15,11 @@ module.delete = function(t, item)
 	return index and table.remove(t, index)
 end
 
-module.concat = function(self, other)
-	for _, e in ipairs(other) do
-		table.insert(self, e)
+module.concat = function(self, ...)
+	for _, other in ipairs {...} do
+		for _, e in ipairs(other) do
+			table.insert(self, e)
+		end
 	end
 
 	return self

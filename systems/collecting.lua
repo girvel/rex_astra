@@ -7,7 +7,7 @@ return tiny.processingSystem {
 		local x, y, button = unpack(event)
 
 		if  devices.mouse.mutex.pressed[button] or 
-			not device.mouse.is_over(entity) 
+			not devices.mouse.is_over(entity) 
 		then return end
 		devices.mouse.mutex.pressed[button] = true
 

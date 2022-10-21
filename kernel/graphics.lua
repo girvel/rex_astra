@@ -24,8 +24,10 @@ module.palette = types.palette("sprites/palette.png", {
 	"black",
 	"casual_gold",
 	"selection",
-	"ai1",
+	"jadians",
 	"player",
+	"savanna_yellow",
+	"zanarthians",
 })
 
 module.layers = types.enumeration {

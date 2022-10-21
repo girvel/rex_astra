@@ -3,15 +3,19 @@ local module = {}
 
 -- definitions --
 module.invest = function(entity, amount)
-	if  entity.garrison < entity.maximal_garrison and
-		entity.owner.gold >= amount
-	then
-		entity.owner.gold = entity.owner.gold - amount
-		entity.garrison = entity.garrison + amount
-		return true
+	amount = math.min(
+		amount, 
+		entity.maximal_garrison - entity.garrison, 
+		entity.owner.gold
+	)
+
+	if amount == 0 then
+		return false
 	end
 
-	return false
+	entity.owner.gold = entity.owner.gold - amount
+	entity.garrison = entity.garrison + amount
+	return true
 end
 
 module.attack = function(army, target)
@@ -77,6 +81,20 @@ module.attack = function(army, target)
 	end
 
 	return success
+end
+
+module.invest_evenly = function(player)
+	if player.gold <= 0 then return end
+
+	local investment = math.floor(player.gold / #player.property)
+	local remainder_index = player.gold % #player.property
+
+	for i, province in ipairs(player.property) do
+		kit.orders.invest(
+			province, 
+			investment + (i <= remainder_index and 1 or 0)
+		)
+	end
 end
 
 
