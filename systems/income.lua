@@ -3,17 +3,16 @@ return tiny.processingSystem {
 	system_type = "update",
 	filter = tiny.requireAll("fertility", "owner"),
 
-	income_repeater = types.repeater(1),
-	global_fertility_rate = .2,
+	global_fertility_rate = .35,
 
 	process = function(self, entity, dt)
 		if not entity.owner then return end
 
 		-- TODO consider non-linear distribution
-		if  self.income_repeater:move(dt) and
+		if  entity.income_repeater:move(dt) and
 			kit.random.chance(
 				self.global_fertility_rate * entity.fertility * 
-				(1 - entity.garrison / entity.maximal_garrison)
+				(1 - entity.garrison / (entity.maximal_garrison + 1))
 			)
 		then
 			if entity.owner == player then

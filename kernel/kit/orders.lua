@@ -61,7 +61,7 @@ module.attack = function(army, target)
 	)
 
 	local success = kit.random.chance(
-		attacking_force / (attacking_force + 1.5 * target.garrison)
+		attacking_force / (attacking_force + 1.5 * target.garrison * target.defense_k)
 	)
 
 	if success then
@@ -95,6 +95,18 @@ module.invest_evenly = function(player)
 			investment + (i <= remainder_index and 1 or 0)
 		)
 	end
+end
+
+module.surrender = function(player, target)
+	for _, province in ipairs({unpack(player.property)}) do
+		log.debug(province.name)
+		province:set_owner(target)
+	end
+
+	target.gold = target.gold + player.gold
+	player.gold = 0
+
+	player.lost = true
 end
 
 

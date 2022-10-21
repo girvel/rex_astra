@@ -52,7 +52,7 @@ end
 
 function mt:__call(i, j)
   if type(i) == "string" then
-    return self:match(i, j)
+    return self:find(i, j)
   else
     local len = #self
     if i > len or i < -len or i == 0 then return nil end

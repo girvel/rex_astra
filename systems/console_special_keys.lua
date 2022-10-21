@@ -20,7 +20,11 @@ return tiny.system {
 		if not ui.console.active then return end
 
 		if scancode == "return" then
-			local success, message = pcall(load("return " .. ui.console.command))
+			local success, message = pcall(load(
+				(ui.console.command("=") and "" or "return ") 
+				.. ui.console.command
+			))
+
 			log.info(">", ui.console.command, ">>", message)
 
 			if not success then

@@ -23,6 +23,8 @@ module.planet = function(world, name, path)
 			maximal_garrison = 10,
 			layer = 1,
 			owner = false,
+			income_repeater = types.repeater(1),
+			defense_k = 1,
 		},
 
 		add_province = function(self, province)
@@ -77,6 +79,7 @@ module.player = function(entity)
 	return kit.table.merge(entity, {
 		property = {},
 		gold = 0,
+		lost = false,
 		
 		own = function(self, ...)
 			for _, subject in ipairs {...} do
