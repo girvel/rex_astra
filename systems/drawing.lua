@@ -45,7 +45,8 @@ return tiny.sortedProcessingSystem {
 
 	postProcess = function()
 		-- ui modes --
-		love.graphics.setFont(graphics.fonts.ui_normal)
+		local font = graphics.fonts.ui_normal
+		love.graphics.setFont(font)
 
 		local lines = {
 			{ui.modes.investing, "[G]old: %s" % player.gold},
@@ -59,7 +60,7 @@ return tiny.sortedProcessingSystem {
 				love.graphics.setColor(graphics.palette.selection)
 			end
 
-			love.graphics.print(line, 0, 15 * (i - 1))
+			love.graphics.print(line, 0, (font:getHeight() + 4) * (i - 1))
 			
 			love.graphics.setColor(graphics.palette.white)
 		end
