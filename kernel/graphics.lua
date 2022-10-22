@@ -39,6 +39,8 @@ module.layers = types.enumeration {
 module.fonts = {
 	small = love.graphics.newFont("fonts/aseprite-remix.ttf", 7),
 	normal = love.graphics.newFont("fonts/aseprite-remix.ttf", 14),
+	ui_small = love.graphics.newFont("fonts/aseprite-remix.ttf", 14),
+	ui_normal = love.graphics.newFont("fonts/aseprite-remix.ttf", 28),
 }
 
 for _, f in pairs(module.fonts) do

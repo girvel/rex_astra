@@ -90,11 +90,14 @@ module.invest_evenly = function(player)
 	local investment = math.floor(player.gold / property_n)
 	local remainder_index = player.gold % property_n
 
+	local i = 1
 	for province, _ in pairs(player.property) do
 		kit.orders.invest(
 			province, 
 			investment + (i <= remainder_index and 1 or 0)
 		)
+		
+		i = i + 1
 	end
 end
 

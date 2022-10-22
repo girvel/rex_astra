@@ -10,8 +10,8 @@ local module = {
 		active = false,
 	},
 	chat = {
-		w = graphics.world_size[1] / 4,
-		font = graphics.fonts.small,
+		w = graphics.window_size[1] / 4,
+		font = graphics.fonts.ui_small,
 		line_spacing = 1,
 
 		put = function(self, message)
