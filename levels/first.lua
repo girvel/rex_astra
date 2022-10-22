@@ -11,7 +11,19 @@ return {load = function(world)
 		aggression_chance = .7,
 
 		win = function(self)
-			-- ui.chat.message("")
+			ui.chat(
+				"Now the planet Zandara belongs to Jadian nomads. They " ..
+				"will continue to travel through its beautiful lands, " ..
+				"disturbed by no sentient being."
+			)
+		end,
+
+		lose = function(self)
+			ui.chat(
+				"Last one of Jadian nomads dies in battle. The species becomes " ..
+				"extinct, but their brave souls will continue the ride in " .. 
+				"the fields of eternity."
+			)
 		end,
 
 		decide = function(self, dt)
@@ -43,6 +55,36 @@ return {load = function(world)
 		},
 
 		surrendered = false,
+
+		win = function(self)
+			ui.chat(
+				"After the years of brutal war the Guardians of Zanartha " ..
+				"remain the last one standing. They have defeated every " ..
+				"invader that dared to set foot on Zandara, and now they " ..
+				"enter a golden age of peace, prosperity and honour."
+			)
+		end,
+
+		lose = function(self)
+			if self.surrendered then
+				ui.chat(
+					"After careful consideration the Guardians of Zanartha " ..
+					"have decided to stop the conflict and join the empire " ..
+					"of the Rex Astra. They will preserve their ancent " ..
+					"culture and tradition and continue to defend the lands " ..
+					"of Zandara from invaders, but now as a part of the " ..
+					"rising intergalactic empire."
+				)
+			else
+				ui.chat(
+					"After the series of great battles the legendary " ..
+					"civilization of the Guardians of Zanartha ceases to " ..
+					"exist. Never again will they ride through the valleys " ..
+					"of Zanartha, and never again will the Uxan peaks hear " ..
+					"the horn of Dasnar."
+				)
+			end
+		end,
 
 		decide = function(self, dt)
 			local all_neighbours = {}
@@ -119,6 +161,7 @@ return {load = function(world)
 		name = "Taiga of Annar",
 		anchor_position = vector {220, 66},
 		fertility = .05,
+		garrison = 4,
 	}
 
 	p.dowur = zandara:add_province {
@@ -153,6 +196,7 @@ return {load = function(world)
 		name = "Reimin plains",
 		fertility = .10,
 		anchor_position = vector {220, 100},
+		garrison = 1,
 	}
 
 	p.uxan = zandara:add_province {
@@ -202,7 +246,7 @@ return {load = function(world)
 	}
 
 	player:own(p.reidan)
-	ai.jadians:own(p.annar, p.venedai, p.jadia)
+	ai.jadians:own(p.annar, p.venedai, p.jadia, p.annar, p.reimin)
 	ai.zanarthians:own(p.zanartha, p.uxan)
 
 	p.fulthu.neighbours = {p.devarus, p.jadia}
@@ -211,7 +255,7 @@ return {load = function(world)
 	p.higher_mikara.neighbours = {p.lower_mikara, p.antaris}
 	p.lower_mikara.neighbours = {p.higher_mikara, p.sod}
 	p.sod.neighbours = {p.annar, p.dowur, p.lower_mikara}
-	p.annar.neighbours = {p.sod, p.dowur, p.venedai, p.zanartha, p.uxan}
+	p.annar.neighbours = {p.sod, p.dowur, p.venedai, p.zanartha, p.uxan, p.reimin}
 	p.dowur.neighbours = {p.sod, p.annar, p.uxan, p.reidan}
 	p.venedai.neighbours = {p.annar, p.jadia, p.reimin}
 	p.zanartha.neighbours = {p.annar, p.reimin, p.uxan}

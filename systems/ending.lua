@@ -10,6 +10,7 @@ return tiny.processingSystem {
 		if kit.table.size(entity.property) == 0 then
 			entity.lost = true
 
+			log.debug(entity.lose)
 			if entity.lose then
 				entity:lose()
 			end
