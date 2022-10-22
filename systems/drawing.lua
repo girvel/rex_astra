@@ -67,7 +67,8 @@ return tiny.sortedProcessingSystem {
 
 		-- console --
 		if ui.console.active then
-			love.graphics.print("> %s" % ui.console.command, 0, 45)
+			love.graphics.setFont(graphics.fonts.ui_small)
+			love.graphics.print("> %s" % ui.console.command, 0, (font:getHeight() + 4) * 3)
 		end
 
 		-- chat --

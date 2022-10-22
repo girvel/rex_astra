@@ -61,6 +61,7 @@ love.load = function(args)
 		"modifiers_released",
 		"query",
 		"ai",
+		"ending",
 	})
 	
 	engine.override_game_cycle(world)
@@ -69,6 +70,14 @@ love.load = function(args)
 		name = "Rex Astra",
 		color = graphics.palette.player,
 		gold = 0,
+
+		win = function(self)
+			ui.chat:message("casual_gold{You win!}")
+		end,
+
+		lose = function(self)
+			ui.chat:message("selection{You lost!}")
+		end,
 	})
 
 	log.info("Loading the level")

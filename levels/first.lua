@@ -11,7 +11,7 @@ return {load = function(world)
 		aggression_chance = .7,
 
 		decide = function(self, dt)
-			if not self.activity_period:move(dt) then return end
+			if not self.activity_period:move(dt):now() then return end
 
 			kit.orders.invest_evenly(self)
 
@@ -49,7 +49,7 @@ return {load = function(world)
 				end
 			end
 
-			if self.activity_period:move(dt) then
+			if self.activity_period:move(dt):now() then
 				kit.orders.invest_evenly(self)
 
 				if  fun.iter(all_neighbours)
@@ -62,7 +62,7 @@ return {load = function(world)
 						:map(function(p) return p.garrison end)
 						:reduce(fun.operator.add, 0)
 				then
-					if self.surrender_period:move(1) then
+					if self.surrender_period:move(1):now() then
 						kit.orders.surrender(self, player)
 
 						ui.chat:message(
@@ -76,7 +76,7 @@ return {load = function(world)
 				end
 			end
 
-			if  self.raid.period:move(dt) and 
+			if  self.raid.period:move(dt):now() and 
 				kit.random.chance(self.raid.chance) 
 			then
 				local targets = fun.iter(all_neighbours)
@@ -198,7 +198,7 @@ return {load = function(world)
 	}
 
 	player:own(p.reidan)
-	-- ai.jadians:own(p.annar, p.venedai, p.jadia)
+	ai.jadians:own(p.annar, p.venedai, p.jadia)
 	ai.zanarthians:own(p.zanartha, p.uxan)
 
 	p.fulthu.neighbours = {p.devarus, p.jadia}

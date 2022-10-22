@@ -4,7 +4,7 @@ MVP:
   ✔ enemy AI @done (22-10-22 08:48)
   ☐ informative chat
     ☐ help
-    ☐ time
+    ✔ time @done (22-10-22 11:18)
     ☐ lore info
   ☐ minimal balance
 
@@ -30,6 +30,7 @@ Refactoring:
 
 Long features:
   ☐ animations
+  ☐ garrison sprites
  
 
 Optimization remarks:
@@ -43,3 +44,7 @@ Minor improvements:
   ☐ Icon
   ☐ Cursor
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
+
+
+Absolutely unnecessary features:
+  ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...]

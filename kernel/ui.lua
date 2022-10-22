@@ -26,6 +26,7 @@ local module = {
 		end,
 
 		_put = function(self, message)
+			log.debug(message)
 			local line = {}
 			local w = self.w
 			local i = 0
@@ -83,7 +84,7 @@ local module = {
 
 		_message = function(self, message, result)
 			local result = result or {}
-			local a, b = message:find("%a[%a%d]+{")
+			local a, b = message:find("[%a_][%a%d_]+{")
 
 			if a == nil then
 				table.insert(result, graphics.palette.white)

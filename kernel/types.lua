@@ -125,13 +125,17 @@ module.repeater = function(period)
 		move = function(self, delta) 
 			self.value = self.value + delta 
 			
+			return self
+		end,
+
+		now = function(self)
 			if self.value > self.period then
 				self.value = self.value - self.period
 				return true
 			end
 
 			return false
-		end,
+		end
 	}
 end
 
