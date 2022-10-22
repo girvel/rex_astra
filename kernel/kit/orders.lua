@@ -103,7 +103,6 @@ end
 
 module.surrender = function(player, target)
 	for province, _ in pairs(kit.table.shallow_copy(player.property)) do
-		log.debug(province.name)
 		province:set_owner(target)
 	end
 

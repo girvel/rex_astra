@@ -33,6 +33,7 @@ graphics = require "kernel.graphics"
 ui = require "kernel.ui"
 prototypes = require "kernel.prototypes"
 devices = require "kernel.devices"
+clock = require "kernel.clock"
 
 
 -- engine initialization --
@@ -40,11 +41,13 @@ love.load = function(args)
 	log.info("Loading the game")
 
 	launch = engine.parse_launch_parameters(args)
+	log.level = launch.debug and "trace" or "info"
 
 	world = tiny.world()
 	engine.load_systems(world, {
 		"mutex",
 
+		"clock",
 		"collecting",
 		"console_special_keys",
 		"console_input",
@@ -59,6 +62,7 @@ love.load = function(args)
 		"query",
 		"ai",
 	})
+	
 	engine.override_game_cycle(world)
 
 	player = world:addEntity(prototypes.player {

@@ -12,7 +12,7 @@ local module = {
 	chat = {
 		w = graphics.window_size[1] / 4,
 		font = graphics.fonts.ui_small,
-		line_spacing = 1,
+		line_spacing = 2,
 
 		put = function(self, message)
 			log.info(
@@ -76,6 +76,8 @@ local module = {
 				)
 			end
 
+			message = clock:format("%Y.%m.%d ") .. message
+
 			return self:put(self:_message(message))
 		end,
 
@@ -107,6 +109,7 @@ local module = {
 		end,
 	},
 }
+
 module.mode = module.modes.normal
 
 
