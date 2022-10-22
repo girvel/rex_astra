@@ -25,5 +25,21 @@ module.concat = function(self, ...)
 	return self
 end
 
+module.size = function(self)
+	local result = 0
+	for _, _ in pairs(self) do
+		result = result + 1
+	end
+	return result
+end
+
+module.shallow_copy = function(self)
+	local result = {}
+	for k, v in pairs(self) do
+		result[k] = v
+	end
+	return result
+end
+
 
 return module

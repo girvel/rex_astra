@@ -15,7 +15,7 @@ return {load = function(world)
 
 			kit.orders.invest_evenly(self)
 
-			for _, province in ipairs(self.property) do
+			for province, _ in pairs(self.property) do
 				if kit.random.chance(self.aggression_chance) then
 					kit.orders.attack(
 						{province}, 
@@ -41,7 +41,7 @@ return {load = function(world)
 		decide = function(self, dt)
 			local all_neighbours = {}
 
-			for _, p in ipairs(self.property) do
+			for p, _ in pairs(self.property) do
 				for _, n in ipairs(p.neighbours) do
 					if n.owner ~= self then
 						all_neighbours[n] = true

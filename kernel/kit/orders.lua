@@ -86,10 +86,11 @@ end
 module.invest_evenly = function(player)
 	if player.gold <= 0 then return end
 
-	local investment = math.floor(player.gold / #player.property)
-	local remainder_index = player.gold % #player.property
+	local property_n = kit.table.size(player.property)
+	local investment = math.floor(player.gold / property_n)
+	local remainder_index = player.gold % property_n
 
-	for i, province in ipairs(player.property) do
+	for province, _ in pairs(player.property) do
 		kit.orders.invest(
 			province, 
 			investment + (i <= remainder_index and 1 or 0)
@@ -98,7 +99,7 @@ module.invest_evenly = function(player)
 end
 
 module.surrender = function(player, target)
-	for _, province in ipairs({unpack(player.property)}) do
+	for province, _ in pairs(kit.table.shallow_copy(player.property)) do
 		log.debug(province.name)
 		province:set_owner(target)
 	end

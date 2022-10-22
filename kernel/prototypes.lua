@@ -44,13 +44,13 @@ module.planet = function(world, name, path)
 
 			province.set_owner = function(self, owner)
 				if self.owner then
-					kit.table.delete(self.owner.property, self)
+					self.owner.property[self] = nil
 				end
 
 				self.owner = owner
 
 				if self.owner then
-					table.insert(self.owner.property, self)
+					self.owner.property[self] = true
 				end
 			end
 

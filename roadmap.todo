@@ -1,21 +1,21 @@
 MVP:
   ✔ movable armies @done (22-10-17 13:00)
   ☐ win/lose
-  ☐ enemy AI
+  ✔ enemy AI @done (22-10-22 08:48)
   ☐ informative chat
     ☐ help
     ☐ time
-  ☐ balance
 
 
 Prototype:
   ✔ mouse, keyboard mutex events @done (22-10-20 10:32)
-  ☐ systems manual order
-  ☐ basic AI
-  ☐ events log
+  ✔ systems manual order @done (22-10-22 08:48)
+  ✔ basic AI @done (22-10-22 08:48)
+  ✔ events log @done (22-10-22 08:48)
   ✔ beautiful UI mode indicator @done (22-10-17 11:37)
-  ☐ lore research
+  ☐ lore research action
   ☐ RU translation?
+  ☐ balance
 
 
 Refactoring:
@@ -23,7 +23,7 @@ Refactoring:
   ✔ standard -> other kernel modules @done (22-10-20 10:32)
   ✔ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc) @done (22-10-20 10:32)
   ☐ information system
-  ☐ mouse, keyboard systems
+  ☐ mouse, keyboard types of systems
 
 
 Long features:
@@ -34,9 +34,10 @@ Optimization remarks:
   ☐ Regenerate province hitboxes & highlights only when developing
 
 
-Minor improvments:
-  ☐ Round borders on the sea
+Minor improvements:
+  ☐ Ecs or click without a point causes deselection
+  ✘ Round borders on the sea @cancelled (22-10-22 08:51)
   ☐ Ocean details
   ☐ Icon
   ☐ Cursor
-  ☐ Flags of player colors
+  ✘ Flags of player colors @cancelled (22-10-22 08:51)
