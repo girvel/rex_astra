@@ -33,10 +33,7 @@ module.attack = function(army, target)
 	end
 
 	if not target.owner then
-		ui.chat:message(
-			"#1{%s} colonizes %s" % {army[1].owner.name, target.name}, 
-			army[1].owner.color
-		)
+		ui.chat("%s colonizes %s" % {army[1].owner.name, target.name})
 
 		target:set_owner(army[1].owner)
 		return true
@@ -71,10 +68,7 @@ module.attack = function(army, target)
 			target:set_owner(army[1].owner)
 			target.garrison = 0
 
-			ui.chat:message(
-				"#1{%s} takes %s" % {army[1].owner.name, target.name}, 
-				army[1].owner.color
-			)
+			ui.chat("%s takes %s" % {army[1].owner.name, target.name})
 		end
 	else
 		army[1].garrison = army[1].garrison - 1
@@ -108,8 +102,6 @@ module.surrender = function(player, target)
 
 	target.gold = target.gold + player.gold
 	player.gold = 0
-
-	player.lost = true
 end
 
 

@@ -9,7 +9,7 @@ local module = {
 		command = "",
 		active = false,
 	},
-	chat = {
+	chat = setmetatable({
 		w = graphics.window_size[1] / 4,
 		font = graphics.fonts.ui_small,
 		line_spacing = 2,
@@ -108,7 +108,23 @@ local module = {
 
 			return self:_message(message:sub(d + 1), result)
 		end,
-	},
+	}, {
+		__call = function(self, message, ...)
+			local color = function(m, pl)
+				return m:gsub(pl.name, "%s{%s}" % {
+					kit.table.reverse_index(graphics.palette, pl.color), 
+					pl.name,
+				})
+			end
+
+			message = color(message, player)
+			for _, ai in pairs(level.ai) do
+				message = color(message, ai)
+			end
+
+			self:message(message, ...)
+		end,
+	}),
 }
 
 module.mode = module.modes.normal

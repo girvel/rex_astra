@@ -72,11 +72,11 @@ love.load = function(args)
 		gold = 0,
 
 		win = function(self)
-			ui.chat:message("casual_gold{You win!}")
+			ui.chat("casual_gold{You win!}")
 		end,
 
 		lose = function(self)
-			ui.chat:message("selection{You lost!}")
+			ui.chat("selection{You lost!}")
 		end,
 	})
 

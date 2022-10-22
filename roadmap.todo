@@ -1,12 +1,14 @@
 MVP:
   ✔ movable armies @done (22-10-17 13:00)
-  ☐ win/lose
+  ✔ win/lose @done (22-10-22 12:14)
+  ☐ fancy win/lose messages
   ✔ enemy AI @done (22-10-22 08:48)
   ☐ informative chat
     ☐ help
     ✔ time @done (22-10-22 11:18)
     ☐ lore info
   ☐ minimal balance
+  ☐ build system
 
 
 Prototype:
@@ -24,8 +26,9 @@ Refactoring:
   ✔ kit submodules @done (22-10-20 10:32)
   ✔ standard -> other kernel modules @done (22-10-20 10:32)
   ✔ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc) @done (22-10-20 10:32)
-  ☐ information system
+  ☐ information system/event system
   ☐ mouse, keyboard types of systems
+  ☐ player names autocoloring in the chat
 
 
 Long features:

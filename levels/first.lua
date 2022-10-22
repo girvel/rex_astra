@@ -10,6 +10,10 @@ return {load = function(world)
 		activity_period = types.repeater(5),
 		aggression_chance = .7,
 
+		win = function(self)
+			-- ui.chat.message("")
+		end,
+
 		decide = function(self, dt)
 			if not self.activity_period:move(dt):now() then return end
 
@@ -38,6 +42,8 @@ return {load = function(world)
 			chance = .7,
 		},
 
+		surrendered = false,
+
 		decide = function(self, dt)
 			local all_neighbours = {}
 
@@ -64,11 +70,11 @@ return {load = function(world)
 				then
 					if self.surrender_period:move(1):now() then
 						kit.orders.surrender(self, player)
+						self.surrendered = true
 
-						ui.chat:message(
-							"#1{%s} sees your superior army and surrenders" %
-							self.name,
-							self.color
+						ui.chat(
+							"%s sees your superior army and surrenders" %
+							self.name
 						)
 					end
 				else
@@ -76,7 +82,7 @@ return {load = function(world)
 				end
 			end
 
-			if  self.raid.period:move(dt):now() and 
+			if self.raid.period:move(dt):now() and 
 				kit.random.chance(self.raid.chance) 
 			then
 				local targets = fun.iter(all_neighbours)
@@ -90,11 +96,9 @@ return {load = function(world)
 
 					kit.orders.attack(self.property, target)
 
-					ui.chat:message(
-						"#1{%s} ride against barbarians in %s" %
-						{self.name, target.name},
-						self.color
-					)
+					ui.chat("%s ride against barbarians in %s" % {
+						self.name, target.name
+					})
 				end
 			end
 		end,

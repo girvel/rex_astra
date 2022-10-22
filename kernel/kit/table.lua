@@ -25,6 +25,12 @@ module.concat = function(self, ...)
 	return self
 end
 
+module.reverse_index = function(self, index)
+	for key, value in pairs(self) do
+		if value == index then return key end
+	end
+end
+
 module.size = function(self)
 	local result = 0
 	for _, _ in pairs(self) do
