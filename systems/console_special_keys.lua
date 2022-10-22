@@ -17,27 +17,29 @@ return tiny.system {
 			return
 		end
 
-		if not ui.console.active then return end
+		if ui.console.active then
 
-		if scancode == "return" then
-			local success, message = pcall(load(
-				(ui.console.command("=") and "" or "return ") 
-				.. ui.console.command
-			))
+			if scancode == "return" then
+				local success, message = pcall(load(
+					(ui.console.command("=") and "" or "return ") 
+					.. ui.console.command
+				))
 
-			log.info(">", ui.console.command, ">>", message)
+				log.info(">", ui.console.command, ">>", message)
 
-			if not success then
-				log.debug("console error:", message)
+				if not success then
+					log.debug("console error:", message)
+				end
+
+				ui.console.command = ""
+				return
+			elseif scancode == "backspace" then
+				if #ui.console.command > 0 then
+					ui.console.command = ui.console.command:sub(1, -2)
+				end
+				return
 			end
 
-			ui.console.command = ""
-			return
-		elseif scancode == "backspace" then
-			if #ui.console.command > 0 then
-				ui.console.command = ui.console.command:sub(1, -2)
-			end
-			return
 		end
 
 		devices.keyboard.mutex.pressed[scancode] = nil

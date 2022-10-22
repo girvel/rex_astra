@@ -44,6 +44,7 @@ module.load_systems = function(world, order)
 		end
 	end
 
+	log.debug(fun.iter(systems):map(function(s) return s.name end):totable())
 	for _, s in ipairs(systems) do
 		world:addSystem(s)
 	end

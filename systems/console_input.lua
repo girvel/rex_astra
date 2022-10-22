@@ -4,6 +4,7 @@ return tiny.system {
 
 	update = function(self, text)
 		if not launch.debug or not ui.console.active then return end
+		-- if not ui.console.active then return end
 
 		-- TODO kit
 		local function escape_pattern(text)
@@ -22,5 +23,6 @@ return tiny.system {
 		for i in fun.range(#text) do
 			devices.keyboard.mutex.pressed[text(i)] = true
 		end
+		log.debug(devices.keyboard.mutex.pressed)
 	end,
 }

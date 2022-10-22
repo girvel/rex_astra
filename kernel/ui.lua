@@ -26,7 +26,6 @@ local module = {
 		end,
 
 		_put = function(self, message)
-			log.debug(message)
 			local line = {}
 			local w = self.w
 			local i = 0

@@ -41,7 +41,6 @@ love.load = function(args)
 	log.info("Loading the game")
 
 	launch = engine.parse_launch_parameters(args)
-	log.level = launch.debug and "trace" or "info"
 
 	world = tiny.world()
 	engine.load_systems(world, {

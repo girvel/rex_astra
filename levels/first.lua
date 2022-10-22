@@ -162,6 +162,7 @@ return {load = function(world)
 		anchor_position = vector {220, 66},
 		fertility = .05,
 		garrison = 4,
+		maximal_garrison = 17,
 	}
 
 	p.dowur = zandara:add_province {
