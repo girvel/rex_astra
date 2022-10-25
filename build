@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import fire
+import os
+from pathlib import Path
+
+
+class Cli:
+	def __call__(self):
+		"""Builds rex_astra windows executable"""
+		os.system("mkdir -p .build")
+		os.system("cp -r ./* .build")
+		os.system(
+			"cd .build; rm -rf .git build build-requirements.txt " +
+			"rex_astra.sublime-* .gitignore " + 
+			" ".join(f"'{f}'" 
+				for f in Path(".gitignore").read_text().split("\n")
+			)
+		)
+
+		os.system("cd .build; zip -9r ../rex_astra.love ./*")
+		os.system("rm -rf .build")
+
+		os.system("mkdir -p rex_astra")
+		os.system("cat '/mnt/c/Program Files/LOVE/love.exe' rex_astra.love > 'rex_astra/Rex Astra.exe'")
+		# os.system("rm rex_astra.love")
+		os.system(
+			"cp -t rex_astra/ " + 
+			" ".join(f"/mnt/c/Program\\ Files/LOVE/{dll}" for dll in ["*.dll", "license.txt"])
+		)
+		os.system("zip -9r rex_astra.zip rex_astra")
+		os.system("rm -rf rex_astra")
+
+
+if __name__ == "__main__":
+	fire.Fire(Cli())

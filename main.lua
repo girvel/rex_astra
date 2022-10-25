@@ -3,7 +3,7 @@
 local loading_time = os.time()
 
 -- this is for between-libraries dependencies
-package.path = package.path .. ";lib/?.lua"
+love.filesystem.setRequirePath(love.filesystem.getRequirePath() .. ";lib/?.lua")
 
 -- libraries --
 log = require "log"
