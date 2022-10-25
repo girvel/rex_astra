@@ -265,8 +265,40 @@ return {load = function(world)
 	p.uxan.neighbours = {p.reimin, p.zanartha, p.annar, p.dowur, p.reidan}
 	p.reidan.neighbours = {p.uxan, p.dowur}
 
+	local narrator = world:addEntity {
+		name = "narrator",
+		interpret = {
+			game_starts = function()
+				ui.chat(
+					"Press player{[Shift + H]} to display help."
+				)
+
+				ui.chat(
+					"You arrive to the mysterious planet of Zandara. You are a Rex " ..
+					"Astra, one of the mythical Star Kings, that conquer galaxies just " ..
+					"for fun. To get this planet, you have to defeat two powerful " ..
+					"opponents."
+				)
+
+				ui.chat(
+					"The first one is the Jadian nomads, the wild tribes of " ..
+					"bloodthirsty savages that wander the reaches of Zandara. They " ..
+					"do not care for better life or greater good and can be defeated " ..
+					"only with a brutal force."
+				)
+
+				ui.chat(
+					"The second one is the Guards of Zanartha, the legendary religious " ..
+					"order, consisting of thousands of brave and honourable warriors. " ..
+					"They are powerful and dangerous, but also reasonable."
+				)
+			end,
+		}
+	}
+
 	return {
 		ai = ai,
 		provinces = p,
+		narrator = narrator,
 	}
 end}

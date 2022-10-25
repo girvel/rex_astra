@@ -34,6 +34,7 @@ ui = require "kernel.ui"
 prototypes = require "kernel.prototypes"
 devices = require "kernel.devices"
 clock = require "kernel.clock"
+information = require "kernel.information"
 
 
 -- engine initialization --
@@ -61,6 +62,7 @@ love.load = function(args)
 		"query",
 		"ai",
 		"ending",
+		"information",
 	})
 	
 	engine.override_game_cycle(world)
@@ -105,30 +107,7 @@ love.load = function(args)
 
 	log.info("Loading the level")
 	level = require("levels.first").load(world)
-
-	ui.chat(
-		"Press player{[Shift + H]} to display help."
-	)
-
-	ui.chat(
-		"You arrive to the mysterious planet of Zandara. You are a Rex " ..
-		"Astra, one of the mythical Star Kings, that conquer galaxies just " ..
-		"for fun. To get this planet, you have to defeat two powerful " ..
-		"opponents."
-	)
-
-	ui.chat(
-		"The first one is the Jadian nomads, the wild tribes of " ..
-		"bloodthirsty savages that wander the reaches of Zandara. They " ..
-		"do not care for better life or greater good and can be defeated " ..
-		"only with a brutal force."
-	)
-
-	ui.chat(
-		"The second one is the Guards of Zanartha, the legendary religious " ..
-		"order, consisting of thousands of brave and honourable warriors. " ..
-		"They are powerful and dangerous, but also reasonable."
-	)
+	information.register.game_starts()
 
 	loading_time = os.difftime(os.time(), loading_time)
 	log.info("Game started in %i s" % {loading_time})
