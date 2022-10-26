@@ -85,4 +85,9 @@ love.load = function(args)
 
 	loading_time = os.difftime(os.time(), loading_time)
 	log.info("Game started in %i s" % {loading_time})
+
+	if #launch.case > 0 then
+		log.info("Executing the case `%s`" % launch.case)
+		log.info(pcall(load(launch.case)))
+	end
 end

@@ -11,11 +11,17 @@ module.parse_launch_parameters = function(args)
 		:name "rex_astra"
 		:description "Run the Rex Astra game"
 
-	parser:flag "-m --trace-mouse"
+	parser:argument("case", "Lua code to execute in the beginning of the game")
+		:args "*"
 
+	parser:flag "-m --trace-mouse"
 	parser:flag "-d --debug"
 
-	return parser:parse(args)
+	local result = parser:parse(args)
+
+	result.case = table.concat(result.case, " ")
+
+	return result
 end
 
 module.load_systems = function(world, order)
