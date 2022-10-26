@@ -8,6 +8,14 @@ module.table = require "kernel.kit.table"
 
 
 -- definitions --
+module.read_text = function(path)
+	local file = io.open(path, "r")
+	if not file then return end
+	local content = file:read "*a"
+	file:close()
+	return content
+end
+
 local query_system = require "systems.query"
 module.query = function(request_source)
 	local _, predicate = load("return function(e) return %s end" % request_source)

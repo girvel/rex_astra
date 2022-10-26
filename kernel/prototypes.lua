@@ -2,6 +2,37 @@ local module = {}
 
 
 -- definitions --
+module.coin = function(province)
+	local hitbox = love.image.newImageData("sprites/golden_coin.png")
+	return {
+		name = "coin",
+		sprite = love.graphics.newImage("sprites/golden_coin.png"),
+		hitbox = hitbox,
+		layer = graphics.layers.coin,
+		position = province.anchor_position - vector {
+			hitbox:getWidth() / 2, 
+			hitbox:getHeight(),
+		},
+		coin_flag = true,
+		parent_province = province,
+	}
+end
+
+module.narrator = function(path)
+	return {
+		name = "narrator",
+		interpret = fun.iter(love.filesystem.getDirectoryItems(path))
+			:map(function(file) return (file / ".")[1], function()
+				for _, message 
+				in ipairs(kit.read_text(path .. "/" .. file) / "\n\n")
+				do
+					ui.chat(message)
+				end
+			end end)
+			:tomap()
+	}
+end
+
 module.planet = function(world, name, path)
 	return {
 		world = world,
@@ -10,7 +41,7 @@ module.planet = function(world, name, path)
 		borders = love.image.newImageData("%s/borders.png" % path),
 
 		add_planet = function(self)
-			self.world:addEntity {
+			return self.world:addEntity {
 				name = self.name,
 				sprite = love.graphics.newImage("%s/planet.png" % self.path),
 				layer = graphics.layers.planet,
@@ -56,22 +87,6 @@ module.planet = function(world, name, path)
 
 			return self.world:addEntity(province)
 		end,
-	}
-end
-
-module.coin = function(province)
-	local hitbox = love.image.newImageData("sprites/golden_coin.png")
-	return {
-		name = "coin",
-		sprite = love.graphics.newImage("sprites/golden_coin.png"),
-		hitbox = hitbox,
-		layer = graphics.layers.coin,
-		position = province.anchor_position - vector {
-			hitbox:getWidth() / 2, 
-			hitbox:getHeight(),
-		},
-		coin_flag = true,
-		parent_province = province,
 	}
 end
 
