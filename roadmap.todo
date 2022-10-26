@@ -16,6 +16,7 @@ Gameplay corrections:
   ☐ Research
   ✔ Pause button @done (22-10-26 15:12)
   ✔ Pause by default in the beginning @done (22-10-26 15:22)
+  ✔ Missing chat in built version @bug @done (22-10-26 20:01)
 
 
 Prototype:
@@ -41,7 +42,7 @@ Refactoring:
 Long features:
   ☐ animations
   ☐ garrison sprites
-  ☐ fix that mutex bug
+  ☐ fix that mutex @bug
   ☐ shader for pause @fancy
  
 
