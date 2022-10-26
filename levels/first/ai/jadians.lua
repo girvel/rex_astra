@@ -1,5 +1,6 @@
 return prototypes.player {
 	name = "Jadian nomads",
+	codename = "jadians",
 	color = graphics.palette.jadians,
 	is_barbaric = true,
 

@@ -23,6 +23,5 @@ return tiny.system {
 		for i in fun.range(#text) do
 			devices.keyboard.mutex.pressed[text(i)] = true
 		end
-		log.debug(devices.keyboard.mutex.pressed)
 	end,
 }

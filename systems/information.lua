@@ -5,7 +5,6 @@ return tiny.processingSystem {
 
 	process = function(self, entity, dt)
 		for _, message in ipairs(information.messages) do
-			log.debug(message)
 			if entity.interpret[message.name] then
 				entity.interpret[message.name](unpack(message.args))
 			end

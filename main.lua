@@ -18,7 +18,9 @@ fun = require "fun"
 
 setmetatable(_G, {
 	__index = function(self, index)
+		log.stack_delta = 1
 		log.warn("Undefined global variable %s" % {index})
+		log.stack_delta = nil
 	end,
 })
 
@@ -69,27 +71,12 @@ love.load = function(args)
 
 	player = world:addEntity(prototypes.player {
 		name = "Rex Astra",
+		codename = "player",
 		color = graphics.palette.player,
 		gold = 0,
 
 		win = function(self)
-			ui.chat(
-				"Now the lands of Zandara belong to the Rex Astra. Soon they " ..
-				"will finish the colonization process and start preparing " ..
-				"the planet to join the Regis Astra Coalition."
-			)
-
-			ui.chat("casual_gold{You win!}")
-
-			if level.ai.zanarthians.surrendered then
-				ui.chat(
-					"You have discovered a player{peaceful ending}."
-				)
-			else
-				ui.chat(
-					"You have discovered a selection{violent ending}."
-				)
-			end
+			
 		end,
 
 		lose = function(self)

@@ -4,7 +4,6 @@ return tiny.system {
 
 	update = function(self, event)
 		local key, scancode = unpack(event)
-		log.debug(devices.keyboard.mutex.pressed)
 		if devices.keyboard.mutex.pressed[scancode] then return end
 
 		if self.behaviours[scancode] then

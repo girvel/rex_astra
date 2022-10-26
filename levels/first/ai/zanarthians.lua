@@ -1,5 +1,6 @@
 return prototypes.player {
 	name = "Guardians of Zanartha",
+	codename = "zanarthians", 
 	color = graphics.palette.zanarthians,
 
 	activity_period = types.repeater(5),
