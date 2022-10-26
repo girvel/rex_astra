@@ -3,7 +3,10 @@
 local loading_time = os.time()
 
 -- this is for between-libraries dependencies
-love.filesystem.setRequirePath(love.filesystem.getRequirePath() .. ";lib/?.lua")
+love.filesystem.setRequirePath(
+	love.filesystem.getRequirePath() .. 
+	";lib/?.lua"
+)
 
 -- libraries --
 log = require "log"
@@ -74,27 +77,11 @@ love.load = function(args)
 		codename = "player",
 		color = graphics.palette.player,
 		gold = 0,
-
-		win = function(self)
-			
-		end,
-
-		lose = function(self)
-			ui.chat(
-				"The last army of Rex Astra was destroyed. Thousands have " ..
-				"died, fighting for something greater. The Rex himself " ..
-				"quickly left the dangerous planet. He will spend some " ..
-				"time resting in the halls of Astral Keep and return " ..
-				"in a couple hundred years with the new forces."
-			)
-
-			ui.chat("selection{You lost!}")
-		end,
 	})
 
 	log.info("Loading the level")
 	level = require("levels.first").load(world)
-	information.register.game_starts()
+	information.register.game_start()
 
 	loading_time = os.difftime(os.time(), loading_time)
 	log.info("Game started in %i s" % {loading_time})

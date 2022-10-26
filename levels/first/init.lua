@@ -7,10 +7,10 @@ return {load = function(world)
 	}
 
 	player:own(p.reidan)
-	-- ai.jadians:own(p.annar, p.venedai, p.jadia, p.annar, p.reimin)
-	-- ai.zanarthians:own(p.zanartha, p.uxan)
+	ai.jadians:own(p.annar, p.venedai, p.jadia, p.annar, p.reimin)
+	ai.zanarthians:own(p.zanartha, p.uxan)
 
-	local narrator = world:addEntity(prototypes.narrator("levels/first/narrator"))
+	local narrator = world:addEntity(require "levels.first.narrator")
 
 	return {
 		ai = ai,

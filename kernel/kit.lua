@@ -8,12 +8,34 @@ module.table = require "kernel.kit.table"
 
 
 -- definitions --
+module.ingame_format = function(source, ...)
+	for i, substitute in ipairs {...} do
+		source = source:gsub("%%" .. i, module.ingame_string(substitute))
+	end
+
+	return source
+end
+
 module.read_text = function(path)
 	local file = io.open(path, "r")
 	if not file then return end
 	local content = file:read "*a"
 	file:close()
 	return content
+end
+
+module.ingame_string = function(object)
+	return type(object) ~= "table" and object 
+		or object.name 
+		or object.codename 
+		or object
+end
+
+module.short_string = function(object)
+	return type(object) ~= "table" and object 
+		or object.codename 
+		or object.name 
+		or object
 end
 
 local query_system = require "systems.query"

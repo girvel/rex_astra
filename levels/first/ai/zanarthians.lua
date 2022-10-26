@@ -13,36 +13,6 @@ return prototypes.player {
 
 	surrendered = false,
 
-	win = function(self)
-		ui.chat(
-			"After the years of brutal war the Guardians of Zanartha " ..
-			"remain the last one standing. They have defeated every " ..
-			"invader that dared to set foot on Zandara, and now they " ..
-			"enter a golden age of peace, prosperity and honour."
-		)
-	end,
-
-	lose = function(self)
-		if self.surrendered then
-			ui.chat(
-				"After careful consideration the Guardians of Zanartha " ..
-				"have decided to stop the conflict and join the empire " ..
-				"of the Rex Astra. They will preserve their ancent " ..
-				"culture and tradition and continue to defend the lands " ..
-				"of Zandara from invaders, but now as a part of the " ..
-				"rising intergalactic empire."
-			)
-		else
-			ui.chat(
-				"After the series of great battles the legendary " ..
-				"civilization of the Guardians of Zanartha ceases to " ..
-				"exist. Never again will they ride through the valleys " ..
-				"of Zanartha, and never again will the Uxan peaks hear " ..
-				"the horn of Dasnar."
-			)
-		end
-	end,
-
 	decide = function(self, dt)
 		local all_neighbours = {}
 
@@ -69,12 +39,6 @@ return prototypes.player {
 			then
 				if self.surrender_period:move(1):now() then
 					kit.orders.surrender(self, player)
-					self.surrendered = true
-
-					ui.chat(
-						"%s sees your superior army and surrenders" %
-						self.name
-					)
 				end
 			else
 				self.surrender_period.value = 0
@@ -94,10 +58,6 @@ return prototypes.player {
 				local target = kit.random.choose(targets)
 
 				kit.orders.attack(self.property, target)
-
-				ui.chat("%s ride against barbarians in %s" % {
-					self.name, target.name
-				})
 			end
 		end
 	end,

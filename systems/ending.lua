@@ -9,7 +9,7 @@ return tiny.processingSystem {
 	process = function(self, entity)
 		if kit.table.size(entity.property) == 0 then
 			entity.lost = true
-			information.register.loses(entity)
+			information.register.loss(entity)
 			world:removeEntity(entity)
 		end
 	end,
@@ -19,7 +19,7 @@ return tiny.processingSystem {
 
 		if #self.entities == 1 then
 			level.ended = true
-			information.register.wins(self.entities[1])
+			information.register.win(self.entities[1])
 		end
 	end
 }

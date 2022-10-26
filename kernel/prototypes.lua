@@ -18,42 +18,28 @@ module.coin = function(province)
 	}
 end
 
-module.narrator = function(path)
-	local special = {
-		wins = function(winner) return "wins_" .. winner.codename end,
-	}
-
-	local narrator = {
+module.narrator = function(path, narrator)
+	kit.table.merge(narrator, {
 		name = "narrator",
 		lines = setmetatable({}, {__index = function(_, index)
 			local content = kit.read_text(path .. "/" .. index .. ".txt")
-			content = content and (content / "\n") or {}
+			content = content and (content / "\n\n") or {}
 
-			content.play = function(self)
+			content.play = function(self, ...)
 				for _, message in ipairs(self) do
-					ui.chat(message)
+					ui.chat(kit.ingame_format(message, ...))
 				end
 			end
 
 			return content
 		end}),
-	}
+	})
 
-	narrator.interpret = setmetatable({}, {__index = function(_, index)
-		return function(...)
-			local filename = special[index] 
-				and special[index](...) 
-				or index
-
-			local script_path = path .. "/" .. filename .. ".lua"
-
-			if love.filesystem.getInfo(script_path) then
-				require(path:gsub("/", ".") .. "." .. filename)(narrator)
-			else
-				narrator.lines[filename]:play()
-			end
-		end
-	end})
+	narrator.interpret = setmetatable(narrator.interpret or {}, {
+		__index = function(_, index)
+			return function(...) narrator.lines[index]:play(...) end
+		end,
+	})
 
 	return narrator
 end

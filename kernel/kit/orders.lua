@@ -33,7 +33,7 @@ module.attack = function(army, target)
 	end
 
 	if not target.owner then
-		information.register.colonizes(army[1].owner, target)
+		information.register.colonization(army[1].owner, target)
 		target:set_owner(army[1].owner)
 		return true
 	end
@@ -56,6 +56,8 @@ module.attack = function(army, target)
 		{army[1].owner.name, target.name, target.owner.name}
 	)
 
+	information.register.attack(army, target)
+
 	local success = kit.random.chance(
 		attacking_force / (attacking_force + 1.5 * target.garrison * target.defense_k)
 	)
@@ -67,7 +69,7 @@ module.attack = function(army, target)
 			target:set_owner(army[1].owner)
 			target.garrison = 0
 
-			information.register.takes(army[1].owner, target)
+			information.register.take(army[1].owner, target)
 		end
 	else
 		army[1].garrison = army[1].garrison - 1
@@ -102,6 +104,8 @@ module.surrender = function(player, target)
 	target.gold = target.gold + player.gold
 	player.gold = 0
 	player.surrendered = true
+
+	information.register.surrender(player, target)
 end
 
 

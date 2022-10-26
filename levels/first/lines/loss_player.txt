@@ -1,0 +1,3 @@
+The last army of Rex Astra was destroyed. Thousands have died, fighting for something greater. The Rex himself quickly left the dangerous planet. He will spend some time resting in the halls of Astral Keep and return in a couple hundred years with the new forces.
+
+selection{You lost!}
