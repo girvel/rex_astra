@@ -1,6 +1,7 @@
 return tiny.sortedProcessingSystem {
 	name = "systems.highlighting",
 	system_type = "update",
+	ingame = true,
 	filter = tiny.requireAll("hitbox"),
 
 	compare = function(_, e1, e2) return e1.layer > e2.layer end,

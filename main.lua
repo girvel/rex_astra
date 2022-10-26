@@ -59,7 +59,7 @@ love.load = function(args)
 		"debugging",
 		"drawing",
 		"highlighting",
-		"hotkeys",
+		"ui_modes",
 		"select_target",
 		"income",
 		"modifiers_pressed",

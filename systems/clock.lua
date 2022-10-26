@@ -1,5 +1,6 @@
 return tiny.system {
 	name = "systems.clock",
+	ingame = true,
 	system_type = "update",
 
 	update = function(_, dt)

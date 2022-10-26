@@ -69,7 +69,10 @@ module.override_game_cycle = function(world)
 		love[callback] = function(...)
 			world:update(
 				select('#', ...) == 1 and select(1, ...) or {...},
-				function(_, x) return x.system_type == callback end
+				function(_, x) return 
+					not (ui.mode == ui.modes.pause and x.ingame) 
+					and x.system_type == callback 
+				end
 			)
 		end
 	end

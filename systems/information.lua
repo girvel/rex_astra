@@ -1,6 +1,7 @@
 return tiny.processingSystem {
 	name = "systems.information",
 	system_type = "update",
+	ingame = true,
 	filter = tiny.requireAll("interpret"),
 
 	process = function(self, entity, dt)

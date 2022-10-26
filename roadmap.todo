@@ -7,15 +7,15 @@ MVP:
     ☐ help
     ✔ time @done (22-10-22 11:18)
     ✔ lore info @done (22-10-22 15:43)
-  ☐ minimal balance
-  ☐ build system
+  ✔ minimal balance @done (22-10-26 14:35)
+  ✔ build system @done (22-10-26 14:35)
 
 
 Gameplay corrections:
-  ☐ Clean the chat up
+  ✔ Clean the chat up @done (22-10-26 14:35)
   ☐ Research
-  ☐ Pause button
-  ☐ Pause by default in the beginning
+  ✔ Pause button @done (22-10-26 15:12)
+  ✔ Pause by default in the beginning @done (22-10-26 15:22)
 
 
 Prototype:
@@ -33,7 +33,7 @@ Refactoring:
   ✔ kit submodules @done (22-10-20 10:32)
   ✔ standard -> other kernel modules @done (22-10-20 10:32)
   ✔ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc) @done (22-10-20 10:32)
-  ☐ information system/event system + narrator
+  ✔ information system/event system + narrator @done (22-10-26 14:35)
   ☐ mouse, keyboard types of systems
   ✔ players' names autocoloring in the chat @done (22-10-22 13:34)
 
@@ -41,6 +41,8 @@ Refactoring:
 Long features:
   ☐ animations
   ☐ garrison sprites
+  ☐ fix that mutex bug
+  ☐ shader for pause @fancy
  
 
 Optimization remarks:
@@ -48,14 +50,16 @@ Optimization remarks:
 
 
 Minor improvements:
-  ☐ Ecs or click without a point causes deselection
+  ☐ Ecs or click without a point causes deselection?
   ✘ Round borders on the sea @cancelled (22-10-22 08:51) @wtf?
-  ☐ Ocean details
-  ☐ Icon
-  ☐ Cursor
+  ✘ Ocean details @cancelled (22-10-26 15:09)
+  ☐ Icon @fancy
+  ☐ Cursor @fancy
+  ☐ Deep ocean @fancy
+  ☐ Draw a little @fancy
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
   ☐ remove coins when the province is taken
 
 
 Absolutely unnecessary features:
-  ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...]
+  ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache

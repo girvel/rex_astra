@@ -51,6 +51,7 @@ return tiny.sortedProcessingSystem {
 		local lines = {
 			{ui.modes.investing, "[G]old: %s" % player.gold},
 			{ui.modes.aggression, "[A]rmy"},
+			{ui.modes.pause, "[P]ause"},
 		}
 
 		for i, line_pair in ipairs(lines) do

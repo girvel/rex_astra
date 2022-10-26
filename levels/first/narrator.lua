@@ -1,6 +1,14 @@
 local narrator = prototypes.narrator("levels/first/lines", {})
 
 
+narrator.interpret.game_start = function()
+	narrator.lines.game_start:play()
+
+	if not launch.debug then
+		ui.mode = ui.modes.pause
+	end
+end
+
 narrator.interpret.win = function(player)
 	if player.codename == "player" then
 		narrator.lines.win_player:play()

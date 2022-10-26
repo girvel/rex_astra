@@ -1,6 +1,7 @@
 return tiny.processingSystem {
 	name = "systems.income",
 	system_type = "update",
+	ingame = true,
 	filter = tiny.requireAll("fertility", "owner"),
 
 	global_fertility_rate = .35,

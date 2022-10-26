@@ -1,5 +1,5 @@
 return tiny.system {
-	name = "systems.hotkeys",
+	name = "systems.ui_modes",
 	system_type = "keypressed",
 
 	update = function(self, event)
@@ -8,6 +8,7 @@ return tiny.system {
 
 		if self.behaviours[scancode] then
 			ui.mode = self.behaviours[scancode](self) or ui.mode
+			devices.keyboard.mutex.pressed[scancode] = true
 		end
 	end,
 
@@ -28,6 +29,10 @@ return tiny.system {
 					kit.orders.invest(entity, 1)
 				end
 			end
+		end,
+
+		p = function()
+			return ui.modes.pause
 		end,
 	},
 }

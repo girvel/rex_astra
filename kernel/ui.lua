@@ -3,6 +3,7 @@ local module = {
 		"normal",
 		"investing",
 		"aggression",
+		"pause"
 	},
 	sources = {},
 	console = {

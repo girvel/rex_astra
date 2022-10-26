@@ -1,6 +1,7 @@
 return tiny.processingSystem {  -- TODO selection system?
 	name = "systems.select_target",
 	system_type = "mousepressed",
+	ingame = true,
 	filter = tiny.requireAll("garrison", "hitbox"),
 
 	process = function(self, entity, event)

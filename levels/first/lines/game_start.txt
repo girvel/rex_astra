@@ -1,4 +1,4 @@
-Press player{[Shift + H]} to display help.
+Press player{[Ecs]} to start the game, player{[Shift + H]} to display help.
 
 You arrive to the mysterious planet of Zandara. You are a Rex Astra, one of the mythical Star Kings, that conquer galaxies just for fun. To get this planet, you have to defeat two powerful opponents.
 

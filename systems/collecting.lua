@@ -1,6 +1,7 @@
 return tiny.processingSystem {
 	name = "systems.collecting",
 	system_type = "mousepressed",
+	ingame = true,
 	filter = tiny.requireAll("coin_flag"),
 
 	process = function(self, entity, event)
