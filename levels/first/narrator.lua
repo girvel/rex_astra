@@ -3,7 +3,7 @@ local narrator = prototypes.narrator("levels/first/lines", {})
 
 narrator.interpret.win = function(player)
 	if player.codename == "player" then
-		narrator.lines.wins_player:play()
+		narrator.lines.win_player:play()
 
 		narrator.lines[
 			level.ai.zanarthians.surrendered 
