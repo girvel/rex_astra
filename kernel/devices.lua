@@ -8,6 +8,7 @@ module.keyboard = {
 	},
 	mutex = {
 		pressed = {},
+		released = {},
 	},
 	modifier_by_scancode = {
 		rshift = "shift",

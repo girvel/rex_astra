@@ -78,5 +78,16 @@ module.override_game_cycle = function(world)
 	end
 end
 
+module.keySystem = function(kind, t)
+	return tiny.system(kit.table.merge(t, {
+		system_type = "key" .. kind,
+		update = function(self, event)
+			local _, scancode = unpack(event)
+			if devices.keyboard.mutex[kind][scancode] then return end
+			devices.keyboard.mutex[kind][scancode] = self:process_key(scancode)
+		end,
+	}))
+end
+
 
 return module

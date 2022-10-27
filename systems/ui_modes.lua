@@ -1,15 +1,11 @@
-return tiny.system {
+return engine.keySystem("pressed", {
 	name = "systems.ui_modes",
-	system_type = "keypressed",
 
-	update = function(self, event)
-		local key, scancode = unpack(event)
-		if devices.keyboard.mutex.pressed[scancode] then return end
+	process_key = function(self, scancode)
+		if not self.behaviours[scancode] then return end
 
-		if self.behaviours[scancode] then
-			ui.mode = self.behaviours[scancode](self) or ui.mode
-			devices.keyboard.mutex.pressed[scancode] = true
-		end
+		ui.mode = self.behaviours[scancode](self) or ui.mode
+		return true
 	end,
 
 	behaviours = {
@@ -35,4 +31,4 @@ return tiny.system {
 			return ui.modes.pause
 		end,
 	},
-}
+})

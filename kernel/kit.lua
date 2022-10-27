@@ -17,12 +17,8 @@ module.ingame_format = function(source, ...)
 end
 
 module.read_text = function(path)
-	return love.filesystem.read(path):gsub("\r", "")
-	-- local file = io.open(path, "r")
-	-- if not file then return end
-	-- local content = file:read "*a"
-	-- file:close()
-	-- return content
+	local content = love.filesystem.read(path)
+	return content and content:gsub("\r", "")
 end
 
 module.ingame_string = function(object)

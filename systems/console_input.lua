@@ -11,11 +11,11 @@ return tiny.system {
 		    return text:gsub("([^%w])", "%%%1")
 		end
 
-		for key, _ in pairs(devices.keyboard.mutex.pressed) do
-			if #key == 1 then
-				text = text:gsub(escape_pattern(key), "")
-			end
-		end
+		-- for key, _ in pairs(devices.keyboard.mutex.pressed) do
+		-- 	if #key == 1 then
+		-- 		text = text:gsub(escape_pattern(key), "")
+		-- 	end
+		-- end
 
 		ui.console.command = ui.console.command .. text
 

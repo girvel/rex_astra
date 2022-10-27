@@ -4,6 +4,7 @@ return tiny.system {
 
 	update = function()
 		devices.keyboard.mutex.pressed = {}
+		devices.keyboard.mutex.released = {}
 		devices.mouse.mutex.pressed = {}
 		devices.mouse.mutex.over = false
 	end,

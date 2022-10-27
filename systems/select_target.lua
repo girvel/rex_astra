@@ -24,7 +24,7 @@ return tiny.processingSystem {  -- TODO selection system?
 		[ui.modes.normal] = function(_, entity) 
 			if entity.owner ~= player then return end
 
-			if devices.keyboard.modifiers.shift then
+			if log.debug(devices.keyboard.modifiers.shift) then
 				ui.sources[entity] = not ui.sources[entity] or nil
 			else
 				-- if-else instead of single expression for readability
