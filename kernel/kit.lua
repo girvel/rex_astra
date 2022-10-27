@@ -21,18 +21,40 @@ module.read_text = function(path)
 	return content and content:gsub("\r", "")
 end
 
+module.short_string = function(object)
+	local result = module._short_string(object)
+
+	if #result > 256 then
+		return result:sub(1, 253) .. "..."
+	end
+
+	return result
+end
+
+module._short_string = function(object)
+	if type(object) ~= "table" then
+		return tostring(object)
+	end
+
+	if #object == kit.table.size(object) then
+		return "{%s}" % table.concat(
+			fun.iter(object)
+				:map(module._short_string)
+				:totable(), 
+			", "
+		)
+	end
+
+	return object.name 
+		or object.codename 
+		or tostring(object)
+end
+
 module.ingame_string = function(object)
 	return type(object) ~= "table" and object 
 		or object.name 
 		or object.codename 
-		or object
-end
-
-module.short_string = function(object)
-	return type(object) ~= "table" and object 
-		or object.codename 
-		or object.name 
-		or object
+		or tostring(object)
 end
 
 local query_system = require "systems.query"

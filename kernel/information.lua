@@ -7,12 +7,15 @@ module.register = setmetatable({}, {
 		return function(...)
 			log.stack_delta = 1
 
-			log.trace("Game information:", index, 
-				unpack(fun.iter {...}
-					:map(kit.short_string)
-					:totable()
-				)
-			)
+			log.trace("%s(%s)" % {
+				index, 
+				table.concat(
+					fun.iter {...}
+						:map(kit.short_string)
+						:totable(),
+					", "
+				),
+			})
 
 			log.stack_delta = nil
 

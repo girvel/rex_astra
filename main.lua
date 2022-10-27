@@ -67,6 +67,7 @@ love.load = function(args)
 		"query",
 		"ai",
 		"ending",
+		"hotkeys_ui",
 		"information",
 	})
 	

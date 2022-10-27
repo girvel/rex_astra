@@ -37,6 +37,9 @@ module.load_systems = function(world, order)
 
 		if order[system_name] then
 			local system = require("systems." .. system_name)
+			system.name = "systems." .. system_name
+			system.codename = system.name
+
 			systems[order[system_name]] = system
 
 			if not fun.iter(module.events):index(system.system_type) then

@@ -51,11 +51,6 @@ module.attack = function(army, target)
 		return true
 	end
 
-	log.trace(
-		"%s attack %s, %s" % 
-		{army[1].owner.name, target.name, target.owner.name}
-	)
-
 	information.register.attack(army, target)
 
 	local success = kit.random.chance(
