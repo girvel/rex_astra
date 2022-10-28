@@ -3,8 +3,8 @@ MVP:
   ✔ win/lose @done (22-10-22 12:14)
   ✔ fancy win/lose messages @done (22-10-22 14:28)
   ✔ enemy AI @done (22-10-22 08:48)
-  ☐ informative chat
-    ☐ help
+  ✔ informative chat @done (22-10-27 10:41)
+    ✔ help @done (22-10-27 10:41)
     ✔ time @done (22-10-22 11:18)
     ✔ lore info @done (22-10-22 15:43)
   ✔ minimal balance @done (22-10-26 14:35)
@@ -27,7 +27,7 @@ Prototype:
   ✔ beautiful UI mode indicator @done (22-10-17 11:37)
   ☐ lore research action
   ☐ RU translation?
-  ☐ balance
+  ✔ balance @done (22-10-27 22:46)
 
 
 Refactoring:
