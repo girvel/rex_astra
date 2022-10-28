@@ -43,7 +43,7 @@ Long features:
   ☐ animations
   ☐ garrison sprites
   ☐ fix that mutex @bug
-  ☐ shader for pause @fancy
+  ☐ shader for pause @fancy @learn
  
 
 Optimization remarks:
@@ -56,10 +56,15 @@ Minor improvements:
   ✘ Ocean details @cancelled (22-10-26 15:09)
   ☐ Icon @fancy
   ☐ Cursor @fancy
-  ☐ Deep ocean @fancy
-  ☐ Draw a little @fancy
+  ✔ Deep ocean @fancy @done (22-10-28 18:35)
+  ✔ Draw a little @fancy @done (22-10-28 18:35)
+  ✔ Add taiga @done (22-10-28 19:35)
+  ☐ Add mountains in Arctic
+  ✔ More rivers @done (22-10-28 19:35)
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
   ☐ remove coins when the province is taken
+
+ ☐ random events 
 
 
 Absolutely unnecessary features:

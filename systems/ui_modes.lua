@@ -25,6 +25,7 @@ return engine.keySystem("pressed", {
 					kit.orders.invest(entity, 1)
 				end
 			end
+			return ui.modes.normal
 		end,
 
 		p = function()
