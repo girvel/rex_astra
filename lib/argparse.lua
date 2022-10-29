@@ -630,7 +630,7 @@ function Parser:mutex(...)
    end
 
    table.insert(self._mutexes, elements)
-   return self
+   return ...
 end
 
 function Parser:group(name, ...)

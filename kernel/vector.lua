@@ -67,5 +67,12 @@ vector_methods.proportion_to = function(self, other)
 		or nil
 end
 
+vector_methods.soft_proportion_to = function(self, other)
+	local ks = fun.zip(self, other)
+		:map(function(a, b) return a / b end)
+
+	return ks:reduce(math.min, ks:head())
+end
+
 
 return module

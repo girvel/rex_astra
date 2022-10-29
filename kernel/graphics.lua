@@ -6,14 +6,29 @@ local module = {}
 
 -- initialization --
 module.initialize = function(self)
-	self.scale = launch.resolution and launch.resolution:proportion_to(world_size) or 3
+	love.mouse.setVisible(false)
+	if launch.resolution then
+		love.window.setMode(unpack(self.window_size))
+		self.window_size = launch.resolution
+	else
+		love.window.setFullscreen(true, "desktop")
+		self.window_size = vector {love.graphics.getDimensions()}
+	end
+
+	self.scale = self.window_size:soft_proportion_to(world_size)
+
+	-- create black lines
+	local dx, dy = unpack(self.window_size - world_size * self.scale)
 	self.window_size = world_size * self.scale
 
-	love.window.setMode(unpack(self.window_size))
 	love.graphics.setDefaultFilter("nearest", "nearest")
 
 	self.camera = gamera.new(0, 0, unpack(world_size))
 	self.camera:setScale(self.scale)
+	self.camera:setPosition(-dx / 2, -dy / 2)
+
+	self.ui_camera = gamera.new(0, 0, unpack(self.window_size))
+	self.ui_camera:setPosition(-dx / 2, -dy / 2)
 end
 
 module.palette = types.palette("sprites/palette.png", {

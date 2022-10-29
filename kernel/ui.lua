@@ -10,6 +10,7 @@ local module = {
 		command = "",
 		active = false,
 	},
+	cursor = love.graphics.newImage("sprites/cursor.png"),
 	chat = setmetatable({
 		font = graphics.fonts.ui_small,
 		line_spacing = 2,

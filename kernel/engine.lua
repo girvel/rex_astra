@@ -13,37 +13,39 @@ module.parse_launch_parameters = function(args)
 
 	parser:help_max_width(80)
 
+	parser:argument("case", "Lua code to execute in the beginning of the game")
+		:args "*"
+
 	parser:group("Main stuff", 
-		parser:argument("case", "Lua code to execute in the beginning of the game")
-			:args "*",
-
-		parser:option(
-			"-r --resolution", 
-			"Resolution of the game in format <width>x<height>; should be " ..
-			"proportional %sx%s" % world_size
-		)
-			:args(1)
-			:convert(function(r) 
-				r = vector.parse(r, "%xx%y")
-
-				if not r then
-					error "Wrong format of --resolution option"
-				end
-				
-				if r:proportion_to(world_size) % 1 ~= 0 then
-					error(
-						"--resolution should be proportional to %sx%s" % 
-						world_size
-					)
-				end
-
-				return r
-			end),
-
 		parser:flag(
 			"-d --debug", 
 			"Use the debug mode: displays log console, adds debug console to " ..
 			"the game"
+		),
+
+		parser:mutex(
+			parser:option(
+				"-r --resolution", 
+				"Resolution of the game in format <width>x<height>; should be " ..
+				"proportional %sx%s" % world_size
+			)
+				:args(1)
+				:convert(function(r) 
+					r = vector.parse(r, "%xx%y")
+
+					if not r then
+						error "Wrong format of --resolution option"
+					end
+					
+					if r:proportion_to(world_size) % 1 ~= 0 then
+						error(
+							"--resolution should be proportional to %sx%s" % 
+							world_size
+						)
+					end
+
+					return r
+				end)
 		)
 	)
 
