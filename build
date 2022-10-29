@@ -5,8 +5,8 @@ from pathlib import Path
 
 
 class Cli:
-	def __call__(self):
-		"""Builds rex_astra windows executable"""
+	def __call__(self, love_keep=False):
+		"""Build rex_astra windows executable"""
 		os.chdir(Path(__file__).parent)
 		os.system("mkdir -p .build")
 		os.system("cp -r ./* .build")
@@ -28,7 +28,10 @@ class Cli:
 			" > 'rex_astra/Rex Astra.exe'"
 		)
 		os.system("chmod +x 'rex_astra/Rex Astra.exe'")
-		os.system("rm rex_astra.love")
+
+		if not love_keep:
+			os.system("rm rex_astra.love")
+
 		os.system(
 			"cp -t rex_astra/ " + 
 			" ".join(f"/mnt/c/Program\\ Files/LOVE/{dll}" for dll in ["*.dll", "license.txt"])
