@@ -69,20 +69,57 @@ module.planet = function(world, name, path)
 			defense_k = 1,
 		},
 
-		add_province = function(self, province)
-			kit.table.merge(province, self.province_defaults)
+		add_highlight = function(self, province)
+			local cache_path = "%s/highlights/%s.png" % {
+				self.path, province.codename
+			}
+			local cache_info = love.filesystem.getInfo(cache_path)
 
-			province.hitbox = graphics.fill_province_hitbox(
-				self.borders, province.anchor_position
+			local borders_info = love.filesystem.getInfo(
+				"%s/borders.png" % self.path
 			)
 
-			province.highlight = self.world:addEntity {
-				name = "highlight: %s" % province.name,
-				sprite = graphics.generate_highlight(province.hitbox),
+			local sprite
+			if cache_info and cache_info.modtime >= borders_info.modtime then
+				sprite = love.graphics.newImage(cache_path)
+			else
+				local source
+				sprite, source = graphics.generate_highlight(province.hitbox)
+				kit.save_image_data(cache_path, source)
+			end
+
+			return self.world:addEntity {
+				name = "highlight: %s" % province.codename,
+				sprite = sprite,
 				layer = graphics.layers.highlight,
 				is_team_colored = true,
 				parent = province,
 			}
+		end,
+
+		add_province = function(self, province)
+			kit.table.merge(province, self.province_defaults)
+
+			local cache_path = "%s/provinces/%s.png" % {
+				self.path, province.codename
+			}
+
+			local cache_info = love.filesystem.getInfo(cache_path)
+
+			local borders_info = love.filesystem.getInfo(
+				"%s/borders.png" % self.path
+			)
+
+			if cache_info and cache_info.modtime >= borders_info.modtime then
+				province.hitbox = love.image.newImageData(cache_path)
+			else
+				province.hitbox = graphics.fill_province_hitbox(
+					self.borders, province.anchor_position
+				)
+				kit.save_image_data(cache_path, province.hitbox)
+			end
+
+			province.highlight = self:add_highlight(province)
 
 			province.set_owner = function(self, owner)
 				if self.owner then

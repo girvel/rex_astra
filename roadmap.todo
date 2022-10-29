@@ -28,7 +28,7 @@ Prototype:
   ☐ lore research action
   ☐ RU translation?
   ✔ balance @done (22-10-27 22:46)
-  ☐ optimization of loading
+  ✔ optimization of loading @done (22-10-29 21:37)
   ☐ custom position for gold coins
 
 
@@ -50,7 +50,7 @@ Long features:
  
 
 Optimization remarks:
-  ☐ Regenerate province hitboxes & highlights only when developing
+  ✔ Regenerate province hitboxes & highlights only when developing @done (22-10-29 21:37)
   ☐ Warning for global variables declaration outside of main.lua or lib/
 
 

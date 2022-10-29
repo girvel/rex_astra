@@ -21,6 +21,16 @@ module.read_text = function(path)
 	return content and content:gsub("\r", "")
 end
 
+module.write_text = function(path, text)
+	local f = io.open(path, "wb")
+	f:write(text)
+	f:close()
+end
+
+module.save_image_data = function(path, data)
+	module.write_text(path, data:encode("png", "last.png"):getString())	
+end
+
 module.short_string = function(object)
 	local result = module._short_string(object)
 

@@ -100,7 +100,7 @@ module.generate_highlight = function(province_data)
 		end
 	end
 
-	return love.graphics.newImage(data)
+	return love.graphics.newImage(data), data
 end
 
 module.fill_province_hitbox = function(borders, position, hitbox)
