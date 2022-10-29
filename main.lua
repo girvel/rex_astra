@@ -10,6 +10,7 @@ love.filesystem.setRequirePath(
 
 -- libraries --
 log = require "log"
+d = log.debug
 
 log.info("Loading libraries")
 require "strong"
@@ -30,9 +31,11 @@ setmetatable(_G, {
 -- kernel --
 log.info("Loading kernel")
 
+vector = require "kernel.vector"
+world_size = vector {480, 270}
+
 types = require "kernel.types"
 kit = require "kernel.kit"
-vector = require "kernel.vector"
 engine = require "kernel.engine"
 graphics = require "kernel.graphics"
 ui = require "kernel.ui"
@@ -47,6 +50,8 @@ love.load = function(args)
 	log.info("Loading the game")
 
 	launch = engine.parse_launch_parameters(args)
+	graphics:initialize()
+	ui:initialize()
 
 	world = tiny.world()
 	engine.load_systems(world, {

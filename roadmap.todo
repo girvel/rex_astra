@@ -48,6 +48,7 @@ Long features:
 
 Optimization remarks:
   ☐ Regenerate province hitboxes & highlights only when developing
+  ☐ Warning for global variables declaration outside of main.lua or lib/
 
 
 Minor improvements:
@@ -64,7 +65,7 @@ Minor improvements:
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
   ☐ remove coins when the province is taken
 
- ☐ random events 
+  ☐ random events 
 
 
 Absolutely unnecessary features:

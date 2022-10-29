@@ -5,15 +5,16 @@ local module = {}
 
 
 -- initialization --
-module.world_size = vector {480, 270}
-module.scale = 3
-module.window_size = module.world_size * module.scale
+module.initialize = function(self)
+	self.scale = launch.resolution and launch.resolution:proportion_to(world_size) or 3
+	self.window_size = world_size * self.scale
 
-love.window.setMode(unpack(module.window_size))
-love.graphics.setDefaultFilter("nearest", "nearest")
+	love.window.setMode(unpack(self.window_size))
+	love.graphics.setDefaultFilter("nearest", "nearest")
 
-module.camera = gamera.new(0, 0, unpack(module.world_size))
-module.camera:setScale(module.scale)
+	self.camera = gamera.new(0, 0, unpack(world_size))
+	self.camera:setScale(self.scale)
+end
 
 module.palette = types.palette("sprites/palette.png", {
 	"transparent",

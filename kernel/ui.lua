@@ -11,7 +11,6 @@ local module = {
 		active = false,
 	},
 	chat = setmetatable({
-		w = graphics.window_size[1] / 4,
 		font = graphics.fonts.ui_small,
 		line_spacing = 2,
 
@@ -127,7 +126,11 @@ local module = {
 	}),
 }
 
-module.mode = module.modes.normal
+
+module.initialize = function(self)
+	self.mode = self.modes.normal
+	self.chat.w = graphics.window_size[1] / 4
+end
 
 
 return module
