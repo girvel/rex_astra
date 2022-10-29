@@ -21,18 +21,22 @@ return tiny.processingSystem {  -- TODO selection system?
 	end,
 
 	behaviours = {
-		[ui.modes.normal] = function(_, entity) 
-			if entity.owner ~= player then return end
+		[ui.modes.normal] = function(_, entity, button) 
+			if button == 1 then
+				if entity.owner ~= player then return end
 
-			if devices.keyboard.modifiers.shift then
-				ui.sources[entity] = not ui.sources[entity] or nil
-			else
-				-- if-else instead of single expression for readability
-				if fun.iter(ui.sources):length() == 1 and ui.sources[entity] then
-					ui.sources = {}
+				if devices.keyboard.modifiers.shift then
+					ui.sources[entity] = not ui.sources[entity] or nil
 				else
-					ui.sources = {[entity] = true}
+					-- if-else instead of single expression for readability
+					if fun.iter(ui.sources):length() == 1 and ui.sources[entity] then
+						ui.sources = {}
+					else
+						ui.sources = {[entity] = true}
+					end
 				end
+			elseif button == 2 then
+				kit.orders.attack(ui.sources, entity)
 			end
 		end,
 
