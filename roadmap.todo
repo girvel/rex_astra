@@ -28,6 +28,8 @@ Prototype:
   ☐ lore research action
   ☐ RU translation?
   ✔ balance @done (22-10-27 22:46)
+  ☐ optimization of loading
+  ☐ custom position for gold coins
 
 
 Refactoring:
@@ -44,6 +46,7 @@ Long features:
   ☐ garrison sprites
   ☐ fix that mutex @bug
   ☐ shader for pause @fancy @learn
+  ☐ loading screen @fancy
  
 
 Optimization remarks:

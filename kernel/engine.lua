@@ -26,12 +26,20 @@ module.parse_launch_parameters = function(args)
 		parser:mutex(
 			parser:option(
 				"-r --resolution", 
-				"Resolution of the game in format <width>x<height>; should be " ..
-				"proportional %sx%s" % world_size
+				"Resolution of the game in format <width>x<height>; should " ..
+				"be proportional %sx%s, %sx%s if empty" % 
+				{world_size[1], world_size[2], 
+				 world_size[1] * 3, world_size[2] * 3}
 			)
-				:args(1)
-				:convert(function(r) 
-					r = vector.parse(r, "%xx%y")
+				:args "?"
+				:action(function(args, index, value) 
+					if #value == 0 then
+						args[index] = world_size * 3
+						d(world_size * 3)
+						return
+					end
+
+					local r = vector.parse(value[1], "%xx%y")
 
 					if not r then
 						error "Wrong format of --resolution option"
@@ -44,7 +52,7 @@ module.parse_launch_parameters = function(args)
 						)
 					end
 
-					return r
+					args[index] = r
 				end)
 		)
 	)

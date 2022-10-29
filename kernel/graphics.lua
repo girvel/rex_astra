@@ -8,11 +8,11 @@ local module = {}
 module.initialize = function(self)
 	love.mouse.setVisible(false)
 	if launch.resolution then
-		love.window.setMode(unpack(self.window_size))
 		self.window_size = launch.resolution
+		love.window.setMode(unpack(self.window_size))
 	else
-		love.window.setFullscreen(true, "desktop")
 		self.window_size = vector {love.graphics.getDimensions()}
+		love.window.setFullscreen(true, "desktop")
 	end
 
 	self.scale = self.window_size:soft_proportion_to(world_size)

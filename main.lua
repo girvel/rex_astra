@@ -50,6 +50,7 @@ love.load = function(args)
 	log.info("Loading the game")
 
 	launch = engine.parse_launch_parameters(args)
+	log.info("CLI arguments:", launch)
 	graphics:initialize()
 	ui:initialize()
 

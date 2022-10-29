@@ -29,15 +29,15 @@ end
 
 -- operators --
 vector_metatable.__sub = function(a, b)
-	return fun.zip(a, b):map(function(u, v) return u - v end):totable()
+	return module(fun.zip(a, b):map(function(u, v) return u - v end):totable())
 end
 
 vector_metatable.__mul = function(vector, coefficient)
-	return fun.iter(vector):map(function(v) return v * coefficient end):totable()
+	return module(fun.iter(vector):map(function(v) return v * coefficient end):totable())
 end
 
 vector_metatable.__div = function(vector, coefficient)
-	return fun.iter(vector):map(function(v) return v / coefficient end):totable()
+	return module(fun.iter(vector):map(function(v) return v / coefficient end):totable())
 end
 
 vector_metatable.__le = function(a, b)
