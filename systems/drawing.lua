@@ -96,6 +96,8 @@ return tiny.sortedProcessingSystem {
 		end)
 
 		-- mouse --
-		love.graphics.draw(ui.cursor, love.mouse.getPosition())
+		if love.mouse.getX() > 0 and love.mouse.getY() > 0 then
+			love.graphics.draw(ui.cursor, love.mouse.getPosition())
+		end
 	end
 }
