@@ -11,8 +11,8 @@ module.initialize = function(self)
 		self.window_size = launch.resolution
 		love.window.setMode(unpack(self.window_size))
 	else
-		self.window_size = vector {love.graphics.getDimensions()}
 		love.window.setFullscreen(true, "desktop")
+		self.window_size = vector {love.graphics.getDimensions()}
 	end
 
 	self.scale = self.window_size:soft_proportion_to(world_size)
