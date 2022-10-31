@@ -2,6 +2,6 @@ Press player{[Ecs]} to start the game, player{[Shift + H]} to display help.
 
 You arrive to the mysterious planet of Zandara. You are a Rex Astra, one of the mythical Star Kings, that conquer galaxies just for fun. To get this planet, you have to defeat two powerful opponents.
 
-The first one is the Jadian nomads, the wild tribes of bloodthirsty savages that wander the reaches of Zandara. They do not care for better life or greater good and can be defeated only with a brutal force."
+Jadian nomads are the brutal wild tribes. They do not care for better life or greater good and can be defeated only with a brutal force.
 
-The second one is the Guardians of Zanartha, the legendary religious order, consisting of thousands of brave and honourable warriors. They are powerful and dangerous, but also reasonable.
+The second one is the Guardians of Zanartha, the legendary religious order, consisting of thousands of brave and honourable warriors. They are powerful and dangerous, but can be persuaded.

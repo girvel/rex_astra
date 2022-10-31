@@ -35,7 +35,6 @@ module.parse_launch_parameters = function(args)
 				:action(function(args, index, value) 
 					if #value == 0 then
 						args[index] = world_size * 3
-						d(world_size * 3)
 						return
 					end
 

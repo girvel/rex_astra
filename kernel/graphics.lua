@@ -6,7 +6,7 @@ local module = {}
 
 -- initialization --
 module.initialize = function(self)
-	love.mouse.setVisible(false)
+	-- love.mouse.setVisible(false)
 	if launch.resolution then
 		self.window_size = launch.resolution
 		love.window.setMode(unpack(self.window_size))
@@ -18,17 +18,17 @@ module.initialize = function(self)
 	self.scale = self.window_size:soft_proportion_to(world_size)
 
 	-- create black lines
-	local dx, dy = unpack(self.window_size - world_size * self.scale)
+	local d = (world_size * self.scale - self.window_size) / 2
 	self.window_size = world_size * self.scale
 
 	love.graphics.setDefaultFilter("nearest", "nearest")
 
 	self.camera = gamera.new(0, 0, unpack(world_size))
 	self.camera:setScale(self.scale)
-	self.camera:setPosition(-dx / 2, -dy / 2)
+	self.camera:setPosition(unpack(d))
 
 	self.ui_camera = gamera.new(0, 0, unpack(self.window_size))
-	self.ui_camera:setPosition(-dx / 2, -dy / 2)
+	self.ui_camera:setPosition(unpack(d))
 end
 
 module.palette = types.palette("sprites/palette.png", {
