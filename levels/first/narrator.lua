@@ -39,5 +39,9 @@ narrator.interpret.surrender = function(player, target)
 	narrator.lines["surrender_" .. player.codename]:play()
 end
 
+narrator.interpret.attack = function(attacking_force, target)
+	narrator.lines["attack_" .. attacking_force[1].owner.codename]:play(target)
+end
+
 
 return narrator
