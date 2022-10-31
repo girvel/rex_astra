@@ -10,4 +10,5 @@ love.conf = function(conf)
 	conf.window.title = "Rex Astra"
 	conf.window.icon = "sprites/icon.png"
 	conf.console = fetch_console_from_flags()
+	conf.appendidentity = true
 end

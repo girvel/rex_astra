@@ -20,9 +20,12 @@ end
 
 module.narrator = function(path, narrator)
 	kit.table.merge(narrator, {
-		name = "narrator",
+		name = "Narrator",
 		lines = setmetatable({}, {__index = function(_, index)
-			local content = kit.read_text(path .. "/" .. index .. ".txt")
+			local content = kit.read_text(
+				path .. "/" .. launch.language .. "/" .. index .. ".txt"
+			)
+
 			content = content and (content / "\n\n") or {}
 
 			content.play = function(self, ...)

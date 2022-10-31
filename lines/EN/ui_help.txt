@@ -1,0 +1,11 @@
+Planet consists of provinces, they can be owned by players. Yours are player{blue} ones, the zanarthians{blue} and jadians{red} are of your opponents.
+
+player{[RMB]} -- select your province
+
+player{[Shift + RMB]} -- multiple selection
+
+player{[G]} -- hire army for gold
+
+player{[A + RMB]}/player{[LMB]} -- attack or move
+
+player{[P]} -- pause

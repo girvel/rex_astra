@@ -1,0 +1,3 @@
+Now the lands of Zandara belong to the Rex Astra. Soon your subjects will finish the colonization process and start preparing the planet to join the Regis Astra Coalition.
+
+casual_gold{You win!}

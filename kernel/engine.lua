@@ -23,37 +23,41 @@ module.parse_launch_parameters = function(args)
 			"the game"
 		),
 
-		parser:mutex(
-			parser:option(
-				"-r --resolution", 
-				"Resolution of the game in format <width>x<height>; should " ..
-				"be proportional %sx%s, %sx%s if empty" % 
-				{world_size[1], world_size[2], 
-				 world_size[1] * 3, world_size[2] * 3}
-			)
-				:args "?"
-				:action(function(args, index, value) 
-					if #value == 0 then
-						args[index] = world_size * 3
-						return
-					end
-
-					local r = vector.parse(value[1], "%xx%y")
-
-					if not r then
-						error "Wrong format of --resolution option"
-					end
-					
-					if r:proportion_to(world_size) % 1 ~= 0 then
-						error(
-							"--resolution should be proportional to %sx%s" % 
-							world_size
-						)
-					end
-
-					args[index] = r
-				end)
+		parser:option(
+			"-r --resolution", 
+			"Resolution of the game in format <width>x<height>; should " ..
+			"be proportional %sx%s, %sx%s if empty" % 
+			{world_size[1], world_size[2], 
+			 world_size[1] * 3, world_size[2] * 3}
 		)
+			:args "?"
+			:action(function(args, index, value) 
+				if #value == 0 then
+					args[index] = world_size * 3
+					return
+				end
+
+				local r = vector.parse(value[1], "%xx%y")
+
+				if not r then
+					error "Wrong format of --resolution option"
+				end
+				
+				if r:proportion_to(world_size) % 1 ~= 0 then
+					error(
+						"--resolution should be proportional to %sx%s" % 
+						world_size
+					)
+				end
+
+				args[index] = r
+			end),
+
+		parser:option(
+			"-l --language",
+			"Localization of the game; supports EN, RU."
+		)
+			:default("EN")
 	)
 
 	parser:group("Questionable stuff", 

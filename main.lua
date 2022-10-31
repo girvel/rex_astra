@@ -86,6 +86,11 @@ love.load = function(args)
 		gold = 0,
 	})
 
+	world:addEntity(prototypes.narrator("lines", {
+		name = "Global narrator",
+		codename = "global_narrator",
+	}))
+
 	log.info("Loading the level")
 	level = require("levels.first").load(world)
 	information.register.game_start()
