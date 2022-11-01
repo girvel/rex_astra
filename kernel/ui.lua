@@ -67,22 +67,7 @@ local module = {
 			))
 		end,
 
-		message = function(self, message, ...)
-			for i, color in ipairs {...} do
-				message = message:gsub("#%i" % i, 
-					fun.iter(graphics.palette)
-						:filter(function(key, value) return value == color end)
-						:map(function(key) return key end)
-						:head()
-				)
-			end
-
-			message = clock:format("%Y.%m.%d ") .. message
-
-			return self:put(self:_message(message))
-		end,
-
-		_message = function(self, message, result)
+		_parse_colors = function(self, message, result)
 			local result = result or {}
 			local a, b = message:find("[%a_][%a%d_]+{")
 
@@ -106,10 +91,11 @@ local module = {
 			table.insert(result, second_color)
 			table.insert(result, second_message)
 
-			return self:_message(message:sub(d + 1), result)
+			return self:_parse_colors(message:sub(d + 1), result)
 		end,
 	}, {
 		__call = function(self, message, ...)
+			-- color the player mentions --
 			local color = function(m, pl)
 				return m:gsub(pl.name, "%s{%s}" % {
 					kit.table.reverse_index(graphics.palette, pl.color), 
@@ -122,7 +108,20 @@ local module = {
 				message = color(message, ai)
 			end
 
-			self:message(message, ...)
+			-- color #<N> --
+			for i, color in ipairs {...} do
+				message = message:gsub("#%i" % i, 
+					fun.iter(graphics.palette)
+						:filter(function(key, value) return value == color end)
+						:map(function(key) return key end)
+						:head()
+				)
+			end
+
+			-- add timestamp --
+			message = clock:format("%Y.%m.%d ") .. message
+
+			return self:put(self:_parse_colors(message))
 		end,
 	}),
 }

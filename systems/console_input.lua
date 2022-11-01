@@ -4,10 +4,9 @@ return tiny.system {
 
 	update = function(self, text)
 		if not launch.debug or not ui.console.active then return end
-		-- if not ui.console.active then return end
 
 		-- TODO kit
-		local function escape_pattern(text)
+		local escape_pattern = function(text)
 		    return text:gsub("([^%w])", "%%%1")
 		end
 

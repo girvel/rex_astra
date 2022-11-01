@@ -25,13 +25,13 @@ Prototype:
   ✔ basic AI @done (22-10-22 08:48)
   ✔ events log @done (22-10-22 08:48)
   ✔ beautiful UI mode indicator @done (22-10-17 11:37)
-  ☐ lore research action
   ☐ RU translation?
   ✔ balance @done (22-10-27 22:46)
   ✔ optimization of loading @done (22-10-29 21:37)
   ☐ custom position for gold coins
   ☐ Aseprite font license
-  ☐ Even shorter chat messages?
+  ✔ Even shorter chat messages? @done (22-10-31 22:11)
+  ☐ Fix the cursor?
 
 
 Refactoring:
@@ -61,19 +61,21 @@ Minor improvements:
   ☐ Ecs or click without a point causes deselection?
   ✘ Round borders on the sea @cancelled (22-10-22 08:51) @wtf?
   ✘ Ocean details @cancelled (22-10-26 15:09)
-  ☐ Icon @fancy
+  ✔ Icon @fancy @done (22-10-31 22:12)
   ✔ Cursor @fancy @done (22-10-31 15:01)
   ✔ Deep ocean @fancy @done (22-10-28 18:35)
   ✔ Draw a little @fancy @done (22-10-28 18:35)
   ✔ Add taiga @done (22-10-28 19:35)
-  ☐ Add mountains in Arctic
+  ✘ Add mountains in Arctic @cancelled (22-10-31 22:12)
   ✔ More rivers @done (22-10-28 19:35)
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
   ☐ remove coins when the province is taken
   ☐ draw the planet whole for custom resolution purposes
 
+
+Next iteration:
   ☐ random events 
+  ☐ lore research action
 
-
-Absolutely unnecessary features:
-  ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache
+  Absolutely unnecessary features:
+    ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache

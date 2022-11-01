@@ -6,7 +6,7 @@ local module = {}
 
 -- initialization --
 module.initialize = function(self)
-	-- love.mouse.setVisible(false)
+	love.mouse.setVisible(false)
 	if launch.resolution then
 		self.window_size = launch.resolution
 		love.window.setMode(unpack(self.window_size))
