@@ -1,7 +1,4 @@
 return tiny.system {
-	name = "systems.mutex",
-	system_type = "update",
-
 	update = function(self)
 		devices.keyboard.mutex.pressed = {}
 		devices.keyboard.mutex.released = {}

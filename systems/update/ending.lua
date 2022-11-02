@@ -1,6 +1,4 @@
 return tiny.processingSystem {
-	name = "systems.ending",
-	system_type = "update",
 	ingame = true,
 	filter = tiny.requireAll("lost", "property"),
 

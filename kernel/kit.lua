@@ -67,7 +67,7 @@ module.ingame_string = function(object)
 		or tostring(object)
 end
 
-local query_system = require "systems.query"
+local query_system = require "systems.update.query"
 module.query = function(request_source)
 	local _, predicate = load("return function(e) return %s end" % request_source)
 	local result = fun.iter(query_system.entities):filter(predicate):totable()

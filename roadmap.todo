@@ -25,13 +25,12 @@ Prototype:
   ✔ basic AI @done (22-10-22 08:48)
   ✔ events log @done (22-10-22 08:48)
   ✔ beautiful UI mode indicator @done (22-10-17 11:37)
-  ☐ RU translation?
+  ✘ RU translation? @cancelled (22-11-02 09:47)
   ✔ balance @done (22-10-27 22:46)
   ✔ optimization of loading @done (22-10-29 21:37)
   ☐ custom position for gold coins
-  ☐ Aseprite font license
+  ✔ Aseprite font license @done (22-11-02 09:51)
   ✔ Even shorter chat messages? @done (22-10-31 22:11)
-  ☐ Fix the cursor?
 
 
 Refactoring:
@@ -50,6 +49,7 @@ Long features:
   ☐ shader for pause @fancy @learn
   ☐ loading screen @fancy
   ☐ menu @fancy
+  ☐ font for commercial use
  
 
 Optimization remarks:
@@ -76,6 +76,9 @@ Minor improvements:
 Next iteration:
   ☐ random events 
   ☐ lore research action
+  ☐ solve utf8 issues -> RU translation
+  ☐ fix the cursor
+  ☐ pathlib (kernel)
 
   Absolutely unnecessary features:
     ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache

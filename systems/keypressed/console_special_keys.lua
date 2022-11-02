@@ -1,6 +1,4 @@
 return engine.keySystem("pressed", {
-	name = "systems.console_special_keys",
-
 	process_key = function(self, scancode)
 		if not launch.debug then return end
 

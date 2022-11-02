@@ -1,6 +1,4 @@
 return engine.keySystem("pressed", {
-	name = "systems.ui_modes",
-
 	process_key = function(self, scancode)
 		if not self.behaviours[scancode] then return end
 

@@ -1,6 +1,4 @@
 return tiny.sortedProcessingSystem {
-	name = "systems.highlighting",
-	system_type = "update",
 	ingame = true,
 	filter = tiny.requireAll("hitbox"),
 

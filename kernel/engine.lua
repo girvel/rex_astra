@@ -74,23 +74,19 @@ module.parse_launch_parameters = function(args)
 	return result
 end
 
-module.load_systems = function(world, order)
-	order = fun.iter(order)
-		:enumerate()
-		:map(function(i, s) return s, i end)
-		:tomap()
-
+module.load_systems = function(world)
 	systems = {}
 
-	for _, system_file in ipairs(love.filesystem.getDirectoryItems("systems")) do
-		system_name = system_file:sub(1, -5)
+	for _, system_folder in ipairs(love.filesystem.getDirectoryItems("systems")) do
+		for _, system_file in ipairs(love.filesystem.getDirectoryItems("systems/" .. system_folder)) do
+			system_name = system_file:sub(1, -5)
 
-		if order[system_name] then
-			local system = require("systems." .. system_name)
+			local system = require("systems.%s.%s" % {system_folder, system_name})
 			system.name = "systems." .. system_name
 			system.codename = system.name
+			system.system_type = system_folder
 
-			systems[order[system_name]] = system
+			table.insert(systems, system)
 
 			if not fun.iter(module.events):index(system.system_type) then
 				log.warn(
@@ -98,8 +94,6 @@ module.load_systems = function(world, order)
 					{system.name, system.system_type}
 				)
 			end
-		else
-			log.warn("Detected unlisted system `%s`" % system_name)
 		end
 	end
 

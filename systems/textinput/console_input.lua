@@ -1,7 +1,4 @@
 return tiny.system {
-	name = "systems.console_input",
-	system_type = "textinput",
-
 	update = function(self, text)
 		if not launch.debug or not ui.console.active then return end
 

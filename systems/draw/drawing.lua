@@ -1,6 +1,4 @@
 return tiny.sortedProcessingSystem {
-	name = "systems.drawing",
-	system_type = "draw",
 	filter = tiny.requireAll("layer"),
 
 	compare = function(_, e1, e2) return e1.layer < e2.layer end,
