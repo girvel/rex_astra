@@ -133,6 +133,11 @@ module.planet = function(world, name, path)
 
 				if self.owner then
 					self.owner.property[self] = true
+
+					if self.owner ~= player and self.coin then
+						world:removeEntity(self.coin)
+						self.coin = nil
+					end
 				end
 			end
 
