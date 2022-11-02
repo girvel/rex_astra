@@ -12,7 +12,7 @@ module.coin = function(province)
 		position = province.anchor_position - vector {
 			hitbox:getWidth() / 2, 
 			hitbox:getHeight(),
-		},
+		} + vector[2].up() * 2,
 		coin_flag = true,
 		parent_province = province,
 	}

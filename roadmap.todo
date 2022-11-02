@@ -40,16 +40,6 @@ Refactoring:
   ✔ information system/event system + narrator @done (22-10-26 14:35)
   ☐ mouse, keyboard types of systems
   ✔ players' names autocoloring in the chat @done (22-10-22 13:34)
-
-
-Long features:
-  ☐ animations
-  ☐ garrison sprites
-  ☐ fix that mutex @bug
-  ☐ shader for pause @fancy @learn
-  ☐ loading screen @fancy
-  ☐ menu @fancy
-  ☐ font for commercial use
  
 
 Optimization remarks:
@@ -58,7 +48,7 @@ Optimization remarks:
 
 
 Minor improvements:
-  ☐ Ecs or click without a point causes deselection?
+  ✘ Ecs or click without a point causes deselection? @cancelled (22-11-02 14:27)
   ✘ Round borders on the sea @cancelled (22-10-22 08:51) @wtf?
   ✘ Ocean details @cancelled (22-10-26 15:09)
   ✔ Icon @fancy @done (22-10-31 22:12)
@@ -69,9 +59,16 @@ Minor improvements:
   ✘ Add mountains in Arctic @cancelled (22-10-31 22:12)
   ✔ More rivers @done (22-10-28 19:35)
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
-  ☐ remove coins when the province is taken
-  ☐ draw the planet whole for custom resolution purposes
+  ✔ remove coins when the province is taken @done (22-11-02 13:07)
 
+
+Release:
+  ☐ README
+    ☐ Description
+    ☐ Screenshot
+    ☐ Installation
+  ☐ GH release
+  ☐ Download page?
 
 Next iteration:
   ☐ random events 
@@ -79,6 +76,17 @@ Next iteration:
   ☐ solve utf8 issues -> RU translation
   ☐ fix the cursor
   ☐ pathlib (kernel)
+  ☐ draw the planet whole for custom resolution purposes
 
   Absolutely unnecessary features:
     ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache
+
+
+Long features:
+  ☐ animations
+  ☐ garrison sprites
+  ☐ fix that mutex @bug
+  ☐ shader for pause @fancy @learn
+  ☐ loading screen @fancy
+  ☐ menu @fancy
+  ☐ font for commercial use

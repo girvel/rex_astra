@@ -37,7 +37,7 @@ module.parse_launch_parameters = function(args)
 					return
 				end
 
-				local r = vector.parse(value[1], "%xx%y")
+				local r = vector[2].parse(value[1], "%xx%y")
 
 				if not r then
 					error "Wrong format of --resolution option"
