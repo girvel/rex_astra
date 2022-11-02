@@ -1,12 +1,8 @@
 # Rex Astra
 
-![](sprites/icon_big.png)
+![Only one](sprites/Screenshot.png)
 
 Rex Astra is a minimalistic RTS built with [LOVE](https://love2d.org/). You can download it in the [Releases](https://github.com/girvel/rex_astra/releases).
-
-## Screenshots
-
-![](sprites/Screeenshot.png)
 
 ## Installation
 
