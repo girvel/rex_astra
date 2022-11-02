@@ -74,6 +74,65 @@ module.parse_launch_parameters = function(args)
 	return result
 end
 
+local tsort_systems = function(systems)
+	local systems_map = fun.iter(systems)
+		:map(function(s) return s.codename, s end)
+		:tomap()
+
+	for _, s in ipairs(systems) do
+		for _, o_name in ipairs(s.after) do
+			local o = systems_map[o_name]
+			o.before = o.before
+			table.insert(o.before, s.codename)
+		end
+
+		s.after = nil
+	end
+
+	local result = {}
+	local source = fun.iter(systems)
+		:filter(function(e) return
+			not fun.iter(systems)
+				:any(function(s) return 
+					kit.table.contains(s.before, e.codename)
+				end)
+		end)
+		:map(function(e) return e, true end)
+		:tomap()
+
+	while not kit.table.empty(source) do
+		local n = kit.table.pop(source)
+		table.insert(result, n)
+		n_before = n.before
+		n.before = nil
+		for _, m_name in ipairs(n_before) do
+			local m = systems_map[m_name]
+
+			if not fun.iter(systems)
+				:any(function(s) return 
+					s.before and kit.table.contains(s.before, m.codename)
+				end)
+			then
+				source[m] = true
+			end
+		end
+	end
+
+	local remaining = fun.iter(systems)
+		:filter(function(s) return s.before and #s.before > 0 end)
+		:map(function(s) return "%s > %s" % {s.codename, s.before} end)
+		:totable()
+
+	if #remaining > 0
+	then
+		error(
+			"There is at least one cycle in the systems " .. inspect(remaining)
+		)
+	end
+
+	return result
+end
+
 module.load_systems = function(world)
 	systems = {}
 
@@ -83,8 +142,13 @@ module.load_systems = function(world)
 
 			local system = require("systems.%s.%s" % {system_folder, system_name})
 			system.name = "systems." .. system_name
-			system.codename = system.name
+			system.codename = system_name
 			system.system_type = system_folder
+
+			kit.table.merge(system, {
+				before = {},
+				after = {}
+			})
 
 			table.insert(systems, system)
 
@@ -96,6 +160,13 @@ module.load_systems = function(world)
 			end
 		end
 	end
+
+	systems = tsort_systems(systems)
+	
+	log.info(
+		"Loaded systems", 
+		fun.iter(systems):map(function(s) return s.codename end):totable()
+	)
 
 	for _, s in ipairs(systems) do
 		world:addSystem(s)

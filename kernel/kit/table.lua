@@ -39,6 +39,28 @@ module.size = function(self)
 	return result
 end
 
+module.empty = function(self)
+	for _, _ in pairs(self) do
+		return false
+	end
+	return true
+end
+
+module.pop = function(self)
+	for k, v in pairs(self) do
+		self[k] = nil
+		return k, v
+	end
+end
+
+module.contains = function(self, e)
+	for k, v in pairs(self) do
+		if v == e then
+			return true
+		end
+	end
+end
+
 module.shallow_copy = function(self)
 	local result = {}
 	for k, v in pairs(self) do

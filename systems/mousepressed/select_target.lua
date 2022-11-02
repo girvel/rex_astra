@@ -1,6 +1,7 @@
 return tiny.processingSystem {  -- TODO selection system?
 	ingame = true,
 	filter = tiny.requireAll("garrison", "hitbox"),
+	after = {"collecting"},
 
 	process = function(self, entity, event)
 		local x, y, button = unpack(event)
