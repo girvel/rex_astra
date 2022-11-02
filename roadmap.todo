@@ -43,7 +43,7 @@ Refactoring:
 
 Optimization remarks:
   ✔ Regenerate province hitboxes & highlights only when developing @done (22-10-29 21:37)
-  ☐ Warning for global variables declaration outside of main.lua or lib/
+  ✔ Warning for global variables declaration outside of main.lua or lib/ @done (22-11-02 14:57)
 
 
 Minor improvements:
@@ -59,6 +59,9 @@ Minor improvements:
   ✔ More rivers @done (22-10-28 19:35)
   ✘ Flags of player colors @cancelled (22-10-22 08:51)
   ✔ remove coins when the province is taken @done (22-11-02 13:07)
+
+Absolutely unnecessary features:
+  ✔ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache @done (22-11-02 15:13)
 
 
 Release:
@@ -79,9 +82,6 @@ Next iteration:
   ☐ pathlib (kernel) @nice
   ☐ draw the planet whole for custom resolution purposes @fancy
   ☐ mouse, keyboard types of systems? @refactor
-
-  Absolutely unnecessary features:
-    ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache
 
 
 Long features:

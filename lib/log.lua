@@ -14,6 +14,7 @@ local log = { _version = "0.1.0" }
 log.usecolor = true
 log.outfile = nil
 log.level = "trace"
+log.counters = {}
 
 
 local modes = {
@@ -29,6 +30,7 @@ local modes = {
 local levels = {}
 for i, v in ipairs(modes) do
   levels[v.name] = i
+  log.counters[v.name] = 0
 end
 
 
@@ -65,6 +67,8 @@ for i, x in ipairs(modes) do
     if i < levels[log.level] then
       return
     end
+
+    log.counters[x.name] = log.counters[x.name] + 1
 
     local msg = tostring(...)
     local info = debug.getinfo(2 + (log.stack_delta or 0), "Sl")

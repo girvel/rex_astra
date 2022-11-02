@@ -214,6 +214,13 @@ module.override_game_cycle = function(world)
 			)
 		end
 	end
+
+	love.quit = function()
+		log.info("Finishing the game")
+		log.info("%i warnings, %s errors" % {
+			log.counters.warn, log.counters.error
+		})
+	end
 end
 
 module.keySystem = function(kind, t)
