@@ -6,7 +6,7 @@ Rex Astra is a minimalistic RTS built with [LOVE](https://love2d.org/). You can 
 
 ## Screenshots
 
-![Only one](sprites/Screeenshot.png)
+![](sprites/Screeenshot.png)
 
 ## Installation
 
