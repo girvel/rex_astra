@@ -117,10 +117,20 @@ module.planet = function(world, name, path)
 			if cache_info and cache_info.modtime >= borders_info.modtime then
 				province.hitbox = love.image.newImageData(cache_path)
 			else
-				province.hitbox = graphics.fill_province_hitbox(
+				local success, value = pcall(graphics.fill_province_hitbox,
 					self.borders, province.anchor_position
 				)
-				kit.save_image_data(cache_path, province.hitbox)
+
+				if success then
+					province.hitbox = value
+					kit.save_image_data(cache_path, province.hitbox)
+				elseif value("overflow") then
+					error(
+						"Unable to generate hitbox for province %s" % province.codename, 2
+					)
+				else
+					error(value)
+				end
 			end
 
 			province.highlight = self:add_highlight(province)

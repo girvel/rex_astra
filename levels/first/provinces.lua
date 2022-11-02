@@ -113,6 +113,20 @@ p.fulthu = zandara:add_province {
 	anchor_position = vector {126, 73},
 }
 
+p.hexxa = zandara:add_province {
+	name = "Hexxa",
+	codename = "hexxa",
+	fertility = .12,
+	anchor_position = vector {160, 121},
+}	
+
+p.uskhal = zandara:add_province {
+	name = "Uskhal",
+	codename = "uskhal",
+	fertility = .16,
+	anchor_position = vector {133, 123},
+}
+
 p.fulthu.neighbours = {p.devarus, p.jadia}
 p.devarus.neighbours = {p.antaris, p.fulthu}
 p.antaris.neighbours = {p.higher_mikara, p.devarus}

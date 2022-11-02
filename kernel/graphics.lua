@@ -79,7 +79,7 @@ module.pixels_near = function(x, y, w, h)
 end
 
 module.generate_highlight = function(province_data)
-	data = love.image.newImageData(
+	local data = love.image.newImageData(
 		province_data:getWidth(),
 		province_data:getHeight()
 	)
