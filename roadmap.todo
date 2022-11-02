@@ -65,10 +65,10 @@ Absolutely unnecessary features:
 
 
 Release:
-  ☐ README
-    ☐ Description
-    ☐ Screenshot
-    ☐ Installation
+  ✔ README @done (22-11-02 15:46)
+    ✔ Description @done (22-11-02 15:43)
+    ✔ Screenshot @done (22-11-02 15:43)
+    ✔ Installation @done (22-11-02 15:46)
   ☐ GH release
   ☐ Download page?
 
