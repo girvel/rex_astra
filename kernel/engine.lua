@@ -3,6 +3,26 @@ local module = {}
 
 
 -- functions --
+module.safe_global_metatable = function()
+	return {
+		__index = function(self, index)
+			log.stack_delta = 1
+			log.warn("Undefined global variable %s" % {index})
+			log.stack_delta = nil
+		end,
+
+		__newindex = not launch.debug and nil or function(self, index, value)
+			if debug.getinfo(2, "S").short_src ~= "main.lua" then
+				log.stack_delta = 1
+				log.warn("Global definition outside of main.lua")
+				log.stack_delta = nil
+			end
+
+			rawset(self, index, value)
+		end,
+	}
+end
+
 module.parse_launch_parameters = function(args)
 	args[-2] = nil
 	args[-1] = nil
@@ -103,7 +123,7 @@ local tsort_systems = function(systems)
 	while not kit.table.empty(source) do
 		local n = kit.table.pop(source)
 		table.insert(result, n)
-		n_before = n.before
+		local n_before = n.before
 		n.before = nil
 		for _, m_name in ipairs(n_before) do
 			local m = systems_map[m_name]
@@ -134,11 +154,11 @@ local tsort_systems = function(systems)
 end
 
 module.load_systems = function(world)
-	systems = {}
+	local systems = {}
 
 	for _, system_folder in ipairs(love.filesystem.getDirectoryItems("systems")) do
 		for _, system_file in ipairs(love.filesystem.getDirectoryItems("systems/" .. system_folder)) do
-			system_name = system_file:sub(1, -5)
+			local system_name = system_file:sub(1, -5)
 
 			local system = require("systems.%s.%s" % {system_folder, system_name})
 			system.name = "systems." .. system_name

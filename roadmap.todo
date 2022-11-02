@@ -28,7 +28,7 @@ Prototype:
   ✘ RU translation? @cancelled (22-11-02 09:47)
   ✔ balance @done (22-10-27 22:46)
   ✔ optimization of loading @done (22-10-29 21:37)
-  ☐ custom position for gold coins
+  ✔ custom position for gold coins @done (22-11-02 14:35)
   ✔ Aseprite font license @done (22-11-02 09:51)
   ✔ Even shorter chat messages? @done (22-10-31 22:11)
 
@@ -38,7 +38,6 @@ Refactoring:
   ✔ standard -> other kernel modules @done (22-10-20 10:32)
   ✔ `prototype` (or other name) module for constructing entities (prototype.player, prototype.planet etc) @done (22-10-20 10:32)
   ✔ information system/event system + narrator @done (22-10-26 14:35)
-  ☐ mouse, keyboard types of systems
   ✔ players' names autocoloring in the chat @done (22-10-22 13:34)
  
 
@@ -71,12 +70,15 @@ Release:
   ☐ Download page?
 
 Next iteration:
-  ☐ random events 
+  ☐ random events
+  ☐ finish the planet
+  ☐ water stuff
   ☐ lore research action
   ☐ solve utf8 issues -> RU translation
-  ☐ fix the cursor
-  ☐ pathlib (kernel)
-  ☐ draw the planet whole for custom resolution purposes
+  ☐ fix the cursor 
+  ☐ pathlib (kernel) @nice
+  ☐ draw the planet whole for custom resolution purposes @fancy
+  ☐ mouse, keyboard types of systems? @refactor
 
   Absolutely unnecessary features:
     ☐ automatic sorting of systems by systemd-like fields like after = [...], before = [...] @fancy @headache

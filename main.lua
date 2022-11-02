@@ -20,14 +20,6 @@ gamera = require "gamera"
 inspect = require "inspect"
 fun = require "fun"
 
-setmetatable(_G, {
-	__index = function(self, index)
-		log.stack_delta = 1
-		log.warn("Undefined global variable %s" % {index})
-		log.stack_delta = nil
-	end,
-})
-
 -- kernel --
 log.info("Loading kernel")
 
@@ -47,10 +39,12 @@ information = require "kernel.information"
 
 -- engine initialization --
 love.load = function(args)
+	
 	log.info("Loading the game")
 
 	launch = engine.parse_launch_parameters(args)
 	log.info("CLI arguments:", launch)
+	setmetatable(_G, engine.safe_global_metatable())
 	graphics:initialize()
 	ui:initialize()
 
