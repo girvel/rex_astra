@@ -53,22 +53,22 @@ class Cli:
 		shell("cd .build; zip -9r '../Rex Astra.love' ./*")
 		shell("rm -rf .build")
 
-		shell("rm -rf rex_astra")
-		shell("mkdir -p rex_astra")
+		shell("rm -rf windows_rex_astra")
+		shell("mkdir -p windows_rex_astra")
 		shell(
 			"cat '/mnt/c/Program Files/LOVE/love.exe' 'Rex Astra.love'"
-			" > 'rex_astra/Rex Astra.exe'"
+			" > 'windows_rex_astra/Rex Astra.exe'"
 		)
 
-		set_icon("rex_astra/Rex Astra.exe", "../sprites/icon.ico")
+		set_icon("windows_rex_astra/Rex Astra.exe", "../sprites/icon.ico")
 
-		shell("chmod +x 'rex_astra/Rex Astra.exe'")
+		shell("chmod +x 'windows_rex_astra/Rex Astra.exe'")
 
 		shell(
-			"cp -t rex_astra/ " + 
+			"cp -t windows_rex_astra/ " + 
 			" ".join(f"/mnt/c/Program\\ Files/LOVE/{dll}" for dll in ["*.dll", "license.txt"])
 		)
-		shell("zip -9r rex_astra.zip rex_astra")
+		shell("zip -9r windows_rex_astra.zip windows_rex_astra")
 
 
 if __name__ == "__main__":
