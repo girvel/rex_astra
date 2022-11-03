@@ -97,6 +97,7 @@ module.planet = function(world, name, path)
 				layer = graphics.layers.highlight,
 				is_team_colored = true,
 				parent = province,
+				opacity = 0,
 			}
 		end,
 
