@@ -100,7 +100,7 @@ module.generate_highlight = function(province_data)
 		end
 	end
 
-	return love.graphics.newImage(data), data
+	return data
 end
 
 module.fill_province_hitbox = function(borders, position, hitbox)
@@ -131,6 +131,19 @@ module.centered_print = function(position, text)
 	local h = font:getHeight()
 
 	love.graphics.print(text, position[1], position[2], 0, 1, 1, w / 2, h / 2)
+end
+
+module.generate_cached = function(cache_path, source_path, f, ...)
+	local cache_info = love.filesystem.getInfo(cache_path)
+	local source_info = love.filesystem.getInfo(source_path)
+
+	if cache_info and cache_info.modtime >= source_info.modtime then
+		return love.image.newImageData(cache_path)
+	end
+
+	local value = f(...)
+	kit.save_image_data(cache_path, value)
+	return value
 end
 
 

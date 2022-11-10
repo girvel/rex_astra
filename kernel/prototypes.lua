@@ -73,23 +73,12 @@ module.planet = function(world, name, path)
 		},
 
 		add_highlight = function(self, province)
-			local cache_path = "%s/highlights/%s.png" % {
-				self.path, province.codename
-			}
-			local cache_info = love.filesystem.getInfo(cache_path)
-
-			local borders_info = love.filesystem.getInfo(
-				"%s/borders.png" % self.path
-			)
-
-			local sprite
-			if cache_info and cache_info.modtime >= borders_info.modtime then
-				sprite = love.graphics.newImage(cache_path)
-			else
-				local source
-				sprite, source = graphics.generate_highlight(province.hitbox)
-				kit.save_image_data(cache_path, source)
-			end
+			local sprite = love.graphics.newImage(graphics.generate_cached(
+				"%s/highlights/%s.png" % {self.path, province.codename},
+				"%s/borders.png" % self.path,
+				graphics.generate_highlight,
+				province.hitbox
+			))
 
 			return self.world:addEntity {
 				name = "highlight: %s" % province.codename,
@@ -104,33 +93,23 @@ module.planet = function(world, name, path)
 		add_province = function(self, province)
 			kit.table.merge(province, self.province_defaults)
 
-			local cache_path = "%s/provinces/%s.png" % {
-				self.path, province.codename
-			}
-
-			local cache_info = love.filesystem.getInfo(cache_path)
-
-			local borders_info = love.filesystem.getInfo(
-				"%s/borders.png" % self.path
+			local success, value = pcall(
+				graphics.generate_cached,
+				"%s/provinces/%s.png" % {self.path, province.codename},
+				"%s/borders.png" % self.path,
+				graphics.fill_province_hitbox,
+				self.borders, 
+				province.anchor_position
 			)
 
-			if cache_info and cache_info.modtime >= borders_info.modtime then
-				province.hitbox = love.image.newImageData(cache_path)
-			else
-				local success, value = pcall(graphics.fill_province_hitbox,
-					self.borders, province.anchor_position
+			if success then
+				province.hitbox = value
+			elseif value("overflow") then
+				error(
+					"Unable to generate hitbox for province %s" % province.codename, 2
 				)
-
-				if success then
-					province.hitbox = value
-					kit.save_image_data(cache_path, province.hitbox)
-				elseif value("overflow") then
-					error(
-						"Unable to generate hitbox for province %s" % province.codename, 2
-					)
-				else
-					error(value)
-				end
+			else
+				error(value)
 			end
 
 			province.highlight = self:add_highlight(province)
