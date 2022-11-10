@@ -1,16 +1,39 @@
+Promote Rex Astra 1.0:
+  ✔ Reddit @done (22-11-09 11:09)
+    ✔ Draft @done (22-11-09 11:09)
+    ☐ Love forum post
+    ☐ Love reddit post
+  ☐ YouTube
+    ☐ Script draft
+    ☐ Script review
+    ☐ Sound
+    ☐ Video
+    ☐ Editing
+    ☐ Publish
+
+
 Rex Astra 2.0:
-  ☐ Download page?
-  ☐ log.error on error
-  ☐ Article about game architecture choices
-  ☐ random events
-  ☐ finish the planet
-  ☐ water stuff
-  ☐ lore research action
+  ☐ Structure the plans
+
+  Main features:
+    ☐ Waters
+    ☐ Random events
+    ☐ Scouting action
+    ☐ More terrain variability
+    ☐ Two more races
+    ☐ Two more continents
+
+  Refactoring:
+    ☐ log.error on error
+    ☐ log files + .gitignore them
+    ☐ pathlib (kernel) @nice
+
+  Fixes:
   ☐ solve utf8 issues -> RU translation
+    ☐ experiments
   ☐ fix the cursor 
-  ☐ pathlib (kernel) @nice
-  ☐ draw the planet whole for custom resolution purposes @fancy
-  ☐ mouse, keyboard types of systems? @refactor
+
+  ☐ Article about game architecture choices
 
 
 Long features:
@@ -21,3 +44,7 @@ Long features:
   ☐ loading screen @fancy
   ☐ menu @fancy
   ☐ font for commercial use
+
+Unnecessary:
+  ☐ draw the planet whole for custom resolution purposes @fancy
+  ☐ mouse, keyboard types of systems? @refactor

@@ -114,14 +114,14 @@ p.fulthu = zandara:add_province {
 }
 
 p.hexxa = zandara:add_province {
-	name = "Hexxa",
+	name = "Hexxa rainforest",
 	codename = "hexxa",
 	fertility = .12,
 	anchor_position = vector {160, 121},
 }	
 
 p.uskhal = zandara:add_province {
-	name = "Uskhal",
+	name = "Uskhal jungles",
 	codename = "uskhal",
 	fertility = .16,
 	anchor_position = vector {133, 123},
