@@ -18,59 +18,98 @@ module.invest = function(entity, amount)
 	return true
 end
 
-module.attack = function(army, target)
-	army = fun.iter(army)
+local force = function(province)
+	return (province.garrison or 0) + (province.fleet or 0)
+end
+
+local filter_army = function(army, target)
+	return fun.iter(army)
 		:filter(function(a) 
-			return a.garrison > 0 and fun.iter(target.neighbours):index(a) 
+			return force(a) > 0
+				and fun.iter(a.neighbours):index(target) 
 		end)
 		:totable()
+end
 
-	local attacking_force = fun.iter(army)
-		:reduce(function(acc, a) return acc + a.garrison end, 0)
+module.move_or_attack = function(...)
+	return module.move(...) or module.attack(...)
+end
+
+module.attack = function(army, target)
+	army = filter_army(army, target)
+
+	local attacking_force = fun.iter(army):map(force):sum()
 
 	if attacking_force <= 0 then
 		return false
 	end
 
-	if not target.owner then
-		information.register.colonization(army[1].owner, target)
+	if target.garrison and 
+		(not target.owner or force(target) <= 0)
+	then
+		information.register.take(army[1].owner, target)
 		target:set_owner(army[1].owner)
-		return true
-	end
-
-	if target.owner == army[1].owner then
-		for _, entity in ipairs(army) do
-			local movement = math.min(
-				math.floor(entity.garrison * 2 / 3 + .5), 
-				target.maximal_garrison - target.garrison
-			)
-
-			entity.garrison = entity.garrison - movement
-			target.garrison = target.garrison + movement
-		end
 		return true
 	end
 
 	information.register.attack(army, target)
 
 	local success = kit.random.chance(
-		attacking_force / (attacking_force + 1.5 * target.garrison * target.defense_k)
+		attacking_force / (attacking_force + 1.5 * force(target) * target.defense_k)
 	)
 
 	if success then
-		target.garrison = target.garrison - 1
-
-		if target.garrison < 0 then
-			target:set_owner(army[1].owner)
-			target.garrison = 0
-
-			information.register.take(army[1].owner, target)
+		if target.garrison and target.garrison > 0 then
+			target.garrison = target.garrison - 1
+		else
+			target.fleet = target.fleet - 1
 		end
 	else
-		army[1].garrison = army[1].garrison - 1
+		if army[1].garrison and army[1].garrison > 0 then
+			army[1].garrison = army[1].garrison - 1
+		else
+			army[1].fleet = army[1].fleet - 1
+		end
 	end
 
 	return success
+end
+
+module.move = function(army, target)
+	army = filter_army(army, target)
+
+	if #army == 0 then return false end
+
+	local moving_subjects = {}
+
+	local army_can_move = target.owner == army[1].owner and target.garrison
+	local fleet_can_move = (not target.owner or target.owner == army[1].owner) 
+		and target.fleet
+
+	if army_can_move then table.insert(moving_subjects, "garrison") end
+	if fleet_can_move then table.insert(moving_subjects, "fleet") end
+
+	d(moving_subjects)
+
+	if #moving_subjects == 0 then return false end
+
+	target.owner = army[1].owner
+
+	for _, subject in ipairs(moving_subjects) do
+		for _, entity in ipairs(army) do
+			if entity[subject] then
+				local movement = math.min(
+					math.floor(entity[subject] * 2 / 3 + .5), 
+					target["maximal_" .. subject] - target[subject]
+				)
+
+				entity[subject] = entity[subject] - movement
+				target[subject] = target[subject] + movement
+			end
+		end
+	end
+
+	return #moving_subjects > 0
 end
 
 module.invest_evenly = function(player)

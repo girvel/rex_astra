@@ -14,7 +14,7 @@ return prototypes.player {
 
 		for province, _ in pairs(self.property) do
 			if kit.random.chance(self.aggression_chance) then
-				kit.orders.attack(
+				kit.orders.move_or_attack(
 					{province}, 
 					kit.random.choose(province.neighbours)
 				)

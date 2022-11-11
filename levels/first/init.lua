@@ -1,5 +1,5 @@
 return {load = function(world)
-	local planet, p = unpack(require "levels.first.provinces")
+	local planet, p, w = unpack(require "levels.first.provinces")
 
 	local ai = {
 		jadians = world:addEntity(require "levels.first.ai.jadians"),
@@ -15,6 +15,7 @@ return {load = function(world)
 	return {
 		ai = ai,
 		provinces = p,
+		waters = w,
 		narrator = narrator,
 		planet = planet,
 	}

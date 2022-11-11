@@ -1,12 +1,12 @@
 return tiny.processingSystem {  -- TODO selection system?
 	ingame = true,
-	filter = tiny.requireAll("garrison", "hitbox"),
+	filter = tiny.requireAll(tiny.requireAny("garrison", "fleet"), "hitbox"),
 	after = {"collecting"},
 
 	process = function(self, entity, event)
 		local x, y, button = unpack(event)
 
-		if  devices.mouse.mutex.pressed[button] or 
+		if devices.mouse.mutex.pressed[button] or 
 			not devices.mouse.is_over(entity) 
 		then return end
 		
@@ -35,12 +35,12 @@ return tiny.processingSystem {  -- TODO selection system?
 					end
 				end
 			elseif button == 2 then
-				kit.orders.attack(ui.sources, entity)
+				kit.orders.move_or_attack(ui.sources, entity)
 			end
 		end,
 
 		[ui.modes.aggression] = function(_, entity)
-			kit.orders.attack(ui.sources, entity)
+			kit.orders.move_or_attack(ui.sources, entity)
 		end,
 	},
 }

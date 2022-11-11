@@ -44,6 +44,7 @@ Long features:
   ☐ loading screen @fancy
   ☐ menu @fancy
   ☐ font for commercial use
+  ☐ waters & provinces as mixins to area? @refactor
 
 Unnecessary:
   ☐ draw the planet whole for custom resolution purposes @fancy

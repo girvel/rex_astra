@@ -4,7 +4,7 @@ local module = {}
 -- definitions --
 module.merge = function(first, second)
 	for key, value in pairs(second) do
-		first[key] = first[key] or value
+		first[key] = first[key] ~= nil and first[key] or value
 	end
 
 	return first

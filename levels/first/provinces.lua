@@ -1,6 +1,7 @@
 local zandara = prototypes.planet(world, "Zandara", "levels/first/sprites")
 local planet = zandara:add_planet()
 
+
 local p = {}
 
 p.sod = zandara:add_province {
@@ -9,6 +10,11 @@ p.sod = zandara:add_province {
 	anchor_position = vector {233, 35},
 	fertility = .03,
 	maximal_garrison = 8,
+	contains_sea = true,
+	fleet = 5,
+	maximal_fleet = 15,
+	fleet_p = vector {222, 39},
+	owner = player,
 }
 
 p.annar = zandara:add_province {
@@ -48,8 +54,11 @@ p.zanartha = zandara:add_province {
 p.jadia = zandara:add_province {
 	name = "Jadia edge",
 	codename = "jadia",
-	fertility = .07,
+	fertility = .11,
 	anchor_position = vector {170, 90},
+	fleet = 0,
+	max_fleet = 10,
+	fleet_p = vector {160, 93},
 }
 
 p.reimin = zandara:add_province {
@@ -97,6 +106,7 @@ p.antaris = zandara:add_province {
 	codename = "antaris",
 	fertility = .09,
 	anchor_position = vector {85, 30},
+	contains_sea = true,
 }
 
 p.devarus = zandara:add_province {
@@ -127,12 +137,23 @@ p.uskhal = zandara:add_province {
 	anchor_position = vector {133, 123},
 }
 
+
+local w = {}
+
+w.northern_sea = zandara:add_waters {
+	name = "Northern sea",
+	codename = "northern_sea",
+	anchor_position = vector {209, 39},
+	fleet_p = vector {209, 39},
+}
+
+
 p.fulthu.neighbours = {p.devarus, p.jadia}
 p.devarus.neighbours = {p.antaris, p.fulthu}
 p.antaris.neighbours = {p.higher_mikara, p.devarus}
 p.higher_mikara.neighbours = {p.lower_mikara, p.antaris}
 p.lower_mikara.neighbours = {p.higher_mikara, p.sod}
-p.sod.neighbours = {p.annar, p.dowur, p.lower_mikara}
+p.sod.neighbours = {p.annar, p.dowur, p.lower_mikara, w.northern_sea}
 p.annar.neighbours = {p.sod, p.dowur, p.venedai, p.zanartha, p.uxan, p.reimin}
 p.dowur.neighbours = {p.sod, p.annar, p.uxan, p.reidan}
 p.venedai.neighbours = {p.annar, p.jadia, p.reimin}
@@ -142,4 +163,7 @@ p.reimin.neighbours = {p.jadia, p.venedai, p.annar, p.zanartha, p.uxan}
 p.uxan.neighbours = {p.reimin, p.zanartha, p.annar, p.dowur, p.reidan}
 p.reidan.neighbours = {p.uxan, p.dowur}
 
-return {planet, p}
+w.northern_sea.neighbours = {p.sod}
+
+
+return {planet, p, w}

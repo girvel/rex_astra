@@ -32,12 +32,20 @@ return tiny.sortedProcessingSystem {
 			end
 
 			-- province info --
-			if entity.garrison and entity.owner and entity.anchor_position then
+			if entity.owner then
 				love.graphics.setFont(graphics.fonts.small)
 				love.graphics.setColor(entity.owner.color)
-				graphics.centered_print(entity.anchor_position, tostring(entity.garrison))
-				love.graphics.setColor(graphics.palette.white)
+
+				if entity.garrison then
+					graphics.centered_print(entity.anchor_position, tostring(entity.garrison))
+				end
+
+				if entity.fleet then
+					graphics.centered_print(entity.fleet_p, tostring(entity.fleet))
+				end
 			end
+
+			love.graphics.setColor(graphics.palette.white)
 		end)
 	end,
 

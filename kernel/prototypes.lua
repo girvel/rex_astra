@@ -62,16 +62,6 @@ module.planet = function(world, name, path)
 			}
 		end,
 
-		province_defaults = {
-			neighbours = {},
-			garrison = 0,
-			maximal_garrison = 10,
-			layer = 1,
-			owner = false,
-			income_repeater = types.repeater(1),
-			defense_k = 1,
-		},
-
 		add_highlight = function(self, province)
 			local sprite = love.graphics.newImage(graphics.generate_cached(
 				"%s/highlights/%s.png" % {self.path, province.codename},
@@ -90,31 +80,51 @@ module.planet = function(world, name, path)
 			}
 		end,
 
-		add_province = function(self, province)
-			kit.table.merge(province, self.province_defaults)
+		_area_defaults = {
+			neighbours = {},
+			layer = 1,
+			owner = false,
+		},
+
+		_add_area = function(self, source)
+			kit.table.merge(source, self._area_defaults)
 
 			local success, value = pcall(
 				graphics.generate_cached,
-				"%s/provinces/%s.png" % {self.path, province.codename},
+				"%s/provinces/%s.png" % {self.path, source.codename},
 				"%s/borders.png" % self.path,
 				graphics.fill_province_hitbox,
 				self.borders, 
-				province.anchor_position
+				source.anchor_position
 			)
 
 			if success then
-				province.hitbox = value
+				source.hitbox = value
 			elseif value("overflow") then
 				error(
-					"Unable to generate hitbox for province %s" % province.codename, 2
+					"Unable to generate hitbox for area %s" % source.codename, 2
 				)
 			else
 				error(value)
 			end
 
-			province.highlight = self:add_highlight(province)
+			source.highlight = self:add_highlight(source)
 
-			province.set_owner = function(self, owner)
+			return self.world:addEntity(source)
+		end,
+
+		province_defaults = {
+			garrison = 0,
+			maximal_garrison = 10,
+			income_repeater = types.repeater(1),
+			defense_k = 1,
+			contains_land = true,
+		},
+
+		add_province = function(self, source)
+			kit.table.merge(source, self.province_defaults)
+
+			source.set_owner = function(self, owner)
 				if self.owner then
 					self.owner.property[self] = nil
 				end
@@ -131,7 +141,19 @@ module.planet = function(world, name, path)
 				end
 			end
 
-			return self.world:addEntity(province)
+			return self:_add_area(source)
+		end,
+
+		waters_defaults = {
+			fleet = 0,
+			maximal_fleet = 15,
+			contains_sea = true,
+		},
+
+		add_waters = function(self, source)
+			kit.table.merge(source, self.waters_defaults)
+
+			return self:_add_area(source)
 		end,
 	}
 end
