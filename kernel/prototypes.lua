@@ -81,13 +81,24 @@ module.planet = function(world, name, path)
 		end,
 
 		_area_defaults = {
-			neighbours = {},
 			layer = 1,
 			owner = false,
+			defense_k = 1,
+
+			connect = function(self, neighbour, ...)
+				if neighbour == nil then return end
+
+				self.neighbours[neighbour] = true
+				neighbour.neighbours[self] = true
+
+				self:connect(...)
+			end
 		},
 
 		_add_area = function(self, source)
 			kit.table.merge(source, self._area_defaults)
+
+			source.neighbours = source.neighbours or {}
 
 			local success, value = pcall(
 				graphics.generate_cached,
@@ -117,14 +128,9 @@ module.planet = function(world, name, path)
 			garrison = 0,
 			maximal_garrison = 10,
 			income_repeater = types.repeater(1),
-			defense_k = 1,
 			contains_land = true,
-		},
 
-		add_province = function(self, source)
-			kit.table.merge(source, self.province_defaults)
-
-			source.set_owner = function(self, owner)
+			set_owner = function(self, owner)
 				if self.owner then
 					self.owner.property[self] = nil
 				end
@@ -139,7 +145,11 @@ module.planet = function(world, name, path)
 						self.coin = nil
 					end
 				end
-			end
+			end,
+		},
+
+		add_province = function(self, source)
+			kit.table.merge(source, self.province_defaults)
 
 			return self:_add_area(source)
 		end,

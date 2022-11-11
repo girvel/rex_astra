@@ -14,8 +14,14 @@ return tiny.sortedProcessingSystem {
 
 			-- draw the sprite --
 			if entity.sprite then
-				if entity.is_team_colored and entity.parent.owner then
-					love.graphics.setColor(entity.parent.owner.color or graphics.palette.white)
+				if entity.is_team_colored  
+					and entity.parent.owner 
+					and entity.parent.garrison 
+				then
+					love.graphics.setColor(
+						entity.parent.owner.color 
+						or graphics.palette.white
+					)
 				end
 
 				if entity.opacity then

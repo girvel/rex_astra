@@ -17,7 +17,7 @@ return prototypes.player {
 		local all_neighbours = {}
 
 		for p, _ in pairs(self.property) do
-			for _, n in ipairs(p.neighbours) do
+			for n, _ in pairs(p.neighbours) do
 				if n.owner ~= self then
 					all_neighbours[n] = true
 				end
@@ -27,15 +27,15 @@ return prototypes.player {
 		if self.activity_period:move(dt):now() then
 			kit.orders.invest_evenly(self)
 
-			if  fun.iter(all_neighbours)
+			if fun.iter(all_neighbours)
 					:filter(function(p) return 
 						p.owner == player
 					end)
 					:map(function(p) return p.garrison end)
-					:reduce(fun.operator.add, 0) >=
+					:sum() >=
 				2 * fun.iter(self.property)
 					:map(function(p) return p.garrison end)
-					:reduce(fun.operator.add, 0)
+					:sum()
 			then
 				if self.surrender_period:move(1):now() then
 					kit.orders.surrender(self, player)

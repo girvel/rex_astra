@@ -25,8 +25,7 @@ end
 local filter_army = function(army, target)
 	return fun.iter(army)
 		:filter(function(a) 
-			return force(a) > 0
-				and fun.iter(a.neighbours):index(target) 
+			return force(a) > 0 and a.neighbours[target]
 		end)
 		:totable()
 end
@@ -44,12 +43,14 @@ module.attack = function(army, target)
 		return false
 	end
 
-	if target.garrison and 
-		(not target.owner or force(target) <= 0)
-	then
-		information.register.take(army[1].owner, target)
-		target:set_owner(army[1].owner)
-		return true
+	if not target.owner or force(target) <= 0 then
+		if target.garrison then
+			information.register.take(army[1].owner, army, target)
+			target:set_owner(army[1].owner)
+			return true
+		end
+
+		return false
 	end
 
 	information.register.attack(army, target)
@@ -88,8 +89,6 @@ module.move = function(army, target)
 
 	if army_can_move then table.insert(moving_subjects, "garrison") end
 	if fleet_can_move then table.insert(moving_subjects, "fleet") end
-
-	d(moving_subjects)
 
 	if #moving_subjects == 0 then return false end
 
