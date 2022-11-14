@@ -81,6 +81,7 @@ module.planet = function(world, name, path)
 		end,
 
 		_area_defaults = {
+			name = "Unknown place",
 			layer = 1,
 			owner = false,
 			defense_k = 1,

@@ -147,21 +147,52 @@ w.northern = zandara:add_waters {
 	fleet_p = vector {209, 39},
 }
 
+w.storms = zandara:add_waters {
+	name = "Sea of storms",
+	codename = "storms",
+	anchor_position = vector {175, 47},
+	fleet_p = vector {175, 47},
+}
+
+w.colds = zandara:add_waters {
+	name = "Sea of colds",
+	codename = "colds",
+	anchor_position = vector {134, 45},
+	fleet_p = vector {134, 45},
+}
+
+w.venedai = zandara:add_waters {
+	name = "Venedai sea",
+	codename = "venedai",
+	anchor_position = vector {158, 62},
+	fleet_p = vector {158, 62},
+}
+
+-- w.jadia = zandara:add_waters {
+	
+-- }
+
 
 p.sod:connect(p.annar, p.dowur, p.lower_mikara, w.northern)
-p.annar:connect(p.dowur, p.uxan, p.zanartha, p.reimin, p.venedai, w.northern)
+p.annar:connect(
+	p.dowur, p.uxan, p.zanartha, p.reimin, p.venedai, 
+	w.northern, w.venedai,
+)
 p.dowur:connect(p.reidan, p.uxan)
 p.reidan:connect(p.uxan)
 p.uxan:connect(p.zanartha, p.reimin)
 p.zanartha:connect(p.reimin)
-p.venedai:connect(p.reimin, p.jadia)
+p.venedai:connect(p.reimin, p.jadia, w.venedai)
 p.reimin:connect(p.jadia)
 p.jadia:connect(p.fulthu)
-p.fulthu:connect(p.devarus)
+p.fulthu:connect(p.devarus, w.venedai)
 p.devarus:connect(p.antaris)
 p.antaris:connect(p.higher_mikara)
 p.higher_mikara:connect(p.lower_mikara, w.northern)
 p.lower_mikara:connect(w.northern)
+w.northern:connect(w.storms, w.venedai)
+w.storms:connect(w.colds, w.venedai)
+w.colds:connect(w.venedai)
 
 
 return {planet, p, w}

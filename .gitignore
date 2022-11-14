@@ -1,3 +1,5 @@
 rex_astra.zip
 bin
 *.sublime-*
+levels/*/sprites/highlights
+levels/*/sprites/provinces
