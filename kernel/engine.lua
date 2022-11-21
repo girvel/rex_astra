@@ -156,8 +156,10 @@ end
 module.load_systems = function(world)
 	local systems = {}
 
-	for _, system_folder in ipairs(love.filesystem.getDirectoryItems("systems")) do
-		for _, system_file in ipairs(love.filesystem.getDirectoryItems("systems/" .. system_folder)) do
+	for _, system_folder in ipairs(path("systems"):children()) do
+		for _, system_file in 
+			ipairs((path("systems") / system_folder):children()) 
+		do
 			local system_name = system_file:sub(1, -5)
 
 			local system = require("systems.%s.%s" % {system_folder, system_name})

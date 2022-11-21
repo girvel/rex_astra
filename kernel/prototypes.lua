@@ -18,13 +18,13 @@ module.coin = function(province)
 	}
 end
 
-module.narrator = function(path, narrator)
+module.narrator = function(directory, narrator)
 	kit.table.merge(narrator, {
 		name = "Narrator",
 		lines = setmetatable({}, {__index = function(_, index)
-			local content = kit.read_text(
-				path .. "/" .. launch.language .. "/" .. index .. ".txt"
-			)
+			local content = (
+				directory / launch.language / (index .. ".txt")
+			):load_text()
 
 			content = content and (content / "\n\n") or {}
 
@@ -47,25 +47,25 @@ module.narrator = function(path, narrator)
 	return narrator
 end
 
-module.planet = function(world, name, path)
+module.planet = function(world, name, directory)
 	return {
 		world = world,
 		name = name,
-		path = path,
-		borders = love.image.newImageData("%s/borders.png" % path),
+		path = directory,
+		borders = (directory / "borders.png"):load_image_data(),
 
 		add_planet = function(self)
 			return self.world:addEntity {
 				name = self.name,
-				sprite = love.graphics.newImage("%s/planet.png" % self.path),
+				sprite = (self.path / "planet.png"):load_image(),
 				layer = graphics.layers.planet,
 			}
 		end,
 
 		add_highlight = function(self, province)
 			local sprite = love.graphics.newImage(graphics.generate_cached(
-				"%s/highlights/%s.png" % {self.path, province.codename},
-				"%s/borders.png" % self.path,
+				self.path / ("highlights/%s.png" % province.codename),
+				self.path / "borders.png",
 				graphics.generate_highlight,
 				province.hitbox
 			))
@@ -103,8 +103,8 @@ module.planet = function(world, name, path)
 
 			local success, value = pcall(
 				graphics.generate_cached,
-				"%s/provinces/%s.png" % {self.path, source.codename},
-				"%s/borders.png" % self.path,
+				self.path / ("provinces/%s.png" % source.codename),
+				self.path / "borders.png",
 				graphics.fill_province_hitbox,
 				self.borders, 
 				source.anchor_position
@@ -113,9 +113,7 @@ module.planet = function(world, name, path)
 			if success then
 				source.hitbox = value
 			elseif value("overflow") then
-				error(
-					"Unable to generate hitbox for area %s" % source.codename, 2
-				)
+				error("Unable to generate hitbox for area %s" % source.codename, 2)
 			else
 				error(value)
 			end

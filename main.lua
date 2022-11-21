@@ -27,6 +27,7 @@ vector = require "kernel.vector"
 world_size = vector {480, 270}
 
 types = require "kernel.types"
+path = require "kernel.path"
 kit = require "kernel.kit"
 engine = require "kernel.engine"
 graphics = require "kernel.graphics"
@@ -80,7 +81,7 @@ love.load = function(args)
 		gold = 0,
 	})
 
-	world:addEntity(prototypes.narrator("lines", {
+	world:addEntity(prototypes.narrator(path("lines"), {
 		name = "Global narrator",
 		codename = "global_narrator",
 	}))

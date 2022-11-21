@@ -1,4 +1,6 @@
-local zandara = prototypes.planet(world, "Zandara", "levels/first/sprites")
+local zandara = prototypes.planet(
+	world, "Zandara", path("levels/first/sprites")
+)
 local planet = zandara:add_planet()
 
 
@@ -176,7 +178,7 @@ w.venedai = zandara:add_waters {
 p.sod:connect(p.annar, p.dowur, p.lower_mikara, w.northern)
 p.annar:connect(
 	p.dowur, p.uxan, p.zanartha, p.reimin, p.venedai, 
-	w.northern, w.venedai,
+	w.northern, w.venedai
 )
 p.dowur:connect(p.reidan, p.uxan)
 p.reidan:connect(p.uxan)

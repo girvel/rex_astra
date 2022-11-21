@@ -1,4 +1,4 @@
-local narrator = prototypes.narrator("levels/first/lines", {})
+local narrator = prototypes.narrator(path("levels/first/lines"), {})
 
 
 narrator.interpret.game_start = function()

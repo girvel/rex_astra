@@ -108,7 +108,7 @@ module.fill_province_hitbox = function(borders, position, hitbox)
 		borders:getWidth(), borders:getHeight()
 	)
 
-	if  ({borders:getPixel(unpack(position))})[4] > 0 or 
+	if ({borders:getPixel(unpack(position))})[4] > 0 or 
 		({hitbox:getPixel(unpack(position))})[4] > 0 
 	then
 		return hitbox
@@ -134,15 +134,12 @@ module.centered_print = function(position, text)
 end
 
 module.generate_cached = function(cache_path, source_path, f, ...)
-	local cache_info = love.filesystem.getInfo(cache_path)
-	local source_info = love.filesystem.getInfo(source_path)
-
-	if cache_info and cache_info.modtime >= source_info.modtime then
-		return love.image.newImageData(cache_path)
+	if cache_path:exists() and cache_path:modtime() >= source_path:modtime() then
+		return cache_path:load_image_data()
 	end
 
 	local value = f(...)
-	kit.save_image_data(cache_path, value)
+	cache_path:write_image_data(value)
 	return value
 end
 
