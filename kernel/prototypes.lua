@@ -148,6 +148,11 @@ module.planet = function(world, name, directory)
 				end
 			end,
 
+			put_garrison = function(self, garrison, owner)
+				self:set_owner(owner)
+				self.garrison = garrison
+			end,
+
 			ferry = function(self, neighbour, waters)
 				self.ferries[neighbour] = waters
 				neighbour.ferries[self] = waters
@@ -165,6 +170,11 @@ module.planet = function(world, name, directory)
 			fleet = 0,
 			maximal_fleet = 15,
 			contains_sea = true,
+
+			put_fleet = function(self, fleet, owner)
+				self:set_owner(owner)
+				self.fleet = fleet
+			end,
 		},
 
 		add_waters = function(self, source)
@@ -180,12 +190,6 @@ module.player = function(entity)
 		property = {},
 		gold = 0,
 		lost = false,
-		
-		own = function(self, ...)
-			for _, subject in ipairs {...} do
-				subject:set_owner(self)
-			end
-		end,
 	})
 end
 

@@ -24,7 +24,6 @@ p.annar = zandara:add_province {
 	codename = "annar",
 	anchor_position = vector {220, 66},
 	fertility = .05,
-	garrison = 4,
 	maximal_garrison = 17,
 }
 
@@ -49,7 +48,6 @@ p.zanartha = zandara:add_province {
 	anchor_position = vector {236, 92},
 	fertility = .06,
 	maximal_garrison = 11,
-	garrison = 8,
 	defense_k = 2.3,
 }
 
@@ -68,7 +66,6 @@ p.reimin = zandara:add_province {
 	codename = "reimin",
 	fertility = .10,
 	anchor_position = vector {220, 100},
-	garrison = 1,
 }
 
 p.uxan = zandara:add_province {
@@ -77,7 +74,6 @@ p.uxan = zandara:add_province {
 	fertility = .02,
 	anchor_position = vector {259, 98},
 	maximal_garrison = 12,
-	garrison = 7,
 	defense_k = 2.9,
 }
 
