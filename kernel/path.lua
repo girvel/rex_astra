@@ -58,6 +58,10 @@ end
 -- global directories --
 path_methods.write_text = function(self, text)
 	local f = io.open(self._path_string, "wb")
+	if not f then 
+		error("Can not write to the file %s" % self._path_string) 
+	end
+
 	f:write(text)
 	f:close()
 end

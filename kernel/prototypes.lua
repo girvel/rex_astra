@@ -64,7 +64,8 @@ module.planet = function(world, name, directory)
 
 		add_highlight = function(self, province)
 			local sprite = love.graphics.newImage(graphics.generate_cached(
-				self.path / ("highlights/%s.png" % province.codename),
+				self.path / "highlights" / (province.garrison and "land" or "sea") / 
+				("%s.png" % province.codename),
 				self.path / "borders.png",
 				graphics.generate_highlight,
 				province.hitbox
@@ -103,7 +104,8 @@ module.planet = function(world, name, directory)
 
 			local success, value = pcall(
 				graphics.generate_cached,
-				self.path / ("provinces/%s.png" % source.codename),
+				self.path / "provinces" / (source.garrison and "land" or "sea") / 
+				("%s.png" % source.codename),
 				self.path / "borders.png",
 				graphics.fill_province_hitbox,
 				self.borders, 
@@ -145,10 +147,16 @@ module.planet = function(world, name, directory)
 					end
 				end
 			end,
+
+			ferry = function(self, neighbour, waters)
+				self.ferries[neighbour] = waters
+				neighbour.ferries[self] = waters
+			end
 		},
 
 		add_province = function(self, source)
 			kit.table.merge(source, self.province_defaults)
+			source.ferries = source.ferries or {}
 
 			return self:_add_area(source)
 		end,

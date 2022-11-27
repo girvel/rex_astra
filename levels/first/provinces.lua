@@ -170,9 +170,12 @@ w.venedai = zandara:add_waters {
 	fleet_p = vector {158, 62},
 }
 
--- w.jadia = zandara:add_waters {
-	
--- }
+w.jadia = zandara:add_waters {
+	name = "Jadian passage",
+	codename = "jadia",
+	anchor_position = vector {153, 79},
+	fleet_p = vector {153, 79},
+}
 
 
 p.sod:connect(p.annar, p.dowur, p.lower_mikara, w.northern)
@@ -186,7 +189,6 @@ p.uxan:connect(p.zanartha, p.reimin)
 p.zanartha:connect(p.reimin)
 p.venedai:connect(p.reimin, p.jadia, w.venedai)
 p.reimin:connect(p.jadia)
-p.jadia:connect(p.fulthu)
 p.fulthu:connect(p.devarus, w.venedai)
 p.devarus:connect(p.antaris)
 p.antaris:connect(p.higher_mikara)
@@ -195,6 +197,8 @@ p.lower_mikara:connect(w.northern)
 w.northern:connect(w.storms, w.venedai)
 w.storms:connect(w.colds, w.venedai)
 w.colds:connect(w.venedai)
+
+p.jadia:ferry(p.fulthu, w.jadia)
 
 
 return {planet, p, w}

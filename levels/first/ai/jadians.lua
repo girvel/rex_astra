@@ -4,8 +4,8 @@ return prototypes.player {
 	color = graphics.palette.jadians,
 	is_barbaric = true,
 
-	activity_period = types.repeater(5),
-	aggression_chance = .7,
+	activity_period = types.repeater(2),
+	aggression_chance = .6,
 
 	decide = function(self, dt)
 		if not self.activity_period:move(dt):now() then return end

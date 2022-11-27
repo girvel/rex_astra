@@ -3,17 +3,24 @@ Promote Rex Astra 1.0:
     ✔ Draft @done (22-11-09 11:09)
     ☐ Love forum post
     ☐ Love reddit post
-  ☐ YouTube
-    ☐ Script draft
-    ☐ Script review
-    ☐ Sound
-    ☐ Video
-    ☐ Editing
-    ☐ Publish
+  ✔ YouTube @done (22-11-27 07:44)
+    ✔ Script draft @done (22-11-27 07:44)
+    ✔ Script review @done (22-11-27 07:44)
+    ✔ Sound @done (22-11-27 07:44)
+    ✔ Video @done (22-11-27 07:44)
+    ✔ Editing @done (22-11-27 07:44)
+    ✔ Publish @done (22-11-27 07:44)
 
 
 Rex Astra 2.0:
-  ☐ Structure the plans
+  ✔ Structure the plans @done (22-11-27 07:45)
+
+  Rex Astra 1.1:
+    ☐ Waters
+    ☐ Ferries
+    ☐ Building of the ships
+    ☐ Playable piece of continent
+      ☐ Fixed form
 
   Main features:
     ☐ Waters
@@ -26,7 +33,8 @@ Rex Astra 2.0:
   Refactoring:
     ☐ log.error on error
     ☐ log files + .gitignore them
-    ☐ pathlib (kernel) @nice
+    ✔ pathlib (kernel) @nice @done (22-11-27 07:43)
+    ☐ set_owner -> put_garrison
 
   Fixes:
   ☐ solve utf8 issues -> RU translation

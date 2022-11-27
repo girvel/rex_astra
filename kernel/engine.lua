@@ -46,13 +46,13 @@ module.parse_launch_parameters = function(args)
 		parser:option(
 			"-r --resolution", 
 			"Resolution of the game in format <width>x<height>; should " ..
-			"be proportional %sx%s, %sx%s if empty or 'A' (auto)" % 
+			"be proportional %sx%s, %sx%s if empty or 'auto'" % 
 			{world_size[1], world_size[2], 
 			 world_size[1] * 3, world_size[2] * 3}
 		)
 			:args "?"
 			:action(function(args, index, value) 
-				if #value == 0 or #value == 1 and value[1] == "A" then
+				if #value == 0 or #value == 1 and value[1] == "auto" then
 					args[index] = world_size * 3
 					return
 				end
@@ -80,10 +80,15 @@ module.parse_launch_parameters = function(args)
 			:default("EN")
 	)
 
-	parser:group("Questionable stuff", 
+	parser:group("Debugging stuff", 
 		parser:flag(
 			"-m --trace-mouse", 
 			"Output mouse position every tick (Legacy feature)"
+		),
+
+		parser:flag(
+			"-n --trace-names",
+			"Display province names"
 		)
 	)
 

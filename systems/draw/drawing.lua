@@ -46,9 +46,15 @@ return tiny.sortedProcessingSystem {
 					graphics.centered_print(entity.anchor_position, tostring(entity.garrison))
 				end
 
-				if entity.fleet then
+				if entity.fleet and (entity.fleet > 0 or entity.garrison) then
 					graphics.centered_print(entity.fleet_p, tostring(entity.fleet))
 				end
+			end
+
+			if launch.trace_names and entity.name and entity.anchor_position then
+				love.graphics.setColor(graphics.palette.white)
+				love.graphics.setFont(graphics.fonts.small)
+				graphics.centered_print(entity.anchor_position, entity.name)
 			end
 
 			love.graphics.setColor(graphics.palette.white)
