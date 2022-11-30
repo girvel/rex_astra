@@ -1,4 +1,4 @@
--- The only place a global can be defined in is here
+-- The only place a global variable can be defined in is here
 
 local loading_time = os.time()
 

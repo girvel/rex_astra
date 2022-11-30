@@ -35,6 +35,7 @@ Rex Astra 2.0:
     ☐ log files + .gitignore them
     ✔ pathlib (kernel) @nice @done (22-11-27 07:43)
     ☐ set_owner -> put_garrison
+    ☐ anchor_position -> anchor_p
 
   Fixes:
   ☐ solve utf8 issues -> RU translation
@@ -53,7 +54,14 @@ Long features:
   ☐ menu @fancy
   ☐ font for commercial use
   ☐ waters & provinces as mixins to area? @refactor
+  ☐ provinces.yaml @refactor
 
 Unnecessary:
   ☐ draw the planet whole for custom resolution purposes @fancy
   ☐ mouse, keyboard types of systems? @refactor
+
+Big refactor (next):
+  ☐ Game itself as a separate module
+  ☐ level standartization
+    ☐ ai, narrator autoload
+    ☐ provinces.yaml

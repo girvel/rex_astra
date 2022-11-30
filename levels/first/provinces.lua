@@ -145,6 +145,34 @@ w.northern = zandara:add_waters {
 	fleet_p = vector {209, 39},
 }
 
+w.mikara = zandara:add_waters {
+	name = "Mikarian sea",
+	codename = "mikara",
+	anchor_position = vector {142, 30},
+	fleet_p = vector {142, 30},
+}
+
+w.lower = zandara:add_waters {
+	name = "Lower sea",
+	codename = "lower",
+	anchor_position = vector {159, 61},
+	fleet_p = vector {159, 61},
+}
+
+w.higher = zandara:add_waters {
+	name = "Higher sea",
+	codename = "higher",
+	anchor_position = vector {98, 44},
+	fleet_p = vector {98, 44},
+}
+
+w.venedai = zandara:add_waters {
+	name = "Venedai sea",
+	codename = "venedai",
+	anchor_position = vector {158, 62},
+	fleet_p = vector {158, 62},
+}
+
 w.storms = zandara:add_waters {
 	name = "Sea of storms",
 	codename = "storms",
@@ -159,11 +187,18 @@ w.colds = zandara:add_waters {
 	fleet_p = vector {134, 45},
 }
 
-w.venedai = zandara:add_waters {
-	name = "Venedai sea",
-	codename = "venedai",
-	anchor_position = vector {158, 62},
-	fleet_p = vector {158, 62},
+w.antaris = zandara:add_waters {
+	name = "Antaris passage",
+	codename = "antaris",
+	anchor_position = vector {84, 38},
+	fleet_p = vector {84, 38},
+}	
+
+w.fulthu = zandara:add_waters {
+	name = "Fulthu passage",
+	codename = "fulthu",
+	anchor_position = vector {91, 61},
+	fleet_p = vector {91, 61},
 }
 
 w.jadia = zandara:add_waters {
@@ -171,6 +206,27 @@ w.jadia = zandara:add_waters {
 	codename = "jadia",
 	anchor_position = vector {153, 79},
 	fleet_p = vector {153, 79},
+}
+
+w.devil = zandara:add_waters {
+	name = "Devil's passage",
+	codename = "devil",
+	anchor_position = vector {171, 111},
+	fleet_p = vector {171, 111},
+}
+
+w.narrow = zandara:add_waters {
+	name = "Narrow sea",
+	codename = "narrow",
+	anchor_position = vector {148, 102},
+	fleet_p = vector {148, 102},
+}
+
+w.wide = zandara:add_waters {
+	name = "Wide sea",
+	codename = "wide",
+	anchor_position = vector {103, 97},
+	fleet_p = vector {103, 97},
 }
 
 

@@ -51,22 +51,22 @@ module.planet = function(world, name, directory)
 	return {
 		world = world,
 		name = name,
-		path = directory,
+		directory = directory,
 		borders = (directory / "borders.png"):load_image_data(),
 
 		add_planet = function(self)
 			return self.world:addEntity {
 				name = self.name,
-				sprite = (self.path / "planet.png"):load_image(),
+				sprite = (self.directory / "planet.png"):load_image(),
 				layer = graphics.layers.planet,
 			}
 		end,
 
 		add_highlight = function(self, province)
 			local sprite = love.graphics.newImage(graphics.generate_cached(
-				self.path / "highlights" / (province.garrison and "land" or "sea") / 
+				self.directory / "highlights" / (province.garrison and "land" or "sea") / 
 				("%s.png" % province.codename),
-				self.path / "borders.png",
+				self.directory / "borders.png",
 				graphics.generate_highlight,
 				province.hitbox
 			))
@@ -104,9 +104,9 @@ module.planet = function(world, name, directory)
 
 			local success, value = pcall(
 				graphics.generate_cached,
-				self.path / "provinces" / (source.garrison and "land" or "sea") / 
+				self.directory / "provinces" / (source.garrison and "land" or "sea") / 
 				("%s.png" % source.codename),
-				self.path / "borders.png",
+				self.directory / "borders.png",
 				graphics.fill_province_hitbox,
 				self.borders, 
 				source.anchor_position
